@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://cnccqi4753tng" path="res://assets/tiles/floor_tiles_ph.jpg" id="1_rwgxs"]
 [ext_resource type="PackedScene" uid="uid://c74d581jtpyl4" path="res://scenes/player.tscn" id="4_71j4m"]
 [ext_resource type="PackedScene" uid="uid://dgc2c6qm7k0ao" path="res://scenes/temp_chest.tscn" id="5_i7141"]
+[ext_resource type="FontFile" uid="uid://pfyak6wep6wh" path="res://assets/fonts/ProtestRevolution-Regular.ttf" id="4_k0juu"]
 [ext_resource type="Script" uid="uid://teicw2jkvu8r" path="res://scripts/combat/combat_hud.gd" id="5_qfnet"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_k0juu"]
@@ -24,6 +25,10 @@ texture_region_size = Vector2i(32, 32)
 tile_size = Vector2i(32, 32)
 sources/0 = SubResource("TileSetAtlasSource_k0juu")
 
+[sub_resource type="LabelSettings" id="LabelSettings_71j4m"]
+font = ExtResource("4_k0juu")
+font_size = 25
+
 [node name="World" type="Node2D" unique_id=774591807]
 script = ExtResource("1_71j4m")
 
@@ -41,3 +46,13 @@ position = Vector2(251, 293)
 
 [node name="tempChest" parent="." unique_id=1325038607 instance=ExtResource("5_i7141")]
 position = Vector2(928, 330)
+
+[node name="HUD" type="Node2D" parent="." unique_id=1581878404]
+
+[node name="Label" type="Label" parent="HUD" unique_id=2028906315]
+offset_left = 33.0
+offset_top = 27.0
+offset_right = 73.0
+offset_bottom = 50.0
+text = "Score: 99999"
+label_settings = SubResource("LabelSettings_71j4m")

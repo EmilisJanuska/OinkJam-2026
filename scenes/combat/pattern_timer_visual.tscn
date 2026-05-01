@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://b5p11c40i6me3"]
+
+[ext_resource type="Script" uid="uid://b5yp4uni4mlth" path="res://scripts/combat/pattern_timer_visual.gd" id="1_j3jsu"]
+[ext_resource type="Texture2D" uid="uid://dj3gfi2yq2nhc" path="res://assets/UI/prog_bar_fill.png" id="2_ymjc3"]
+
+[node name="PatternTimerVisual" type="Node2D" unique_id=657897721 node_paths=PackedStringArray("TimerBar")]
+script = ExtResource("1_j3jsu")
+TimerBar = NodePath("TimerBar")
+
+[node name="TimerBar" type="TextureProgressBar" parent="." unique_id=200508846]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -75.0
+offset_right = 75.0
+offset_bottom = 10.0
+grow_horizontal = 2
+value = 100.0
+fill_mode = 6
+nine_patch_stretch = true
+texture_progress = ExtResource("2_ymjc3")
+tint_under = Color(1, 1, 1, 0)
+tint_over = Color(1, 1, 1, 0)
+tint_progress = Color(0.99999994, 0.3986643, 0.19710362, 1)

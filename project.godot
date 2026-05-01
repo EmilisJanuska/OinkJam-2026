@@ -18,7 +18,6 @@ config/icon="res://assets/icon.svg"
 [autoload]
 
 WwiseRuntimeManager="*uid://cxwi881py10pu"
-GlobalFlags="*uid://ddvj4cobb76di"
 
 [dotnet]
 

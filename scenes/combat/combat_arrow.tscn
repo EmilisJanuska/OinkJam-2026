@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://dtjqwxx3pormf"]
+
+[ext_resource type="Script" uid="uid://drbb5ljbgcti8" path="res://scripts/combat/combat_arrow.gd" id="1_ndmls"]
+
+[node name="CombatArrow" type="Sprite2D" unique_id=1528526849]
+script = ExtResource("1_ndmls")

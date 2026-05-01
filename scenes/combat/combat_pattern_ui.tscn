@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://dxsi7yp5ie87i"]
+
+[ext_resource type="Script" uid="uid://dwmoxgdialb3m" path="res://scripts/combat/combat_pattern_spawner.gd" id="1_d2hmj"]
+
+[node name="CombatPatterns" type="Node2D" unique_id=1074830920]
+script = ExtResource("1_d2hmj")

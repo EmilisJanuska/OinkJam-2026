@@ -1,7 +1,9 @@
 [gd_scene format=4 uid="uid://n20m7e031cue"]
 
 [ext_resource type="Script" uid="uid://1gyit43gplkj" path="res://scripts/game.gd" id="1_71j4m"]
-[ext_resource type="Texture2D" uid="uid://c46wlsotty0o5" path="res://assets/tiles/floor_tiles_ph.jpg" id="1_rwgxs"]
+[ext_resource type="Texture2D" uid="uid://cnccqi4753tng" path="res://assets/tiles/floor_tiles_ph.jpg" id="1_rwgxs"]
+[ext_resource type="PackedScene" uid="uid://c74d581jtpyl4" path="res://scenes/player.tscn" id="4_71j4m"]
+[ext_resource type="PackedScene" uid="uid://dgc2c6qm7k0ao" path="res://scenes/temp_chest.tscn" id="5_i7141"]
 [ext_resource type="Script" uid="uid://teicw2jkvu8r" path="res://scripts/combat/combat_hud.gd" id="5_qfnet"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_k0juu"]
@@ -33,3 +35,9 @@ tile_set = SubResource("TileSet_71j4m")
 position = Vector2(961, -1)
 script = ExtResource("5_qfnet")
 ref_world = NodePath("..")
+
+[node name="Player" parent="." unique_id=1640087231 instance=ExtResource("4_71j4m")]
+position = Vector2(251, 293)
+
+[node name="tempChest" parent="." unique_id=1325038607 instance=ExtResource("5_i7141")]
+position = Vector2(928, 330)

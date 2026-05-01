@@ -1,0 +1,43 @@
+[gd_scene format=3 uid="uid://c7fimdi78iomb"]
+
+[ext_resource type="Script" uid="uid://c0udv13pgvxq" path="res://scripts/interacting_component_script.gd" id="1_tpfe0"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_stp51"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_tpfe0"]
+font_size = 12
+outline_size = 2
+outline_color = Color(0, 0, 0, 1)
+
+[node name="InteractingComponent" type="Node2D" unique_id=1575907070]
+position = Vector2(0, 1)
+script = ExtResource("1_tpfe0")
+
+[node name="InteractRange" type="Area2D" parent="." unique_id=161067338]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractRange" unique_id=1078612892]
+shape = SubResource("CircleShape2D_stp51")
+
+[node name="InteractLabel" type="Label" parent="." unique_id=1572363495]
+z_index = 10
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -90.0
+offset_top = -62.0
+offset_right = 92.0
+offset_bottom = -13.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+text = "Right Click To Interact"
+label_settings = SubResource("LabelSettings_tpfe0")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="area_entered" from="InteractRange" to="." method="_on_interact_range_area_entered"]
+[connection signal="area_exited" from="InteractRange" to="." method="_on_interact_range_area_exited"]

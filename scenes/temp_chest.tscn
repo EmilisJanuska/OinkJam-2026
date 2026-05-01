@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://dgc2c6qm7k0ao"]
+
+[ext_resource type="Script" uid="uid://bmdyd1bupgr6o" path="res://scripts/temp_chest_script.gd" id="1_hvd3y"]
+[ext_resource type="Texture2D" uid="uid://b562vl17jfknb" path="res://assets/icon.svg" id="1_snc8l"]
+[ext_resource type="PackedScene" uid="uid://d0i7l76j3e4da" path="res://scenes/interactions/interactable.tscn" id="2_hvd3y"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fn32h"]
+radius = 109.457756
+
+[node name="tempChest" type="StaticBody2D" unique_id=1325038607]
+script = ExtResource("1_hvd3y")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1688487118]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1301277115]
+texture = ExtResource("1_snc8l")
+
+[node name="Interactable" parent="." unique_id=1624958000 instance=ExtResource("2_hvd3y")]
+interact_name = "Open Chest"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Interactable" unique_id=555106674]
+position = Vector2(-1, 9)
+shape = SubResource("CircleShape2D_fn32h")

@@ -27,8 +27,10 @@ func start_pattern_scroll() -> void:
 	pattern_spawner.start_spawning()
 
 func stop_pattern_scroll() -> void:
-	pattern_spawner.hide()
-	pattern_spawner.stop_spawning()
+	get_tree().create_timer(0.5).timeout.connect(func():
+		pattern_spawner.hide()
+		pattern_spawner.stop_spawning()
+	)
 
 func handle_attack_success() -> void:
 	print("attack was successful")

@@ -14,7 +14,7 @@ var pattern: Array
 func _ready() -> void:
 	arrow_base = load("res://assets/UI/combat/arrow_base.png")
 	arrow_hit = load("res://assets/UI/combat/arrow_hit.png")
-	arrow_size = 32
+	arrow_size = 64
 	arrow_space = 10
 
 func _process(delta: float) -> void:
@@ -67,9 +67,12 @@ func calc_start_positions() -> Array:
 		
 	return result
 
-func success(idx: int):
+func success(idx: int) -> void:
 	arrows[idx].texture = arrow_hit
+	arrows[idx].b_hit = true
+	arrows[idx].play_success_animation()
 
-func fail():
+func fail() -> void:
 	for arrow in arrows:
 		arrow.texture = arrow_base
+		arrow.reset()

@@ -86,6 +86,7 @@ func spawn_pattern() -> void:
 func choose_next_pattern() -> int:
 	return randi_range(0, pattern_lib.size() - 1)
 
+# checks if input matches current symbol in the current pattern
 func check_input(input: String) -> bool:
 	#print(input == ap_instance.pattern[pattern_idx])
 	if input == ap_instance.pattern[pattern_idx]:

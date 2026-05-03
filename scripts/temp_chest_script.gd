@@ -12,4 +12,3 @@ func _on_interact():
 		sprite_2d.frame = 1
 		interactable.is_interactable = false
 		print("the player gained 10 gold")
-

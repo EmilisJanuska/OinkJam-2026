@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://jcdjovd6aab8"]
+
+[ext_resource type="Texture2D" uid="uid://b562vl17jfknb" path="res://assets/icon.svg" id="1_0qjyh"]
+[ext_resource type="Script" uid="uid://mwkj7vpx6qsq" path="res://scripts/enemy_script.gd" id="1_4fg0d"]
+[ext_resource type="Script" uid="uid://doy7juiycf6la" path="res://scripts/FOVcollision.gd" id="2_k5p11"]
+
+[node name="Enemy" type="CharacterBody2D" unique_id=930025449]
+script = ExtResource("1_4fg0d")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1560351186]
+texture = ExtResource("1_0qjyh")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1099003327]
+
+[node name="FOVcollision" type="CollisionPolygon2D" parent="Area2D" unique_id=552583730]
+polygon = PackedVector2Array(0, 0, 256, -192, 280, -128, 296, -64, 304, 0, 288, 80, 272, 144, 256, 192)
+script = ExtResource("2_k5p11")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

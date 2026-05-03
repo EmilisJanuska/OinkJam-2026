@@ -1,0 +1,68 @@
+[gd_scene format=3 uid="uid://c74d581jtpyl4"]
+
+[ext_resource type="Script" uid="uid://cf02mlp8fc4dx" path="res://scripts/player_movement.gd" id="1_g2els"]
+[ext_resource type="PackedScene" uid="uid://c7fimdi78iomb" path="res://scenes/interactions/interacting_component.tscn" id="3_qhqgy"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_fjrip"]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"back_Walk",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"back_idle",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"front_Walk",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"front_idle",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"left_Walk",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"left_idle",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"right_Walk",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"right_idle",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qhqgy"]
+radius = 8.5
+height = 47.94
+
+[node name="Player" type="CharacterBody2D" unique_id=1640087231]
+position = Vector2(9, -3)
+script = ExtResource("1_g2els")
+speed = null
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=325209838]
+position = Vector2(1, 0)
+sprite_frames = SubResource("SpriteFrames_fjrip")
+animation = &"back_Walk"
+
+[node name="InteractingComponent" parent="." unique_id=1575907070 instance=ExtResource("3_qhqgy")]
+position = Vector2(0, 12)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=843325438]
+position = Vector2(-1, 9)
+shape = SubResource("CapsuleShape2D_qhqgy")

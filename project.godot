@@ -30,6 +30,10 @@ project/assembly_name="OinkJam-2026"
 
 version_control/autoload_on_startup=true
 
+[global_group]
+
+player=""
+
 [input]
 
 Combat_Left={

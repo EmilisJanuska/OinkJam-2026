@@ -11,13 +11,16 @@ config_version=5
 [application]
 
 config/name="OinkJam-2026"
-run/main_scene="uid://n20m7e031cue"
+run/main_scene="uid://cjjb6xbqjeo23"
 config/features=PackedStringArray("4.6", "C#", "Forward Plus")
+boot_splash/bg_color=Color(0.041507192, 0.0415072, 0.04150717, 1)
+boot_splash/show_image=false
 config/icon="res://assets/icon.svg"
 
 [autoload]
 
 WwiseRuntimeManager="*uid://cxwi881py10pu"
+Globals="*uid://cijr1toqctl4m"
 
 [dotnet]
 

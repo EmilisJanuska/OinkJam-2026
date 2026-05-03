@@ -18,7 +18,7 @@ func _ready() -> void:
 	anim_start_time = 0.0
 	anim_run_time = 0.25 # sec
 	anim_start_pos = Vector2(0.0, 0.0)
-	anim_target_scale = Vector2(5.0, 5.0)
+	anim_target_scale = Vector2(2.0, 2.0)
 	anim_rot_speed = 1.0
 	arrow_dir = "left"
 	set_dir(arrow_dir)
@@ -31,6 +31,7 @@ func _process(delta: float) -> void:
 			var rot = lerp_angle(rotation, rotation + anim_target_rot, delta * anim_rot_speed)
 			rotation = rot
 			var scl = scale.lerp(anim_target_scale, cur_anim_time / anim_run_time)
+			scale = scl
 			cur_anim_time = cur_anim_time + delta
 		else:
 			hide()
@@ -63,4 +64,5 @@ func reset() -> void:
 	position = start_pos
 	set_dir(arrow_dir)
 	scale = Vector2(1.0, 1.0)
+	b_hit = false
 	show()

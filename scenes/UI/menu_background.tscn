@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://dtjciqs18kk6"]
+
+[ext_resource type="Texture2D" uid="uid://rpik34r0vut2" path="res://assets/UI/main_menu_bg.jpg" id="1_m27td"]
+
+[node name="MenuBackground" type="Node2D" unique_id=843267083]
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1085496296]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("1_m27td")

@@ -1,4 +1,4 @@
-extends Node
+extends Node2D
 
 var pattern_spawn_timer: Timer
 var pattern_lib: Array
@@ -52,9 +52,10 @@ func _process(_delta: float) -> void:
 
 # pattern spawning
 func start_spawning() -> void:
-	add_child(timer_visual)
-	add_child(pattern_spawn_timer)
-	timer_visual.position.y = 120.0
+	print("spawning pattern...")
+	get_parent().add_child(timer_visual)
+	get_parent().add_child(pattern_spawn_timer)
+	timer_visual.position = Vector2(950.0, 120.0)
 	pattern_spawn_timer.start()
 	b_active = true
 
@@ -66,6 +67,7 @@ func stop_spawning() -> void:
 	b_active = false
 
 func spawn_pattern() -> void:
+	print("spawn pattern, b_active: ", b_active)
 	pattern_idx = 0
 	b_success = false
 	timer_visual.show()
@@ -74,10 +76,12 @@ func spawn_pattern() -> void:
 		ap_instance.queue_free()
 
 	if b_active:
+		print("spawn pattern")
 		var selected_pattern = choose_next_pattern()
 		ap_instance = attack_pattern_prefab.instantiate()
 		ap_instance.set_pattern(pattern_lib[selected_pattern], pattern_scroll_speed, 50.0)
-		add_child(ap_instance)
+		get_parent().add_child(ap_instance)
+		ap_instance.position = Vector2(950.0, 0.0)
 		ap_instance.show()
 		ap_instance.start()
 

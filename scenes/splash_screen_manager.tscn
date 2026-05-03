@@ -1,0 +1,43 @@
+[gd_scene format=3 uid="uid://cjjb6xbqjeo23"]
+
+[ext_resource type="Script" uid="uid://cemdwl6pfkppi" path="res://scripts/splash_screen_manager.gd" id="1_kkrr7"]
+[ext_resource type="FontFile" uid="uid://pfyak6wep6wh" path="res://assets/fonts/ProtestRevolution-Regular.ttf" id="1_rx4go"]
+[ext_resource type="PackedScene" uid="uid://chxkb6vugd40p" path="res://scenes/main.tscn" id="2_4krii"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_f3omg"]
+font = ExtResource("1_rx4go")
+font_size = 72
+
+[node name="SplashScreenManager" type="Control" unique_id=493780438 node_paths=PackedStringArray("splash_screen")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_kkrr7")
+load_scene = ExtResource("2_4krii")
+splash_screen = NodePath("CenterContainer/Label")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1498768633]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.044557855, 0.044557847, 0.044557847, 1)
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=1998209993]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="CenterContainer" unique_id=1997381400]
+layout_mode = 2
+text = "Le Splash"
+label_settings = SubResource("LabelSettings_f3omg")
+horizontal_alignment = 1

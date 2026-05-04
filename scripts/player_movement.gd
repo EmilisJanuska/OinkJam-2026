@@ -10,6 +10,7 @@ Variables:
 - speed (int): Movement speed of the character in pixels per second.
 """
 extends CharacterBody2D
+@export var game_camera: Camera2D
 @export var speed = 300
 var b_paused = false
 
@@ -25,6 +26,7 @@ func _ready() -> void:
 	Globals.game_controller.game_paused.connect(on_game_paused)
 	Globals.game_controller.game_unpaused.connect(on_game_unpaused)
 	Globals.game_controller.new_game_started.connect(on_new_game)
+	Globals.game_controller.use_game_camera.connect(on_use_game_camera)
 
 func get_input():
 	if !b_paused:
@@ -50,3 +52,6 @@ func on_new_game() -> void:
 
 func reset_velocity() -> void:
 	velocity = Vector2(0.0, 0.0)
+
+func on_use_game_camera() -> void:
+	game_camera.make_current()

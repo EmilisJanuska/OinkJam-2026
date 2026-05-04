@@ -2,6 +2,8 @@ extends Node2D
 
 var ref_world : Node2D
 var pattern_spawner: Node2D
+var pattern_count: int
+var b_input_paused: bool
 
 var combat_patterns = preload("res://scenes/combat/combat_pattern_ui.tscn")
 
@@ -19,14 +21,12 @@ var b_adding_score: bool
 var score_adding_delay: float
 var score_adding_time: float
 
-var weapon_damage: float
-var enemy_health: float
-var player_health: float
 var b_enemy_damaged: bool
 
 @export var combat_score_label: Label
 @export var combat_score_mod_label: Label
 @export var multiplier_label: Label
+@export var initiative_label: Label
 @export var enemy_start_pos: Vector2
 @export var enemy_end_pos: Vector2
 @export var enemy_intro_time: float
@@ -35,20 +35,23 @@ var b_enemy_damaged: bool
 @export var reaction_text_color: Color
 @export var reaction_text_fade_to: float
 @export var reaction_text_anim_time: float
+@export var enemy_container: Node2D
+@export var attack_slash_anim: AnimatedSprite2D
+@export var player_health_bar: Node2D
 
 func _ready() -> void:
 	enemy_sprite = load(Globals.combat_enemy_sprites["test"])
 	enemy_instance = enemy_prefab.instantiate()
-	add_child(enemy_instance)
+	enemy_container.add_child(enemy_instance)
 	enemy_instance.hide()
+
+	b_input_paused = false
+	pattern_count = 0
 	combat_score = 0.0
 	combat_score_mod = 0.0
 	scoring_multiplier = 1.0
 	b_show_multiplier = false
 	b_adding_score = false
-	weapon_damage = 10.0
-	enemy_health = 1200.0
-	player_health = 1200.0
 	score_adding_delay = 0.01
 	score_adding_time = 0.0
 	b_enemy_damaged = false
@@ -61,13 +64,15 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	if b_adding_score:
-		if combat_score_mod > 1:
+		if combat_score_mod > 10:
+			var amt = combat_score_mod * 0.1
 			if score_adding_time >= score_adding_delay:
-				combat_score = combat_score + 1
-				combat_score_mod = combat_score_mod - 1
-				update_score_mod()
-				update_score_label()
-				score_adding_time = 0.0
+				if combat_score_mod > amt:
+					combat_score = combat_score + amt
+					combat_score_mod = combat_score_mod - amt
+					update_score_mod()
+					update_score_label()
+					score_adding_time = 0.0
 			else:
 				score_adding_time = score_adding_time + delta
 		else: 
@@ -88,6 +93,7 @@ func handle_combat_input(input: String) -> void:
 
 # arrow pattern system
 func start_pattern_scroll() -> void:
+	$CombatCamera.make_current()
 	if pattern_spawner == null:
 		create_pattern_spawner()
 		pattern_spawner.spawned_pattern.connect(on_pattern_spawned)
@@ -110,7 +116,8 @@ func handle_attack_success() -> void:
 		b_enemy_damaged = true
 
 func handle_attack_fail() -> void:
-	scoring_multiplier = 1
+	scoring_multiplier = 1.0
+	update_multiplier()
 
 func create_pattern_spawner():
 	if pattern_spawner == null:
@@ -123,7 +130,11 @@ func create_pattern_spawner():
 		pattern_spawner.hide()
 
 func on_pattern_spawned() -> void:
+	if !b_enemy_damaged:
+		if pattern_count > 0:
+			handle_attack_fail()
 	b_enemy_damaged = false # allows input again
+	pattern_count += 1
 
 func delete_pattern_spawner() -> void:
 	stop_pattern_scroll()
@@ -140,6 +151,13 @@ func enemy_intro() -> void:
 	tween.tween_property(enemy_instance, "position", enemy_end_pos, enemy_intro_time)
 	await tween.finished
 
+	initiative_label.show()
+	var fade = initiative_label.create_tween()
+	fade.tween_property(initiative_label, "scale", Vector2(1.25, 1.25), 1)
+	fade.tween_property(initiative_label, "modulate:a", 0.0, 1)
+	await tween.finished
+	initiative_label.hide()
+
 # show / animate / destroy reaction text to input time
 func show_reaction_text(input_time: float = Globals.combat_input_precision.nope + 1) -> void:
 	if !b_enemy_damaged:
@@ -148,36 +166,36 @@ func show_reaction_text(input_time: float = Globals.combat_input_precision.nope 
 		reaction_label.position = reaction_text_start_pos
 		reaction_label.label_settings.font_size = 42
 
-		if input_time < Globals.combat_input_precision.superb:
-			reaction_label.text = "Superb!!"
-			reaction_label.label_settings.font_color = Color(0.6, 0.05, 0.8, 1.0)
-			scoring_multiplier = scoring_multiplier + 0.2
-			b_scored = true
-		elif input_time < Globals.combat_input_precision.great:
-			reaction_label.text = "Great!"
-			reaction_label.label_settings.font_color = Color(0.1, 0.5, 0.9, 1.0)
-			scoring_multiplier = scoring_multiplier + 0.1
-			b_scored = true
-		elif input_time < Globals.combat_input_precision.good:
-			reaction_label.text = "Good!"
-			reaction_label.label_settings.font_color = Color(0.2, 1.0, 0.2, 1.0)
-			scoring_multiplier = scoring_multiplier + 0.05
-			b_scored = true
-		elif input_time < Globals.combat_input_precision.sure:
-			reaction_label.text = "Sure."
-			reaction_label.label_settings.font_color = Color(0.8, 0.8, 0.0, 1.0)
-			scoring_multiplier = 1.0
-			b_scored = true
-		elif input_time < Globals.combat_input_precision.nope:
-			reaction_label.text = "nope"
-			reaction_label.label_settings.font_color = Color(0.8, 0.5, 0.0, 1.0)
-			scoring_multiplier = 1.0
-			b_scored = false
-		else:
-			reaction_label.text = "Fail"
-			reaction_label.label_settings.font_color = Color(1.0, 0.0, 0.0, 1.0)
-			scoring_multiplier = 1.0
-			b_scored = false
+		match input_time:
+			_ when input_time < Globals.combat_input_precision.superb:
+				reaction_label.text = "Superb!!"
+				reaction_label.label_settings.font_color = Color(0.6, 0.05, 0.8, 1.0)
+				scoring_multiplier = scoring_multiplier + 2
+				b_scored = true
+			_ when input_time < Globals.combat_input_precision.great:
+				reaction_label.text = "Great!"
+				reaction_label.label_settings.font_color = Color(0.1, 0.5, 0.9, 1.0)
+				scoring_multiplier = scoring_multiplier + 1
+				b_scored = true
+			_ when input_time < Globals.combat_input_precision.good:
+				reaction_label.text = "Good!"
+				reaction_label.label_settings.font_color = Color(0.2, 1.0, 0.2, 1.0)
+				scoring_multiplier = scoring_multiplier + 0.5
+				b_scored = true
+			_ when input_time < Globals.combat_input_precision.sure:
+				reaction_label.text = "Sure."
+				reaction_label.label_settings.font_color = Color(0.8, 0.8, 0.0, 1.0)
+				scoring_multiplier = scoring_multiplier + 0.25
+				b_scored = true
+			_ when input_time < Globals.combat_input_precision.nope:
+				reaction_label.text = "Nope"
+				reaction_label.label_settings.font_color = Color(0.8, 0.5, 0.0, 1.0)
+				b_scored = false
+			_:
+				reaction_label.text = "Fail"
+				reaction_label.label_settings.font_color = Color(1.0, 0.0, 0.0, 1.0)
+				scoring_multiplier = 1.0
+				b_scored = false
 
 		if scoring_multiplier > 1.0:
 			b_show_multiplier = true
@@ -187,8 +205,8 @@ func show_reaction_text(input_time: float = Globals.combat_input_precision.nope 
 
 		@warning_ignore("integer_division")
 		if b_scored:
-			combat_score_mod = combat_score_mod + (weapon_damage * scoring_multiplier)
-		if combat_score_mod > 100.0:
+			combat_score_mod = combat_score_mod + (Globals.game_controller.weapon_damage * scoring_multiplier)
+		if combat_score_mod > 9.0:
 			b_adding_score = true
 
 		add_child(reaction_label)
@@ -200,6 +218,14 @@ func show_reaction_text(input_time: float = Globals.combat_input_precision.nope 
 		reaction_label.queue_free()
 
 func damage_enemy() -> void:
+	pattern_spawner.pause_spawning()
+	b_input_paused = true
+
+	attack_slash_anim.show()
+	attack_slash_anim.play("slash")
+	await attack_slash_anim.animation_finished
+	attack_slash_anim.hide()
+
 	var shake = enemy_instance.create_tween()
 	var shake_dist = Vector2(8.0, 0.0)
 	var shake_step = 0.02
@@ -210,18 +236,22 @@ func damage_enemy() -> void:
 	shake.tween_property(enemy_instance, "position", shake_dist * 2, shake_step).as_relative()
 	shake.tween_property(enemy_instance, "position", -shake_dist, shake_step).as_relative()
 
-	print("damaged enemy with epic attack move")
+	#print("damaged enemy with epic attack move")
+
+	player_health_bar.update_hearts()
+	b_input_paused = false
+	pattern_spawner.resume_spawning()
 
 
 # display / animate score / multiplier
 func update_score_label() -> void:
-	var score = round(combat_score)
+	var score: int = round(combat_score)
 	combat_score_label.text = "Score: " + str(score)
 	if !combat_score_label.visible: combat_score_label.show()
 
 func update_score_mod() -> void: # shows the label if hidden
-	var mod = round(combat_score_mod)
-	combat_score_mod_label.text = "Score: " + str(mod)
+	var mod: int = round(combat_score_mod)
+	combat_score_mod_label.text = str(mod)
 	if !combat_score_mod_label.visible: combat_score_mod_label.show()
 
 func hide_score_mod() -> void:
@@ -231,24 +261,25 @@ func update_multiplier() -> void:
 	var color: Color = Color(1.0, 0.0, 0.0, 1.0)
 	var t_scale: Vector2 = Vector2.ONE
 	match scoring_multiplier:
-		_ when scoring_multiplier > 1 and scoring_multiplier <= 3:
+		_ when scoring_multiplier > 1 and scoring_multiplier <= 5:
 			color = Color(0.8, 0.5, 0.0, 1.0)
 			t_scale = Vector2.ONE
-		_ when scoring_multiplier > 3 and scoring_multiplier <= 7:
+		_ when scoring_multiplier > 5 and scoring_multiplier <= 12:
 			color = Color(0.8, 0.8, 0.0, 1.0)
 			t_scale = Vector2(1.1, 1.1)
-		_ when scoring_multiplier > 8 and scoring_multiplier <= 15:
+		_ when scoring_multiplier > 12 and scoring_multiplier <= 25:
 			color = Color(0.2, 1.0, 0.2, 1.0)
 			t_scale = Vector2(1.2, 1.2)
-		_ when scoring_multiplier > 15 and scoring_multiplier <= 25:
+		_ when scoring_multiplier > 25 and scoring_multiplier <= 40:
 			color = Color(0.1, 0.5, 0.9, 1.0)
 			t_scale = Vector2(1.3, 1.3)
-		_ when scoring_multiplier > 50:
+		_ when scoring_multiplier > 40:
 			color = Color(0.6, 0.05, 0.8, 1.0)
 			t_scale = Vector2(1.5, 1.5)
 	
 	multiplier_label.text = str(scoring_multiplier) + "x"
 	multiplier_label.label_settings.font_color = color
+	multiplier_label.scale = t_scale
 	if !multiplier_label.visible: multiplier_label.show()
 
 func hide_multiplier() -> void:

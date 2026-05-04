@@ -1,0 +1,49 @@
+[gd_scene format=3 uid="uid://6mc2li44br2m"]
+
+[ext_resource type="Texture2D" uid="uid://m2fb8c7eafc4" path="res://assets/UI/heart-spritesheet.png" id="1_l6o3p"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f1unh"]
+atlas = ExtResource("1_l6o3p")
+region = Rect2(0, 0, 41, 38)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pwstv"]
+atlas = ExtResource("1_l6o3p")
+region = Rect2(41, 0, 41, 38)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bfja6"]
+atlas = ExtResource("1_l6o3p")
+region = Rect2(82, 0, 41, 38)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u6fsr"]
+atlas = ExtResource("1_l6o3p")
+region = Rect2(123, 0, 41, 38)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dfuwc"]
+atlas = ExtResource("1_l6o3p")
+region = Rect2(164, 0, 41, 38)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xckd7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f1unh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pwstv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bfja6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u6fsr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dfuwc")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="HealthBarHeart" type="AnimatedSprite2D" unique_id=1890487409]
+sprite_frames = SubResource("SpriteFrames_xckd7")

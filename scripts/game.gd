@@ -12,6 +12,13 @@ var b_game_started: bool
 var b_game_paused: bool
 var b_combat_paused: bool
 
+@export var weapon_damage: float
+@export var player_health: float
+@export var player_max_health: float
+@export var enemy_health: float
+@export var enemy_max_health: float
+@export var quarter_heart_value: float
+
 signal game_paused
 signal game_unpaused
 signal combat_paused
@@ -20,6 +27,7 @@ signal combat_input_pressed
 signal combat_started
 signal combat_ended
 signal new_game_started
+signal use_game_camera
 
 func _unhandled_input(event) -> void:
 	if(event is InputEventKey):
@@ -96,6 +104,7 @@ func change_game_state(to_state: Globals.GameStates, from_state: Globals.GameSta
 				last_game_state = from_state
 				change_scene(Globals.LevelScenes.dev_scene, false, true)
 				change_ui_scene(Globals.HUDScenes.game_hud, false, true)
+				use_game_camera.emit()
 				unpause_game()
 				combat_ended.emit()
 
@@ -162,7 +171,7 @@ func change_ui_scene(ui_scene: Globals.HUDScenes, delete: bool = true, keep_runn
 				loaded_ui_scenes[current_ui_scene].visible = false # scene will run in background
 		var new = load(Globals.hud_scene_lib[ui_scene]).instantiate()
 		loaded_ui_scenes[scene_name] = new
-		world.add_child(new)
+		ui.add_child(new)
 		current_ui_scene = scene_name
 		loaded_ui_scenes[current_ui_scene].visible = true
 	elif loaded_ui_scenes.has(scene_name) && scene_name != current_ui_scene:
@@ -210,4 +219,5 @@ func new_game() -> void:
 	change_ui_scene(Globals.HUDScenes.game_hud, false, true)
 	change_scene(Globals.LevelScenes.dev_scene, false, true)
 	new_game_started.emit()
+	use_game_camera.emit()
 	unpause_game()

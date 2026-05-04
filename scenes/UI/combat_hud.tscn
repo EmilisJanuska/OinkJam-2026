@@ -4,6 +4,14 @@
 [ext_resource type="FontFile" uid="uid://pfyak6wep6wh" path="res://assets/fonts/ProtestRevolution-Regular.ttf" id="2_pn8vs"]
 [ext_resource type="PackedScene" uid="uid://by26ox5y73vth" path="res://scenes/UI/tween_label.tscn" id="3_omoar"]
 [ext_resource type="FontFile" uid="uid://c57wrklqr8ham" path="res://assets/fonts/CarterOne-Regular.ttf" id="4_cxy85"]
+[ext_resource type="Texture2D" uid="uid://1ms3rm7eqisj" path="res://assets/sprite_animations/combat/attack_slash_01.png" id="5_0r7i2"]
+[ext_resource type="Texture2D" uid="uid://cbyu1h6ttjela" path="res://assets/sprite_animations/combat/attack_slash_02.png" id="6_p0xtj"]
+[ext_resource type="Texture2D" uid="uid://dvs15i3tnrets" path="res://assets/sprite_animations/combat/attack_slash_03.png" id="7_upv67"]
+[ext_resource type="Texture2D" uid="uid://bqsadkx1yepqr" path="res://assets/sprite_animations/combat/attack_slash_04.png" id="8_wpbbp"]
+[ext_resource type="Texture2D" uid="uid://cxfifmtlgx7p7" path="res://assets/sprite_animations/combat/attack_slash_05.png" id="9_sq3j6"]
+[ext_resource type="Texture2D" uid="uid://s5xk62vk5qs" path="res://assets/sprite_animations/combat/attack_slash_06.png" id="10_1rych"]
+[ext_resource type="Texture2D" uid="uid://c3jhic7qimmnv" path="res://assets/sprite_animations/combat/attack_slash_07.png" id="11_27uen"]
+[ext_resource type="PackedScene" uid="uid://beo7cifxhgfak" path="res://scenes/UI/health_bar.tscn" id="12_p0xtj"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_h2dbt"]
 font = ExtResource("2_pn8vs")
@@ -17,19 +25,61 @@ font_size = 28
 font = ExtResource("4_cxy85")
 font_size = 72
 
-[node name="CombatHud" type="Node2D" unique_id=967472215 node_paths=PackedStringArray("combat_score_label", "combat_score_mod_label", "multiplier_label")]
+[sub_resource type="LabelSettings" id="LabelSettings_0r7i2"]
+font = ExtResource("2_pn8vs")
+font_size = 60
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_22xsm"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_0r7i2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_p0xtj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_upv67")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_wpbbp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_sq3j6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_1rych")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_27uen")
+}],
+"loop": false,
+"name": &"slash",
+"speed": 30.0
+}]
+
+[node name="CombatHud" type="Node2D" unique_id=967472215 node_paths=PackedStringArray("combat_score_label", "combat_score_mod_label", "multiplier_label", "initiative_label", "enemy_container", "attack_slash_anim", "player_health_bar")]
 script = ExtResource("1_swk68")
 combat_score_label = NodePath("CombatScore")
 combat_score_mod_label = NodePath("CombatScoreMod")
 multiplier_label = NodePath("Multiplier")
-enemy_start_pos = Vector2(200, 200)
-enemy_end_pos = Vector2(550, 200)
+initiative_label = NodePath("Initiative")
+enemy_start_pos = Vector2(100, 50)
+enemy_end_pos = Vector2(512, 288)
 enemy_intro_time = 0.25
-reaction_text_start_pos = Vector2(910, 250)
-reaction_text_end_pos = Vector2(950, 200)
+reaction_text_start_pos = Vector2(800, 275)
+reaction_text_end_pos = Vector2(800, 250)
 reaction_text_color = Color(0.58907443, 0.30049345, 0.79654706, 1)
 reaction_text_fade_to = 0.5
 reaction_text_anim_time = 0.1
+enemy_container = NodePath("EnemyContainer")
+attack_slash_anim = NodePath("AttackSlashAnimation")
+player_health_bar = NodePath("HealthBar")
+
+[node name="CombatCamera" type="Camera2D" parent="." unique_id=1708878876]
+position = Vector2(512, 288)
+
+[node name="EnemyContainer" type="Node2D" parent="." unique_id=1498258183]
 
 [node name="CombatScore" type="Label" parent="." unique_id=1821638661]
 offset_left = 45.0
@@ -46,10 +96,10 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 176.0
-offset_top = 92.0
-offset_right = 253.0
-offset_bottom = 126.0
+offset_left = 153.0
+offset_top = 91.0
+offset_right = 230.0
+offset_bottom = 125.0
 grow_horizontal = 0
 grow_vertical = 0
 text = "0"
@@ -57,9 +107,30 @@ label_settings = SubResource("LabelSettings_m7b21")
 
 [node name="Multiplier" parent="." unique_id=730698128 instance=ExtResource("3_omoar")]
 visible = false
-offset_left = 886.0
-offset_top = 292.0
-offset_right = 1043.0
-offset_bottom = 404.0
+offset_left = 763.0
+offset_top = 300.0
+offset_right = 920.0
+offset_bottom = 412.0
+pivot_offset = Vector2(80, 56)
 text = "150x"
 label_settings = SubResource("LabelSettings_mq2li")
+
+[node name="Initiative" parent="." unique_id=1993837123 instance=ExtResource("3_omoar")]
+visible = false
+offset_left = 400.0
+offset_top = 29.0
+offset_right = 622.0
+offset_bottom = 102.0
+pivot_offset = Vector2(111, 37)
+text = "Spotted!"
+label_settings = SubResource("LabelSettings_0r7i2")
+
+[node name="AttackSlashAnimation" type="AnimatedSprite2D" parent="." unique_id=661368071]
+visible = false
+position = Vector2(500, 287)
+sprite_frames = SubResource("SpriteFrames_22xsm")
+animation = &"slash"
+speed_scale = 1.5
+
+[node name="HealthBar" parent="." unique_id=780960740 instance=ExtResource("12_p0xtj")]
+position = Vector2(45, 500)

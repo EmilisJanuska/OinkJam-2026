@@ -4,6 +4,12 @@
 
 [node name="GameController" type="Node" unique_id=1966796427]
 script = ExtResource("1_0wfyh")
+weapon_damage = 100.0
+player_health = 1000.0
+player_max_health = 1200.0
+enemy_health = 1200.0
+enemy_max_health = 1200.0
+quarter_heart_value = 100.0
 
 [node name="World" type="Node2D" parent="." unique_id=1304922401]
 

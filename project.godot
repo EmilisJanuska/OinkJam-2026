@@ -22,6 +22,14 @@ config/icon="res://assets/icon.svg"
 WwiseRuntimeManager="*uid://cxwi881py10pu"
 Globals="*uid://cijr1toqctl4m"
 
+[display]
+
+window/size/viewport_width=1024
+window/size/viewport_height=576
+window/size/window_width_override=1920
+window/size/window_height_override=1080
+window/stretch/mode="viewport"
+
 [dotnet]
 
 project/assembly_name="OinkJam-2026"

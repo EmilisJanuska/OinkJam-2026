@@ -57,7 +57,7 @@ func _process(_delta: float) -> void:
 func start_spawning() -> void:
 	add_child(timer_visual)
 	add_child(pattern_spawn_timer)
-	timer_visual.position = Vector2(950.0, 140.0)
+	timer_visual.position = Vector2(850.0, 220.0)
 	pattern_spawn_timer.start()
 	b_active = true
 
@@ -68,7 +68,14 @@ func stop_spawning() -> void:
 	timer_visual.hide()
 	b_active = false
 
+func pause_spawning() -> void:
+	pattern_spawn_timer.paused = true
+
+func resume_spawning() -> void:
+	pattern_spawn_timer.paused = false
+
 func spawn_pattern() -> void:
+
 	pattern_idx = 0
 	b_success = false
 	timer_visual.show()
@@ -83,7 +90,8 @@ func spawn_pattern() -> void:
 		ap_instance.symbol_input_fail.connect(handle_symbol_input_fail)
 		ap_instance.set_pattern(pattern_lib[selected_pattern], pattern_scroll_speed, 50.0)
 		add_child(ap_instance)
-		ap_instance.position = Vector2(950.0, 0.0)
+		ap_instance.position = Vector2(850.0, 50.0)
+		ap_instance.scale = Vector2.ONE * 0.8
 		ap_instance.show()
 		ap_instance.start()
 		spawned_pattern.emit()

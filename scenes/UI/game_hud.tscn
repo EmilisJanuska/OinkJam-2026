@@ -1,3 +1,8 @@
 [gd_scene format=3 uid="uid://cdrj6xblb3epo"]
 
+[ext_resource type="PackedScene" uid="uid://beo7cifxhgfak" path="res://scenes/UI/health_bar.tscn" id="1_1wjll"]
+
 [node name="GameHud" type="Node2D" unique_id=983146821]
+
+[node name="HealthBar" parent="." unique_id=780960740 instance=ExtResource("1_1wjll")]
+position = Vector2(45, 500)

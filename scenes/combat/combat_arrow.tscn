@@ -4,3 +4,7 @@
 
 [node name="CombatArrow" type="Sprite2D" unique_id=1528526849]
 script = ExtResource("1_ndmls")
+anim_run_time = 0.1
+anim_target_pos = Vector2(0, -20)
+anim_target_rot = 30.0
+anim_target_scale = Vector2(2, 2)

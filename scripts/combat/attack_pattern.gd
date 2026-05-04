@@ -9,6 +9,9 @@ var arrow_space: float
 var fall_speed: float
 var max_fall_dist: float
 var pattern: Array
+var symbol_input_time: float
+
+signal symbol_input_success_time
 
 # load sprites into memory
 func _ready() -> void:
@@ -22,9 +25,9 @@ func _process(delta: float) -> void:
 		var fall_dist = arrow.position.y - arrow.start_pos.y
 		if fall_dist < max_fall_dist:
 			arrow.position.y = arrow.position.y + (fall_speed * delta)
+	symbol_input_time = symbol_input_time + delta
 
 func start() -> void:
-	#print(start_positions)
 	for dir in pattern:
 		var arrow_inst = combat_arrow_prefab.instantiate()
 		arrows.append(arrow_inst)
@@ -71,6 +74,8 @@ func success(idx: int) -> void:
 	arrows[idx].texture = arrow_hit
 	arrows[idx].b_hit = true
 	arrows[idx].play_success_animation()
+	symbol_input_success_time.emit(symbol_input_time)
+	symbol_input_time = 0.0
 
 func fail() -> void:
 	for arrow in arrows:

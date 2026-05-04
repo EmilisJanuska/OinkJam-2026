@@ -1,6 +1,27 @@
 [gd_scene format=3 uid="uid://bbuctx8rdxywg"]
 
 [ext_resource type="Script" uid="uid://teicw2jkvu8r" path="res://scripts/combat/combat_hud.gd" id="1_swk68"]
+[ext_resource type="FontFile" uid="uid://pfyak6wep6wh" path="res://assets/fonts/ProtestRevolution-Regular.ttf" id="2_pn8vs"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_h2dbt"]
+font = ExtResource("2_pn8vs")
+font_size = 36
 
 [node name="CombatHud" type="Node2D" unique_id=967472215]
 script = ExtResource("1_swk68")
+enemy_start_pos = Vector2(200, 200)
+enemy_end_pos = Vector2(550, 200)
+enemy_intro_time = 0.25
+reaction_text_start_pos = Vector2(950, 250)
+reaction_text_end_pos = Vector2(950, 200)
+reaction_text_color = Color(0.58907443, 0.30049345, 0.79654706, 1)
+reaction_text_fade_to = 0.5
+reaction_text_anim_time = 0.1
+
+[node name="CombatScore" type="Label" parent="." unique_id=1821638661]
+offset_left = 45.0
+offset_top = 45.0
+offset_right = 253.0
+offset_bottom = 89.0
+text = "Score: 99999"
+label_settings = SubResource("LabelSettings_h2dbt")

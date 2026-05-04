@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://cncy653hjbp6m"]
+
+[ext_resource type="Script" uid="uid://t7iilkioot63" path="res://scripts/combat/combat_enemy.gd" id="1_toug8"]
+
+[node name="CombatEnemyPrefab" type="Sprite2D" unique_id=1629517568]
+script = ExtResource("1_toug8")

@@ -7,7 +7,7 @@ var speed = 200
 var startPoint: Vector2
 var direction = 1
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if not startPoint: startPoint = global_position
 
 	if not global_position.x > startPoint.x + 500:

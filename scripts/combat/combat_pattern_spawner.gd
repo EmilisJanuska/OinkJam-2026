@@ -18,6 +18,7 @@ var timer_visual: Node2D
 
 signal pattern_input_success
 signal pattern_input_failure
+signal symbol_input_success_time2
 
 # init
 func _ready() -> void:
@@ -52,9 +53,8 @@ func _process(_delta: float) -> void:
 
 # pattern spawning
 func start_spawning() -> void:
-	print("spawning pattern...")
-	get_parent().add_child(timer_visual)
-	get_parent().add_child(pattern_spawn_timer)
+	add_child(timer_visual)
+	add_child(pattern_spawn_timer)
 	timer_visual.position = Vector2(950.0, 120.0)
 	pattern_spawn_timer.start()
 	b_active = true
@@ -67,7 +67,6 @@ func stop_spawning() -> void:
 	b_active = false
 
 func spawn_pattern() -> void:
-	print("spawn pattern, b_active: ", b_active)
 	pattern_idx = 0
 	b_success = false
 	timer_visual.show()
@@ -76,11 +75,11 @@ func spawn_pattern() -> void:
 		ap_instance.queue_free()
 
 	if b_active:
-		print("spawn pattern")
 		var selected_pattern = choose_next_pattern()
 		ap_instance = attack_pattern_prefab.instantiate()
+		ap_instance.symbol_input_success_time.connect(handle_symbol_input_success_time)
 		ap_instance.set_pattern(pattern_lib[selected_pattern], pattern_scroll_speed, 50.0)
-		get_parent().add_child(ap_instance)
+		add_child(ap_instance)
 		ap_instance.position = Vector2(950.0, 0.0)
 		ap_instance.show()
 		ap_instance.start()
@@ -92,7 +91,6 @@ func choose_next_pattern() -> int:
 
 # checks if input matches current symbol in the current pattern
 func check_input(input: String) -> bool:
-	#print(input == ap_instance.pattern[pattern_idx])
 	if input == ap_instance.pattern[pattern_idx]:
 		if pattern_idx == ap_instance.pattern.size() - 1:
 			ap_instance.success(pattern_idx)
@@ -113,3 +111,6 @@ func check_input(input: String) -> bool:
 func reset() -> void:
 	if ap_instance != null:
 		ap_instance.fail()
+
+func handle_symbol_input_success_time(input_time: float) -> void:
+	symbol_input_success_time2.emit(input_time)

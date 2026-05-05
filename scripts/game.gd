@@ -15,8 +15,6 @@ var b_combat_paused: bool
 @export var weapon_damage: float
 @export var player_health: float
 @export var player_max_health: float
-@export var enemy_health: float
-@export var enemy_max_health: float
 @export var quarter_heart_value: float
 
 signal game_paused
@@ -28,6 +26,9 @@ signal combat_started
 signal combat_ended
 signal new_game_started
 signal use_game_camera
+
+# debug testing only
+signal add_to_score
 
 func _unhandled_input(event) -> void:
 	if(event is InputEventKey):
@@ -44,10 +45,13 @@ func _unhandled_input(event) -> void:
 		
 		#temporary - press space to start / stop combat
 		elif event.pressed and event.keycode == KEY_SPACE:
-			if game_state == Globals.GameStates.in_world:
-				change_game_state(Globals.GameStates.in_combat, Globals.GameStates.in_world)
-			elif game_state == Globals.GameStates.in_combat:
+			#if game_state == Globals.GameStates.in_world:
+				#change_game_state(Globals.GameStates.in_combat, Globals.GameStates.in_world)
+			if game_state == Globals.GameStates.in_combat:
 				change_game_state(Globals.GameStates.in_world, Globals.GameStates.in_combat)
+
+		elif event.pressed and event.keycode == KEY_Q:
+			add_to_score.emit()
 
 		# combat controls - only enabled when in combat
 		if game_state == Globals.GameStates.in_combat:
@@ -74,8 +78,12 @@ func _ready() -> void:
 	change_scene(Globals.LevelScenes.menu_background)
 	change_ui_scene(Globals.HUDScenes.main_menu)
 
+'''
+	GAME STATE / SCENE MANAGEMENT
+'''
+
 # game state switching logic
-func change_game_state(to_state: Globals.GameStates, from_state: Globals.GameStates) -> void:
+func change_game_state(to_state: Globals.GameStates, from_state: Globals.GameStates, start_combat: bool = false) -> void:
 	match to_state:
 		Globals.GameStates.main_menu:
 			if from_state == Globals.GameStates.in_world:
@@ -119,17 +127,16 @@ func change_game_state(to_state: Globals.GameStates, from_state: Globals.GameSta
 				pause_game()
 				game_state = Globals.GameStates.in_combat
 				last_game_state = from_state
-				change_scene(Globals.LevelScenes.combat_scene, false, true)
-				change_ui_scene(Globals.HUDScenes.combat_hud, false, true)
-				unpause_combat()
-				combat_started.emit()
+				change_scene(Globals.LevelScenes.combat_scene, false, true, start_combat)
+				change_ui_scene(Globals.HUDScenes.combat_hud, false, true, start_combat)
 
 		Globals.GameStates.game_over:
 			pass
 		Globals.GameStates.game_win:
 			pass
 
-func change_scene(scene: Globals.LevelScenes, delete: bool = true, keep_running: bool = false) -> void:
+# scene change logic
+func change_scene(scene: Globals.LevelScenes, delete: bool = true, keep_running: bool = false, _begin_combat: bool = false) -> void:
 	var scene_name = Globals.LevelScenes.find_key(scene)
 	if !loaded_scenes.has(scene_name) && scene_name != current_scene:
 		if delete:
@@ -158,7 +165,7 @@ func change_scene(scene: Globals.LevelScenes, delete: bool = true, keep_running:
 		current_scene = scene_name
 		loaded_scenes[scene_name].visible = true
 
-func change_ui_scene(ui_scene: Globals.HUDScenes, delete: bool = true, keep_running: bool = false) -> void:
+func change_ui_scene(ui_scene: Globals.HUDScenes, delete: bool = true, keep_running: bool = false, begin_combat: bool = false) -> void:
 	var scene_name = Globals.HUDScenes.find_key(ui_scene)
 	if !loaded_ui_scenes.has(scene_name) && scene_name != current_ui_scene:
 		if delete:
@@ -173,6 +180,10 @@ func change_ui_scene(ui_scene: Globals.HUDScenes, delete: bool = true, keep_runn
 		loaded_ui_scenes[scene_name] = new
 		ui.add_child(new)
 		current_ui_scene = scene_name
+
+		if begin_combat:
+			combat_started.emit()
+
 		loaded_ui_scenes[current_ui_scene].visible = true
 	elif loaded_ui_scenes.has(scene_name) && scene_name != current_ui_scene:
 		if delete:
@@ -184,9 +195,19 @@ func change_ui_scene(ui_scene: Globals.HUDScenes, delete: bool = true, keep_runn
 			if loaded_ui_scenes.has(current_ui_scene):
 				loaded_ui_scenes[current_ui_scene].visible = false # scene will run in background
 		current_ui_scene = scene_name
+
+		if begin_combat:
+			combat_started.emit()
+
 		loaded_ui_scenes[current_ui_scene].visible = true
 
-# utility functions
+'''
+	UTILITY FUNCTIONS
+'''
+
+func enter_combat() -> void:
+	change_game_state(Globals.GameStates.in_combat, Globals.GameStates.in_world, true)
+
 func pause_game() -> void:
 	b_game_paused = true
 	game_paused.emit()

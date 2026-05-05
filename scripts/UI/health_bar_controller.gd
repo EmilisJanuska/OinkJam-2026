@@ -3,24 +3,38 @@ extends Node
 var heart_prefab: PackedScene = preload("res://scenes/UI/health_bar_heart.tscn")
 var hearts: Array
 
+# using this to determine if this uses player data, or enemy data
+var b_player: bool
+var b_enemy: bool
+
 func _ready() -> void:
+	b_player = false
+	b_enemy = false
+
+func init() -> void:
+	if hearts.size() > 0:
+		for heart in hearts:
+			remove_child(heart)
+			heart.queue_free()
+		hearts.clear()
+
 	var n_hearts:int = calc_num_hearts()
 	for i in range(0, n_hearts):
 		var heart_inst = heart_prefab.instantiate()
 		add_child(heart_inst)
 		heart_inst.position.x = i * 41
 		hearts.append(heart_inst)
-	update_hearts()
 
-	Globals.game_controller.combat_input_pressed.connect(update_hearts)
-
-func update_hearts(_input: String = "") -> void:
+func update_hearts() -> void:
 	var check_n_hearts = calc_num_hearts()
 	if check_n_hearts > hearts.size():
 		add_hearts(check_n_hearts - hearts.size())
 
-	var hp = Globals.game_controller.player_health
+	var hp = -69
 	var heart_value = 400
+
+	if b_player: hp = Globals.game_controller.player_health
+	else:  hp = Globals.cur_enemy_stats.health
 
 	for i in range(0, hearts.size()):
 		var heart = hearts[i] as AnimatedSprite2D
@@ -38,8 +52,12 @@ func update_hearts(_input: String = "") -> void:
 		heart.frame = frame
 
 func calc_num_hearts() -> int:
-	@warning_ignore("narrowing_conversion")
-	return (Globals.game_controller.player_max_health / Globals.game_controller.quarter_heart_value) / 4
+	if b_player:
+		@warning_ignore("narrowing_conversion")
+		return (Globals.game_controller.player_max_health / Globals.game_controller.quarter_heart_value) / 4
+	else:
+		@warning_ignore("narrowing_conversion")
+		return (Globals.cur_enemy_stats.max_health / Globals.game_controller.quarter_heart_value) / 4
 
 func add_hearts(num: int) -> void:
 	var idx = hearts.size()
@@ -49,6 +67,16 @@ func add_hearts(num: int) -> void:
 		heart_inst.position.x = idx * 41
 		add_child(heart_inst)
 		idx += 1
+
+func connect_player() -> void:
+	b_player = true
+	b_enemy = false
+	init()		
+
+func connect_enemy() -> void:
+	b_player = false
+	b_enemy = true
+	init()
 
 func animate_take_damage() -> void:
 	pass

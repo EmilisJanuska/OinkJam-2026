@@ -2,6 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://jcdjovd6aab8" path="res://scenes/Enemy1.tscn" id="3_q442r"]
 [ext_resource type="PackedScene" uid="uid://c74d581jtpyl4" path="res://scenes/player.tscn" id="4_71j4m"]
+[ext_resource type="Resource" uid="uid://b1e1bcwxy4boq" path="res://resources/enemy_weak_1.tres" id="4_ickkf"]
 [ext_resource type="PackedScene" uid="uid://dgc2c6qm7k0ao" path="res://scenes/temp_chest.tscn" id="5_i7141"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_71j4m"]
@@ -218,7 +219,10 @@ game_camera = NodePath("Camera2D")
 position_smoothing_enabled = true
 
 [node name="tempChest" parent="." unique_id=1325038607 instance=ExtResource("5_i7141")]
+visible = false
 position = Vector2(928, 330)
 
 [node name="Enemy" parent="." unique_id=930025449 instance=ExtResource("3_q442r")]
-position = Vector2(808, 232)
+position = Vector2(895, 136)
+scale = Vector2(0.5, 0.5)
+stats = ExtResource("4_ickkf")

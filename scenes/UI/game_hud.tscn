@@ -12,8 +12,9 @@ font_size = 36
 font = ExtResource("3_8i1d3")
 font_size = 28
 
-[node name="GameHud" type="Node2D" unique_id=983146821 node_paths=PackedStringArray("game_score_label", "game_score_mod_label")]
+[node name="GameHud" type="Node2D" unique_id=983146821 node_paths=PackedStringArray("player_health_bar", "game_score_label", "game_score_mod_label")]
 script = ExtResource("1_7wtpu")
+player_health_bar = NodePath("HealthBar")
 game_score_label = NodePath("GameScore")
 game_score_mod_label = NodePath("GameScoreMod")
 

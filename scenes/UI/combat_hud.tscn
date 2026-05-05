@@ -58,8 +58,11 @@ animations = [{
 "speed": 30.0
 }]
 
-[node name="CombatHud" type="Node2D" unique_id=967472215 node_paths=PackedStringArray("combat_score_label", "combat_score_mod_label", "multiplier_label", "initiative_label", "enemy_container", "attack_slash_anim", "player_health_bar")]
+[node name="CombatHud" type="Node2D" unique_id=967472215 node_paths=PackedStringArray("player_health_bar", "enemy_health_bar", "enemy_container", "combat_score_label", "combat_score_mod_label", "multiplier_label", "initiative_label", "attack_slash_anim")]
 script = ExtResource("1_swk68")
+player_health_bar = NodePath("PlayerHealthBar")
+enemy_health_bar = NodePath("EnemyHealthBar")
+enemy_container = NodePath("EnemyContainer")
 combat_score_label = NodePath("CombatScore")
 combat_score_mod_label = NodePath("CombatScoreMod")
 multiplier_label = NodePath("Multiplier")
@@ -72,12 +75,7 @@ reaction_text_end_pos = Vector2(800, 250)
 reaction_text_color = Color(0.58907443, 0.30049345, 0.79654706, 1)
 reaction_text_fade_to = 0.5
 reaction_text_anim_time = 0.1
-enemy_container = NodePath("EnemyContainer")
 attack_slash_anim = NodePath("AttackSlashAnimation")
-player_health_bar = NodePath("HealthBar")
-
-[node name="CombatCamera" type="Camera2D" parent="." unique_id=1708878876]
-position = Vector2(512, 288)
 
 [node name="EnemyContainer" type="Node2D" parent="." unique_id=1498258183]
 
@@ -132,5 +130,11 @@ sprite_frames = SubResource("SpriteFrames_22xsm")
 animation = &"slash"
 speed_scale = 1.5
 
-[node name="HealthBar" parent="." unique_id=780960740 instance=ExtResource("12_p0xtj")]
+[node name="PlayerHealthBar" parent="." unique_id=780960740 instance=ExtResource("12_p0xtj")]
 position = Vector2(45, 500)
+
+[node name="EnemyHealthBar" parent="." unique_id=1689852329 instance=ExtResource("12_p0xtj")]
+position = Vector2(441, 60)
+
+[node name="CombatCamera" type="Camera2D" parent="." unique_id=1708878876]
+position = Vector2(512, 288)

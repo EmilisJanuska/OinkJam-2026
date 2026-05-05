@@ -1,11 +1,14 @@
 extends CharacterBody2D
 
 @onready var vision: Area2D = $Vision
+@export var stats: EnemyStats
 
 var speed = 200
-
 var startPoint: Vector2
 var direction = 1
+
+func _ready() -> void:
+	if stats: stats.duplicate() # necessary for unique stats for this enemy instance
 
 func _physics_process(_delta: float) -> void:
 	if not startPoint: startPoint = global_position
@@ -26,3 +29,6 @@ func _on_vision_player_detected(body: Node2D) -> void:
 		set_physics_process(false)
 		vision.set_color(Color(Color.RED, 0.3))
 		
+		# enter combat
+		Globals.cur_enemy_stats = stats
+		Globals.game_controller.change_game_state(Globals.GameStates.in_combat, Globals.GameStates.in_world, true)

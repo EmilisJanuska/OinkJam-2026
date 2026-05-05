@@ -24,6 +24,9 @@ var score_adding_time: float
 
 var b_enemy_damaged: bool
 
+@export var player_health_bar: Node2D
+@export var enemy_health_bar: Node2D
+@export var enemy_container: Node2D
 @export var combat_score_label: Label
 @export var combat_score_mod_label: Label
 @export var multiplier_label: Label
@@ -36,9 +39,7 @@ var b_enemy_damaged: bool
 @export var reaction_text_color: Color
 @export var reaction_text_fade_to: float
 @export var reaction_text_anim_time: float
-@export var enemy_container: Node2D
 @export var attack_slash_anim: AnimatedSprite2D
-@export var player_health_bar: Node2D
 
 func _ready() -> void:
 	enemy_sprite = load(Globals.combat_enemy_sprites["test"])
@@ -58,45 +59,69 @@ func _ready() -> void:
 	score_adding_time = 0.0
 	b_enemy_damaged = false
 
+	connect_healthbars()
+
 	# signals
 	Globals.game_controller.new_game_started.connect(handle_new_game)
 	Globals.game_controller.combat_input_pressed.connect(handle_combat_input)
-	Globals.game_controller.combat_started.connect(start_pattern_scroll)
-	Globals.game_controller.combat_ended.connect(stop_pattern_scroll)
+	Globals.game_controller.combat_started.connect(on_combat_started)
+	Globals.game_controller.combat_ended.connect(on_combat_ended)
 	Globals.game_controller.combat_paused.connect(on_combat_paused)
 	Globals.game_controller.combat_unpaused.connect(on_combat_unpaused)
 
 func _process(delta: float) -> void:
-	if b_adding_score:
-		if combat_score_mod > 10:
+	b_adding_score = false
+	if !b_combat_paused:
+		if combat_score_mod > 0:
+			b_adding_score = true
+		if b_adding_score:
 			var amt = combat_score_mod * 0.1
-			if score_adding_time >= score_adding_delay:
-				if combat_score_mod > amt:
-					combat_score = combat_score + amt
-					combat_score_mod = combat_score_mod - amt
-					update_score_mod()
-					update_score_label()
-					score_adding_time = 0.0
+			if amt <= 0.1: # x 10 = 1
+				combat_score += 1.0
+				combat_score_mod = 0.0
+				b_adding_score = false
+			elif score_adding_time >= score_adding_delay:
+				combat_score += amt
+				combat_score_mod -= amt
+				update_score_mod()
+				update_score_label()
+				score_adding_time = 0.0
 			else:
-				score_adding_time = score_adding_time + delta
+				score_adding_time += delta
 		else: 
 			hide_score_mod()
 			b_adding_score = false
-	
-	# TEMPORARY - will eventually do this when we end combat from this script
-	Globals.combat_score = combat_score + combat_score_mod
-	
-	if b_show_multiplier:
-		update_multiplier()
+		
+		# TEMPORARY - will eventually do this when we end combat from this script
+		Globals.combat_score = combat_score + combat_score_mod
+		
+		if b_show_multiplier:
+			update_multiplier()
 
 func handle_new_game() -> void:
-	delete_pattern_spawner()
+	on_combat_ended()
 	enemy_instance.position = enemy_start_pos
 	enemy_instance.hide()
 
 # input (combat only)
 func handle_combat_input(input: String) -> void:
 	pattern_spawner.check_input(input)
+
+'''
+	COMBAT
+'''
+
+func on_combat_started() -> void:
+	$CombatCamera.make_current()
+	player_health_bar.update_hearts()
+
+	if pattern_spawner != null:
+		pattern_spawner.queue_free()
+
+	create_pattern_spawner(Globals.cur_enemy_stats)
+	pattern_spawner.spawned_pattern.connect(on_pattern_spawned)
+	
+	enemy_intro()
 
 func on_combat_paused() -> void:
 	b_combat_paused = true
@@ -107,61 +132,30 @@ func on_combat_unpaused() -> void:
 	if pattern_spawner != null:
 		pattern_spawner.resume_spawning()
 
-# arrow pattern system
-func start_pattern_scroll() -> void:
-	$CombatCamera.make_current()
-	if pattern_spawner == null:
-		create_pattern_spawner()
-		pattern_spawner.spawned_pattern.connect(on_pattern_spawned)
-		
-	pattern_spawner.reset()
-	pattern_spawner.show()
-	pattern_spawner.start_spawning()
-	enemy_intro()
-
-func stop_pattern_scroll() -> void:
-	get_tree().create_timer(0.5).timeout.connect(func():
-		if pattern_spawner != null:
-			pattern_spawner.hide()
-			pattern_spawner.stop_spawning()
-	)
-
-func handle_attack_success() -> void:
-	if !b_enemy_damaged:
-		damage_enemy()
-		b_enemy_damaged = true
-
-func handle_attack_fail() -> void:
-	scoring_multiplier = 1.0
-	update_multiplier()
-
-func create_pattern_spawner():
-	if pattern_spawner == null:
-		pattern_spawner = combat_patterns.instantiate()
-		pattern_spawner.pattern_input_success.connect(handle_attack_success)
-		pattern_spawner.pattern_input_failure.connect(handle_attack_fail)
-		pattern_spawner.symbol_input_success_time2.connect(show_reaction_text)
-		pattern_spawner.symbol_input_fail2.connect(show_reaction_text)
-		add_child(pattern_spawner)
-		pattern_spawner.hide()
-
-func on_pattern_spawned() -> void:
-	if !b_enemy_damaged:
-		if pattern_count > 0:
-			handle_attack_fail()
-	b_enemy_damaged = false # allows input again
-	pattern_count += 1
-
-func delete_pattern_spawner() -> void:
+func on_combat_ended() -> void:
 	stop_pattern_scroll()
 	if pattern_spawner != null:
 		pattern_spawner.queue_free()
 
-# enemy - animations
+'''
+	PLAYER
+'''
+
+func damage_player() -> void:
+	Globals.game_controller.player_health -= Globals.cur_enemy_stats.damage
+	player_health_bar.update_hearts()
+
+'''
+	ENEMY
+'''
+
 func enemy_intro() -> void:
 	enemy_instance.show()
 	enemy_instance.texture = enemy_sprite
 	enemy_instance.position = enemy_start_pos
+
+	enemy_health_bar.show()
+	enemy_health_bar.update_hearts()
 
 	var tween = self.create_tween()
 	tween.tween_property(enemy_instance, "position", enemy_end_pos, enemy_intro_time)
@@ -173,6 +167,82 @@ func enemy_intro() -> void:
 	fade.tween_property(initiative_label, "modulate:a", 0.0, 1)
 	await tween.finished
 	initiative_label.hide()
+
+func damage_enemy() -> void:
+	pattern_spawner.pause_spawning()
+	b_input_paused = true
+
+	attack_slash_anim.show()
+	attack_slash_anim.play("slash")
+	await attack_slash_anim.animation_finished
+	attack_slash_anim.hide()
+
+	var shake = enemy_instance.create_tween()
+	var shake_dist = Vector2(8.0, 0.0)
+	var shake_step = 0.02
+	shake.tween_property(enemy_instance, "position", shake_dist, shake_step).as_relative()
+	shake.tween_property(enemy_instance, "position", -shake_dist * 2, shake_step).as_relative()
+	shake.tween_property(enemy_instance, "position", shake_dist * 2, shake_step).as_relative()
+	shake.tween_property(enemy_instance, "position", -shake_dist * 2, shake_step).as_relative()
+	shake.tween_property(enemy_instance, "position", shake_dist * 2, shake_step).as_relative()
+	shake.tween_property(enemy_instance, "position", -shake_dist, shake_step).as_relative()
+
+	#print("damaged enemy with epic attack move")
+
+	@warning_ignore("narrowing_conversion")
+	Globals.cur_enemy_stats.health -= Globals.game_controller.weapon_damage
+	enemy_health_bar.update_hearts()
+
+	b_input_paused = false
+	pattern_spawner.resume_spawning()
+'''
+	PATTERN SYSTEM
+'''
+
+# input pattern successfully - do damage to enemy
+func handle_attack_success() -> void:
+	if !b_enemy_damaged:
+		damage_enemy()
+		b_enemy_damaged = true
+
+# failed the pattern - no damage taken, but resets multiplier
+func handle_pattern_fail() -> void:
+	scoring_multiplier = 1.0
+	update_multiplier()
+
+# timer ran out - take damage, unless we already damaged the enemy
+func handle_time_fail() -> void:
+	if !b_enemy_damaged:
+		damage_player()
+
+func create_pattern_spawner(enemy_stats_ref:EnemyStats):
+	if pattern_spawner == null:
+		pattern_spawner = combat_patterns.instantiate()
+		pattern_spawner.pattern_input_success.connect(handle_attack_success)
+		pattern_spawner.pattern_input_failure.connect(handle_pattern_fail)
+		pattern_spawner.symbol_input_success_time2.connect(show_reaction_text)
+		pattern_spawner.symbol_input_fail2.connect(show_reaction_text)
+		add_child(pattern_spawner)
+		pattern_spawner.hide()
+		pattern_spawner.set_patterns(enemy_stats_ref)
+
+func on_pattern_spawned() -> void:
+	if !b_enemy_damaged:
+		if pattern_count > 0:
+			handle_time_fail()
+	b_enemy_damaged = false # allows input again
+	pattern_count += 1
+
+func stop_pattern_scroll() -> void:
+	get_tree().create_timer(0.5).timeout.connect(func():
+		if pattern_spawner != null:
+			pattern_spawner.hide()
+			pattern_spawner.stop_spawning()
+	)
+
+'''
+	USER INTERFACE
+'''
 
 # show / animate / destroy reaction text to input time
 func show_reaction_text(input_time: float = Globals.combat_input_precision.nope + 1) -> void:
@@ -233,32 +303,6 @@ func show_reaction_text(input_time: float = Globals.combat_input_precision.nope 
 		await tween.finished
 		reaction_label.queue_free()
 
-func damage_enemy() -> void:
-	pattern_spawner.pause_spawning()
-	b_input_paused = true
-
-	attack_slash_anim.show()
-	attack_slash_anim.play("slash")
-	await attack_slash_anim.animation_finished
-	attack_slash_anim.hide()
-
-	var shake = enemy_instance.create_tween()
-	var shake_dist = Vector2(8.0, 0.0)
-	var shake_step = 0.02
-	shake.tween_property(enemy_instance, "position", shake_dist, shake_step).as_relative()
-	shake.tween_property(enemy_instance, "position", -shake_dist * 2, shake_step).as_relative()
-	shake.tween_property(enemy_instance, "position", shake_dist * 2, shake_step).as_relative()
-	shake.tween_property(enemy_instance, "position", -shake_dist * 2, shake_step).as_relative()
-	shake.tween_property(enemy_instance, "position", shake_dist * 2, shake_step).as_relative()
-	shake.tween_property(enemy_instance, "position", -shake_dist, shake_step).as_relative()
-
-	#print("damaged enemy with epic attack move")
-
-	player_health_bar.update_hearts()
-	b_input_paused = false
-	pattern_spawner.resume_spawning()
-
-
 # display / animate score / multiplier
 func update_score_label() -> void:
 	var score: int = round(combat_score)
@@ -300,3 +344,8 @@ func update_multiplier() -> void:
 
 func hide_multiplier() -> void:
 	if multiplier_label.visible: multiplier_label.hide()
+
+func connect_healthbars() -> void:
+	#print(enemy_stats)
+	player_health_bar.connect_player()
+	enemy_health_bar.connect_enemy()

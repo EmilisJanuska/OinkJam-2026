@@ -1,11 +1,9 @@
 extends Node2D
 
 var pattern_spawn_timer: Timer
-var pattern_lib: Array
-
 var pattern_spawn_delay: float # sec\
 var pattern_scroll_speed: float
-
+var pattern_lib: Array
 var pattern_idx: int
 var b_active: bool
 var b_success: bool
@@ -24,13 +22,6 @@ signal spawned_pattern
 
 # init
 func _ready() -> void:
-	# define attack pattern
-	pattern_lib = [
-		["left", "left", "up", "up"],
-		["up", "right", "down"],
-		["right", "right", "down", "down"]
-	]
-
 	# pattern settings
 	pattern_spawn_delay = 3 	# time until next pattern spawns
 	pattern_scroll_speed = 500
@@ -38,6 +29,21 @@ func _ready() -> void:
 	b_active = false
 	b_success = false
 
+func _process(_delta: float) -> void:
+	if pattern_spawn_timer != null:
+		var perc = pattern_spawn_timer.time_left / pattern_spawn_timer.wait_time
+		if timer_visual != null:
+			timer_visual.update(perc)
+
+# pattern spawning
+func set_patterns(enemy_stats:EnemyStats):
+	pattern_lib = enemy_stats.patterns
+	reset()
+	show()
+	init_timer()
+	start_spawning()
+
+func init_timer() -> void:
 	# init spawn timer
 	pattern_spawn_timer = Timer.new()
 	pattern_spawn_timer.wait_time = pattern_spawn_delay
@@ -48,12 +54,6 @@ func _ready() -> void:
 	timer_visual = pattern_timer_visual.instantiate()
 	timer_visual.hide()
 
-func _process(_delta: float) -> void:
-	var perc = pattern_spawn_timer.time_left / pattern_spawn_timer.wait_time
-	if timer_visual != null:
-		timer_visual.update(perc)
-
-# pattern spawning
 func start_spawning() -> void:
 	add_child(timer_visual)
 	add_child(pattern_spawn_timer)
@@ -75,14 +75,12 @@ func resume_spawning() -> void:
 	pattern_spawn_timer.paused = false
 
 func spawn_pattern() -> void:
-
 	pattern_idx = 0
 	b_success = false
 	timer_visual.show()
 
 	if ap_instance != null:
 		ap_instance.queue_free()
-
 	if b_active:
 		var selected_pattern = choose_next_pattern()
 		ap_instance = attack_pattern_prefab.instantiate()

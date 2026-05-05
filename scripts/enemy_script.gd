@@ -1,6 +1,6 @@
 extends CharacterBody2D
-@onready var FOVcollision: CollisionPolygon2D = $Area2D/FOVcollision
 
+@onready var vision: Area2D = $Vision
 
 var speed = 200
 
@@ -10,7 +10,7 @@ var direction = 1
 func _physics_process(_delta: float) -> void:
 	if not startPoint: startPoint = global_position
 
-	if not global_position.x > startPoint.x + 500:
+	if global_position.x > startPoint.x + 500:
 		direction = -1
 
 	elif global_position.x < startPoint.x - 500:
@@ -21,8 +21,8 @@ func _physics_process(_delta: float) -> void:
 
 	move_and_slide()
 
-func _on_area_2d_body_entered(body: Node2D) -> void:
+func _on_vision_player_detected(body: Node2D) -> void:
 	if body.is_in_group("player"):
 		set_physics_process(false)
-		FOVcollision.change_color(Color(Color.RED, 0.3))
-	
+		vision.set_color(Color(Color.RED, 0.3))
+		

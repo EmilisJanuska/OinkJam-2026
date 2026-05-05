@@ -1,19 +1,27 @@
 [gd_scene format=3 uid="uid://jcdjovd6aab8"]
 
 [ext_resource type="Texture2D" uid="uid://b562vl17jfknb" path="res://assets/icon.svg" id="1_0qjyh"]
-[ext_resource type="Script" uid="uid://mwkj7vpx6qsq" path="res://scripts/enemy_script.gd" id="1_4fg0d"]
-[ext_resource type="Script" uid="uid://doy7juiycf6la" path="res://scripts/FOVcollision.gd" id="2_k5p11"]
+[ext_resource type="Script" uid="uid://bebmhp7tvomk7" path="res://scripts/enemy_script.gd" id="1_4fg0d"]
+[ext_resource type="PackedScene" uid="uid://fj4h36nbpotu" path="res://scenes/vision.tscn" id="3_4fg0d"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4fg0d"]
+size = Vector2(127.33845, 133.83505)
 
 [node name="Enemy" type="CharacterBody2D" unique_id=930025449]
+scale = Vector2(0.3298297, 0.30634728)
+collision_layer = 3
+collision_mask = 3
 script = ExtResource("1_4fg0d")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1560351186]
 texture = ExtResource("1_0qjyh")
 
-[node name="Area2D" type="Area2D" parent="." unique_id=1099003327]
+[node name="Vision" parent="." unique_id=1408675126 instance=ExtResource("3_4fg0d")]
 
-[node name="FOVcollision" type="CollisionPolygon2D" parent="Area2D" unique_id=552583730]
-polygon = PackedVector2Array(0, 0, 256, -192, 280, -128, 296, -64, 304, 0, 288, 80, 272, 144, 256, 192)
-script = ExtResource("2_k5p11")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=636006350]
+position = Vector2(1.807134e-06, -1.632129)
+scale = Vector2(1, 0.9999999)
+shape = SubResource("RectangleShape2D_4fg0d")
 
-[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Vision" to="." method="_on_area_2d_body_entered"]
+[connection signal="player_detected" from="Vision" to="." method="_on_vision_player_detected"]

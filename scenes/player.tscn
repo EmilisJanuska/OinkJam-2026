@@ -107,7 +107,7 @@ animations = [{
 radius = 8.5
 height = 47.94
 
-[node name="Player" type="CharacterBody2D" unique_id=1640087231]
+[node name="Player" type="CharacterBody2D" unique_id=1640087231 groups=["player"]]
 position = Vector2(9, -3)
 script = ExtResource("1_g2els")
 
@@ -122,3 +122,7 @@ position = Vector2(0, 12)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=843325438]
 position = Vector2(-1, 9)
 shape = SubResource("CapsuleShape2D_qhqgy")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1839222290]
+position = Vector2(2, 10)
+zoom = Vector2(2.05, 2.05)

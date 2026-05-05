@@ -24,8 +24,8 @@ var score_adding_time: float
 
 var b_enemy_damaged: bool
 
-@export var player_health_bar: Node2D
-@export var enemy_health_bar: Node2D
+@export var player_health_bar: HBoxContainer
+@export var enemy_health_bar: HBoxContainer
 @export var enemy_container: Node2D
 @export var combat_score_label: Label
 @export var combat_score_mod_label: Label
@@ -191,10 +191,53 @@ func damage_enemy() -> void:
 
 	@warning_ignore("narrowing_conversion")
 	Globals.cur_enemy_stats.health -= Globals.game_controller.weapon_damage
+	if Globals.cur_enemy_stats.health <= 0.0:
+		enemy_die()
 	enemy_health_bar.update_hearts()
 
 	b_input_paused = false
 	pattern_spawner.resume_spawning()
+
+func enemy_attack() -> void:
+	pattern_spawner.pause_spawning()
+	b_input_paused = true
+
+	var shake = enemy_instance.create_tween()
+	var shake_start: Vector2 = enemy_instance.position
+	var shake_dist:Vector2 = Vector2(8.0, 0.0)
+	var shake_back_step:float = 0.25
+	var shake_fwd_step:float = 0.1
+	shake.tween_property(enemy_instance, "position", shake_dist, shake_back_step).as_relative()
+	shake.tween_property(enemy_instance, "position", -shake_dist * 3, shake_fwd_step).as_relative()
+	shake.tween_property(enemy_instance, "position", shake_start, shake_fwd_step)
+	await shake.finished
+
+	damage_player()
+
+	b_input_paused = false
+	pattern_spawner.resume_spawning()
+
+func enemy_die() -> void:
+	pattern_spawner.pause_spawning()
+	b_input_paused = true
+
+	var flip = create_tween()
+	var rot_angle: float = 180.0
+	var rot_time: float = 0.5
+
+	flip.tween_property(enemy_instance, "rotation_degrees", rot_angle, rot_time)
+	await flip.finished
+
+	var die = create_tween()
+	var sink_dist: float = 20.0
+	var sink_time: float = 1.0
+
+	die.tween_property(enemy_instance, "position:y", enemy_instance.position.y + sink_dist, sink_time)
+	await die.finished
+
+	Globals.cur_enemy_stats.health = Globals.cur_enemy_stats.max_health
+	Globals.game_controller.change_game_state(Globals.GameStates.in_world, Globals.GameStates.in_combat)
+
 '''
 	PATTERN SYSTEM
 '''
@@ -213,7 +256,7 @@ func handle_pattern_fail() -> void:
 # timer ran out - take damage, unless we already damaged the enemy
 func handle_time_fail() -> void:
 	if !b_enemy_damaged:
-		damage_player()
+		enemy_attack()
 
 func create_pattern_spawner(enemy_stats_ref:EnemyStats):
 	if pattern_spawner == null:

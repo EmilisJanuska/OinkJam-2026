@@ -1,4 +1,4 @@
-extends Node
+extends HBoxContainer
 
 var heart_prefab: PackedScene = preload("res://scenes/UI/health_bar_heart.tscn")
 var hearts: Array
@@ -19,11 +19,20 @@ func init() -> void:
 		hearts.clear()
 
 	var n_hearts:int = calc_num_hearts()
-	for i in range(0, n_hearts):
-		var heart_inst = heart_prefab.instantiate()
-		add_child(heart_inst)
-		heart_inst.position.x = i * 41
-		hearts.append(heart_inst)
+	if b_player:
+		for i in range(0, n_hearts):
+			var heart_inst = heart_prefab.instantiate()
+			add_child(heart_inst)
+			heart_inst.position.x = i * 41
+			hearts.append(heart_inst)
+	else:
+		@warning_ignore("integer_division")
+		for i in range(-(n_hearts / 2), n_hearts / 2):
+			var heart_inst = heart_prefab.instantiate()
+			add_child(heart_inst)
+			heart_inst.position.x = i * 41
+			hearts.append(heart_inst)
+
 
 func update_hearts() -> void:
 	var check_n_hearts = calc_num_hearts()
@@ -56,17 +65,15 @@ func calc_num_hearts() -> int:
 		@warning_ignore("narrowing_conversion")
 		return (Globals.game_controller.player_max_health / Globals.game_controller.quarter_heart_value) / 4
 	else:
+		print("max hp: ", Globals.cur_enemy_stats.max_health)
 		@warning_ignore("narrowing_conversion")
 		return (Globals.cur_enemy_stats.max_health / Globals.game_controller.quarter_heart_value) / 4
 
 func add_hearts(num: int) -> void:
-	var idx = hearts.size()
 	for i in range(0, num):
 		var heart_inst = heart_prefab.instantiate()
 		hearts.append(heart_inst)
-		heart_inst.position.x = idx * 41
 		add_child(heart_inst)
-		idx += 1
 
 func connect_player() -> void:
 	b_player = true
@@ -76,6 +83,7 @@ func connect_player() -> void:
 func connect_enemy() -> void:
 	b_player = false
 	b_enemy = true
+	alignment = BoxContainer.ALIGNMENT_CENTER
 	init()
 
 func animate_take_damage() -> void:

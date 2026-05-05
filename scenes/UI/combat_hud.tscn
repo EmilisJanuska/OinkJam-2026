@@ -114,11 +114,10 @@ text = "150x"
 label_settings = SubResource("LabelSettings_mq2li")
 
 [node name="Initiative" parent="." unique_id=1993837123 instance=ExtResource("3_omoar")]
-visible = false
 offset_left = 400.0
-offset_top = 29.0
+offset_top = 194.0
 offset_right = 622.0
-offset_bottom = 102.0
+offset_bottom = 267.0
 pivot_offset = Vector2(111, 37)
 text = "Spotted!"
 label_settings = SubResource("LabelSettings_0r7i2")
@@ -131,10 +130,16 @@ animation = &"slash"
 speed_scale = 1.5
 
 [node name="PlayerHealthBar" parent="." unique_id=780960740 instance=ExtResource("12_p0xtj")]
-position = Vector2(45, 500)
+offset_left = 45.0
+offset_top = 500.0
+offset_right = 45.0
+offset_bottom = 500.0
 
 [node name="EnemyHealthBar" parent="." unique_id=1689852329 instance=ExtResource("12_p0xtj")]
-position = Vector2(441, 60)
+offset_left = 512.0
+offset_top = 60.0
+offset_right = 512.0
+offset_bottom = 60.0
 
 [node name="CombatCamera" type="Camera2D" parent="." unique_id=1708878876]
 position = Vector2(512, 288)

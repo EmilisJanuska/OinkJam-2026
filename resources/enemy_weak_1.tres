@@ -5,7 +5,8 @@
 [resource]
 script = ExtResource("1_hj7ib")
 name = "ThinBacon"
-health = 1200
+health = 800
+max_health = 800
 damage = 200
 patterns = [["left", "right", "right"], ["right", "up", "down"], ["up", "up", "down"]]
 metadata/_custom_type_script = "uid://b4p88otydyovf"

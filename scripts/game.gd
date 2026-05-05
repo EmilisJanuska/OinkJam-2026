@@ -27,9 +27,6 @@ signal combat_ended
 signal new_game_started
 signal use_game_camera
 
-# debug testing only
-signal add_to_score
-
 func _unhandled_input(event) -> void:
 	if(event is InputEventKey):
 		# toggle main menu
@@ -42,16 +39,6 @@ func _unhandled_input(event) -> void:
 				print(Globals.GameStates.find_key(last_game_state))
 				if b_game_started:
 					change_game_state(last_game_state, Globals.GameStates.main_menu)
-		
-		#temporary - press space to start / stop combat
-		elif event.pressed and event.keycode == KEY_SPACE:
-			#if game_state == Globals.GameStates.in_world:
-				#change_game_state(Globals.GameStates.in_combat, Globals.GameStates.in_world)
-			if game_state == Globals.GameStates.in_combat:
-				change_game_state(Globals.GameStates.in_world, Globals.GameStates.in_combat)
-
-		elif event.pressed and event.keycode == KEY_Q:
-			add_to_score.emit()
 
 		# combat controls - only enabled when in combat
 		if game_state == Globals.GameStates.in_combat:

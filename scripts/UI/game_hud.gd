@@ -7,7 +7,7 @@ var b_adding_score: bool
 var score_adding_delay: float
 var score_adding_time: float
 
-@export var player_health_bar: Node2D
+@export var player_health_bar: HBoxContainer
 @export var game_score_label: Label
 @export var game_score_mod_label: Label
 
@@ -22,9 +22,6 @@ func _ready() -> void:
 	Globals.game_controller.game_paused.connect(on_game_paused)
 	Globals.game_controller.game_unpaused.connect(on_game_unpaused)
 	Globals.game_controller.combat_ended.connect(on_combat_ended)
-
-	# debug testing only
-	Globals.game_controller.add_to_score.connect(debug_on_add_score)
 
 func _process(delta: float) -> void:
 	b_adding_score = false
@@ -74,9 +71,3 @@ func on_game_paused() -> void:
 
 func on_game_unpaused() -> void:
 	b_game_paused = false
-
-# debug testing only
-func debug_on_add_score() -> void:
-	game_score_mod += 1000
-	update_score_mod()
-	

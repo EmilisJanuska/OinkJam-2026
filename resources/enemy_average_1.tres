@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="EnemyStats" format=3 uid="uid://7j0j4e2egfve"]
+
+[ext_resource type="Script" uid="uid://b4p88otydyovf" path="res://scripts/resource_classes/enemy_stats.gd" id="1_lhjng"]
+
+[resource]
+script = ExtResource("1_lhjng")
+name = "FattyBacon"
+type = 1
+health = 1600
+max_health = 1600
+damage = 200
+patterns = [["down", "down", "left"], ["left", "right", "left", "right"], ["up", "up", "right"]]
+metadata/_custom_type_script = "uid://b4p88otydyovf"

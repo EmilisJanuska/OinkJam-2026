@@ -2,5 +2,10 @@
 
 [ext_resource type="Script" uid="uid://cgyl8yq5pha14" path="res://scripts/UI/health_bar_controller.gd" id="1_lpjn6"]
 
-[node name="HealthBar" type="Node2D" unique_id=780960740]
+[node name="HealthBar" type="HBoxContainer" unique_id=299332607]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_lpjn6")

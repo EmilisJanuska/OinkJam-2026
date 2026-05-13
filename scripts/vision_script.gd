@@ -19,6 +19,6 @@ func _on_body_entered(body: Node2D) -> void:
 func _on_body_exited(body: Node2D) -> void:
 	if body.is_in_group("player"):
 		timer.start()
-		
+
 func _on_timer_timeout() -> void:
 	visonPolygon.color = Color(1, 1, 0, 0.3)

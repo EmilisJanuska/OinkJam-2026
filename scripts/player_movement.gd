@@ -12,6 +12,7 @@ Variables:
 extends CharacterBody2D
 @export var game_camera: Camera2D
 @export var speed = 300
+@onready var sprite = $AnimatedSprite2D
 var b_paused = false
 
 func _ready() -> void:
@@ -32,6 +33,32 @@ func get_input():
 	if !b_paused:
 		var input_direction = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 		velocity = input_direction * speed
+
+		if input_direction != Vector2.ZERO:
+			
+			if input_direction.x != 0 : # left and right
+				sprite.play("side_Walk")
+				if input_direction.x < 0:
+					sprite.flip_h = true
+				else:
+					sprite.flip_h = false
+
+			elif input_direction.y < 0: #up
+				sprite.play("front_Walk")
+
+			elif input_direction.y > 0: # down
+				sprite.play("back_Walk")
+
+		else:
+			var current_animation = sprite.animation
+
+			if current_animation == "side_Walk":
+				sprite.play("side_Idle")
+			elif current_animation == "back_Walk":
+				sprite.play("back_Idle")
+			elif current_animation == "front_Walk":
+				sprite.play("front_Idle")
+	
 	elif b_paused:
 		reset_velocity()
 

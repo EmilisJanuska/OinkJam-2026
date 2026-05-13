@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cf10tbscu2un1"]
 
-[ext_resource type="Texture2D" uid="uid://dshyl2sh65w0f" path="res://assets/UI/combat/combat_bg_01.jpg" id="1_jecyb"]
+[ext_resource type="Texture2D" uid="uid://c0ndp0ikn810p" path="res://assets/UI/combat/combat_bg_01.jpg" id="1_jecyb"]
 
 [node name="CombatScene" type="Node2D" unique_id=80936472]
 

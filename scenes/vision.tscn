@@ -1,23 +1,21 @@
 [gd_scene format=3 uid="uid://fj4h36nbpotu"]
 
 [ext_resource type="Script" uid="uid://j066ewxoa7p2" path="res://scripts/vision_script.gd" id="1_2rlwl"]
-[ext_resource type="Script" uid="uid://doy7juiycf6la" path="res://scripts/FOVcollision.gd" id="1_7hclh"]
 
 [node name="Vision" type="Area2D" unique_id=1408675126]
+scale = Vector2(1.0007924, 0.99163884)
 script = ExtResource("1_2rlwl")
 
-[node name="RayCast2D" type="RayCast2D" parent="." unique_id=1339709389]
-target_position = Vector2(304, 0)
+[node name="Polygon2D" type="Polygon2D" parent="." unique_id=1101824283]
+light_mask = 0
+scale = Vector2(0.55983293, 0.56651783)
+color = Color(0, 1, 0.25882354, 0.38431373)
+polygon = PackedVector2Array(0, -1, 254, -193, 271, -148, 282, -113, 291, -74, 299, -30, 301, 0, 291, 62, 276, 123, 259, 187, 0, 1, 0, -1)
 
-[node name="RayCast2D2" type="RayCast2D" parent="." unique_id=1269834438]
-target_position = Vector2(304, 0)
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=1020074925]
+polygon = PackedVector2Array(142.88678, -109.91905, 157.8749, -63.531197, 164.86935, -33.278244, 168.86618, 0, 162.87094, 35.29511, 151.87965, 79.6661, 144.8852, 105.88532, -0.9992082, 0)
 
-[node name="RayCast2D3" type="RayCast2D" parent="." unique_id=585821120]
-target_position = Vector2(304, 0)
-
-[node name="FOVcollision" type="CollisionPolygon2D" parent="." unique_id=111286624]
-polygon = PackedVector2Array(0, 0, 256, -192, 280, -128, 296, -64, 304, 0, 288, 80, 272, 144, 256, 192)
-script = ExtResource("1_7hclh")
+[node name="Timer" type="Timer" parent="." unique_id=714319735]
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]

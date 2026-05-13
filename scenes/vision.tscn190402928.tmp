@@ -1,0 +1,80 @@
+[gd_scene format=3 uid="uid://fj4h36nbpotu"]
+
+[ext_resource type="Script" uid="uid://j066ewxoa7p2" path="res://scripts/vision_script.gd" id="1_2rlwl"]
+
+[node name="Vision" type="Area2D" unique_id=1408675126]
+scale = Vector2(1.0007924, 0.99163884)
+script = ExtResource("1_2rlwl")
+
+[node name="RayCast2D" type="RayCast2D" parent="." unique_id=1339709389]
+scale = Vector2(0.55558324, 0.57240087)
+target_position = Vector2(255, -192)
+
+[node name="RayCast2D2" type="RayCast2D" parent="." unique_id=1269834438]
+scale = Vector2(0.55558324, 0.57240087)
+target_position = Vector2(262, -177)
+
+[node name="RayCast2D3" type="RayCast2D" parent="." unique_id=585821120]
+scale = Vector2(0.55558324, 0.57240087)
+target_position = Vector2(271, -151)
+
+[node name="RayCast2D4" type="RayCast2D" parent="." unique_id=1138984544]
+scale = Vector2(0.55558324, 0.57240087)
+target_position = Vector2(278, -133)
+
+[node name="RayCast2D5" type="RayCast2D" parent="." unique_id=3833785]
+scale = Vector2(0.55558324, 0.57240087)
+target_position = Vector2(283, -115)
+
+[node name="RayCast2D6" type="RayCast2D" parent="." unique_id=2074113417]
+scale = Vector2(0.55558324, 0.57240087)
+target_position = Vector2(287, -94)
+
+[node name="RayCast2D7" type="RayCast2D" parent="." unique_id=1316347948]
+scale = Vector2(0.55558324, 0.57240087)
+target_position = Vector2(293, -75)
+
+[node name="RayCast2D8" type="RayCast2D" parent="." unique_id=2136787769]
+scale = Vector2(0.55558324, 0.57240087)
+target_position = Vector2(296, -52)
+
+[node name="RayCast2D9" type="RayCast2D" parent="." unique_id=32112076]
+scale = Vector2(0.55558324, 0.57240087)
+target_position = Vector2(300, -29)
+
+[node name="RayCast2D10" type="RayCast2D" parent="." unique_id=1323503579]
+scale = Vector2(0.55558324, 0.57240087)
+target_position = Vector2(304, 0)
+
+[node name="RayCast2D11" type="RayCast2D" parent="." unique_id=1637387707]
+scale = Vector2(0.55558324, 0.57240087)
+target_position = Vector2(298, 29)
+
+[node name="RayCast2D12" type="RayCast2D" parent="." unique_id=1454255355]
+scale = Vector2(0.55558324, 0.57240087)
+target_position = Vector2(292, 63)
+
+[node name="RayCast2D13" type="RayCast2D" parent="." unique_id=245905528]
+scale = Vector2(0.55558324, 0.57240087)
+target_position = Vector2(284, 88)
+
+[node name="RayCast2D14" type="RayCast2D" parent="." unique_id=106983415]
+scale = Vector2(0.55558324, 0.57240087)
+target_position = Vector2(277, 124)
+
+[node name="RayCast2D15" type="RayCast2D" parent="." unique_id=1011125131]
+scale = Vector2(0.55558324, 0.57240087)
+target_position = Vector2(266, 161)
+
+[node name="RayCast2D16" type="RayCast2D" parent="." unique_id=1778644603]
+scale = Vector2(0.55558324, 0.57240087)
+target_position = Vector2(260.78036, 184.98457)
+
+[node name="Polygon2D" type="Polygon2D" parent="." unique_id=1101824283]
+light_mask = 0
+scale = Vector2(0.55983293, 0.56651783)
+color = Color(0, 1, 0.25882354, 0.38431373)
+polygon = PackedVector2Array(0, -1, 254, -193, 271, -148, 282, -113, 291, -74, 299, -30, 301, 0, 291, 62, 276, 123, 259, 187, 0, 1, 0, -1)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

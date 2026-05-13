@@ -2,6 +2,8 @@ extends CharacterBody2D
 
 @onready var vision: Area2D = $Vision
 @export var stats: EnemyStats
+@onready var combat_box: Area2D = $combatBox
+
 
 var speed = 200
 var startPoint: Vector2
@@ -24,11 +26,13 @@ func _physics_process(_delta: float) -> void:
 
 	move_and_slide()
 
-func _on_vision_player_detected(body: Node2D) -> void:
+func _on_combat_box_body_entered(body: Node2D) -> void:
+	if not body.is_in_group("player"):
+		return
+
 	if body.is_in_group("player"):
 		set_physics_process(false)
-		vision.set_color(Color(Color.RED, 0.3))
-		
+
 		# enter combat
 		Globals.cur_enemy_stats = stats
 		Globals.game_controller.change_game_state(Globals.GameStates.in_combat, Globals.GameStates.in_world, true)

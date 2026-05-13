@@ -225,6 +225,8 @@ position = Vector2(586, 291)
 game_camera = NodePath("Camera2D")
 
 [node name="Camera2D2" type="Camera2D" parent="Player" unique_id=1824759250]
+light_mask = 0
+visibility_layer = 0
 position_smoothing_enabled = true
 
 [node name="tempChest" parent="." unique_id=1325038607 instance=ExtResource("5_i7141")]
@@ -232,7 +234,7 @@ visible = false
 position = Vector2(928, 330)
 
 [node name="Enemy" parent="." unique_id=930025449 instance=ExtResource("3_q442r")]
-position = Vector2(155, 366.00003)
+position = Vector2(217, 290)
 stats = SubResource("Resource_h1r1l")
 
 [node name="Enemy2" parent="." unique_id=341070890 instance=ExtResource("3_q442r")]

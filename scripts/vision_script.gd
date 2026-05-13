@@ -1,37 +1,24 @@
 extends Area2D
 
-signal player_detected(body: Node2D)
-@onready var FOVcollision: CollisionPolygon2D = $FOVcollision
-@onready var raycasts = [$RayCast2D, $RayCast2D2, $RayCast2D3]
+signal player_seen(body: Node2D)
+@onready var timer: Timer = $Timer
+@onready var visonPolygon: Polygon2D = $Polygon2D
 
-var player: Node2D
 
-func _physics_process(delta: float) -> void:
-	if not player: return
+func _ready():
+	visonPolygon.color = Color(1, 1, 0, 0.3)
 
-	if _is_detected(player):
-		player_detected.emit(player)
-		player = null
-
-func _is_detected(player):
-	raycasts[0].look_at(player.global_position - 16 * transform.y)
-	raycasts[1].look_at(player.global_position)
-	raycasts[2].look_at(player.global_position + 16 * transform.y)
-
-	for raycast: RayCast2D in raycasts:
-		if raycast.is_colliding():
-			if raycast.get_collider().is_in_group("player"):
-				return true
-	return false
 
 func _on_body_entered(body: Node2D) -> void:
-	if body.is_in_group("player"):
-		player = body
 
-func on_body_exited(body: Node2D) -> void:
 	if body.is_in_group("player"):
-		player = null
 
-func set_color(color):
-	FOVcollision.change_color(color)
-	
+		visonPolygon.color = Color(1, 0, 0, 0.4)
+		player_seen.emit(body)
+
+func _on_body_exited(body: Node2D) -> void:
+	if body.is_in_group("player"):
+		timer.start()
+		
+func _on_timer_timeout() -> void:
+	visonPolygon.color = Color(1, 1, 0, 0.3)

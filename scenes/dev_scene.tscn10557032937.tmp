@@ -150,43 +150,43 @@ texture_region_size = Vector2i(32, 32)
 9:6/0 = 0
 10:6/0 = 0
 11:0/0 = 0
-11:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-11.789339, -11.470707, 16, -11, 16, 16, -12, 16)
+11:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-12, -11, 16, -11, 16, 16, -12, 16)
 12:0/0 = 0
-12:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-11.789339, -11.470707, 16, -11, 16, 16, -12, 16)
+12:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(12, -11, -16, -11, -16, 16, 12, 16)
 13:0/0 = 0
-13:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-11.789339, -11.470707, 16, -11, 16, 16, -12, 16)
+13:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-14, 16, 14, 16, 14, -11, -14, -11)
 14:0/0 = 0
-14:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-11.789339, -11.470707, 16, -11, 16, 16, -12, 16)
+14:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -5, 16, -5, 16, 16, -16, 16)
 15:0/0 = 0
-15:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-11.789339, -11.470707, 16, -11, 16, 16, -12, 16)
+15:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 16:0/0 = 0
-16:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-11.789339, -11.470707, 16, -11, 16, 16, -12, 16)
+16:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 11:1/0 = 0
-11:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-11.789339, -11.470707, 16, -11, 16, 16, -12, 16)
+11:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-12, 11, 16, 11, 16, -16, -12, -16)
 12:1/0 = 0
-12:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-11.789339, -11.470707, 16, -11, 16, 16, -12, 16)
+12:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(12, 11, -16, 11, -16, -16, 12, -16)
 13:1/0 = 0
-13:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-11.789339, -11.470707, 16, -11, 16, 16, -12, 16)
+13:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-14, -16, 14, -16, 14, 11, -14, 11)
 14:1/0 = 0
-14:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-11.789339, -11.470707, 16, -11, 16, 16, -12, 16)
+14:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 15:1/0 = 0
-15:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-11.789339, -11.470707, 16, -11, 16, 16, -12, 16)
+15:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 16:1/0 = 0
-16:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-11.789339, -11.470707, 16, -11, 16, 16, -12, 16)
+16:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 13:2/0 = 0
-13:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-11.789339, -11.470707, 16, -11, 16, 16, -12, 16)
+13:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(0, -10, 9, 0, 8, 7, 2, 13, -6, 9, -12, 2, -8, -6)
 14:2/0 = 0
 15:2/0 = 0
 11:3/0 = 0
-11:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-11.789339, -11.470707, 16, -11, 16, 16, -12, 16)
+11:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-6, -5, -1, -10, 5, -10, 11, -8, 16, -9, 16, 12, 8, 11, 0, 4, -4, 6, -9, 2)
 12:3/0 = 0
-12:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-11.789339, -11.470707, 16, -11, 16, 16, -12, 16)
+12:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(3, -8, -2, -5, -4, -9, -11, -11, -16, -9, -16, 12, -8, 11, -2, 6, 3, 7, 9, 3, 9, -4)
 13:3/0 = 0
-13:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-11.789339, -11.470707, 16, -11, 16, 16, -12, 16)
+13:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(4, -9, 9, 0, 9, 7, 10, 16, -11, 16, -13, 12, -8, 8, -11, 5, -10, -5, -3, -10, 0, -8)
 14:3/0 = 0
 15:3/0 = 0
 13:4/0 = 0
-13:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-11.789339, -11.470707, 16, -11, 16, 16, -12, 16)
+13:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(4, -2, 3, -7, 10, -16, -11, -16, -7, -6, -2, 3)
 
 [sub_resource type="TileSet" id="TileSet_i7141"]
 tile_size = Vector2i(32, 32)
@@ -214,7 +214,6 @@ visibility_layer = 3
 texture_filter = 1
 tile_map_data = PackedByteArray("AAAaAP//AAAHAAMAAAAaAAAAAAAHAAQAAAAaAAEAAAAHAAUAAAAbAP//AAAIAAMAAAAbAAAAAAAIAAQAAAAbAAEAAAAIAAUAAAAcAP//AAAJAAMAAAAcAAAAAAAJAAQAAAAcAAEAAAAJAAUAAAAdAP//AAAKAAMAAAAdAAAAAAAKAAQAAAAdAAEAAAAKAAUAAAAZAAAAAAAGAAMAAAAZAP//AAAGAAMAAAAZAP7/AAAIAAIAAAAZAP3/AAAHAAEAAAAeAAAAAAAGAAMAAAAeAP//AAAGAAMAAAAeAP7/AAAGAAIAAAAfAP7/AAAGAAQAAAAfAP3/AAAGAAMAAAAfAPz/AAAGAAMAAAAZAAEAAAAGAAMAAAAeAAEAAAAGAAMAAAAYAAAAAAAGAAUAAAAYAP//AAAGAAMAAAAYAP7/AAAGAAMAAAAaAP7/AAAGAAMAAAAbAP7/AAAGAAMAAAAcAP7/AAAGAAMAAAAdAP7/AAAGAAMAAAAaAP3/AAAHAAIAAAAbAP3/AAAHAAIAAAAcAP3/AAAHAAIAAAAdAP3/AAAHAAIAAAAeAP3/AAAIAAEAAAAaAPz/AAAHAAEAAAAZAPz/AAAHAAEAAAAYAPz/AAAGAAEAAAAYAP3/AAAGAAIAAAAbAPz/AAAHAAEAAAAcAPz/AAAHAAEAAAAdAPz/AAAHAAEAAAAeAPz/AAAIAAEAAAAYAPv/AAAKAAAAAAAeAPv/AAAJAAAAAAAfAPv/AAAHAAIAAAAZAAIAAAAGAAQAAAAeAAIAAAAGAAQAAAAfAP//AAAPAAAAAAAfAAAAAAAPAAEAAAAgAP//AAAQAAAAAAAgAAAAAAAQAAEAAAAfAAEAAAAOAAAAAAAfAAIAAAAOAAEAAAAYAAEAAAAOAAAAAAAYAAIAAAAOAAEAAAAXAAAAAAAOAAAAAAAXAAEAAAAOAAEAAAAUAAUAAAAOAAAAAAAUAAYAAAAOAAEAAAATAAcAAAALAAMAAAAUAAcAAAAMAAMAAAAUAAgAAAALAAMAAAAVAAgAAAAMAAMAAAAWAAYAAAANAAIAAAAWAAAAAAANAAMAAAAWAAEAAAANAAQAAAAhAP//AAANAAMAAAAhAAAAAAANAAQAAAAZAAMAAAANAAIAAAAXAAIAAAANAAIAAAAPAAwAAAALAAMAAAAQAAwAAAAMAAMAAAASAA0AAAALAAMAAAATAA0AAAAMAAMAAAATAA4AAAANAAIAAAAFABAAAAANAAMAAAAFABEAAAANAAQAAAAFAA8AAAANAAIAAAAGAA4AAAANAAIAAAAIAAUAAAANAAIAAAALAAEAAAANAAIAAAAgAAUAAAANAAIAAAAKAAsAAAAOAAAAAAAKAAwAAAAOAAEAAAAXAA4AAAAPAAAAAAAXAA8AAAAPAAEAAAAYAA4AAAAQAAAAAAAYAA8AAAAQAAEAAAAOABMAAAAPAAAAAAAOABQAAAAPAAEAAAAPABMAAAAQAAAAAAAPABQAAAAQAAEAAAARABEAAAAPAAAAAAARABIAAAAPAAEAAAASABEAAAAQAAAAAAASABIAAAAQAAEAAAATABAAAAAOAAAAAAATABEAAAAOAAEAAAAPAAMAAAAOAAAAAAAPAAQAAAAOAAEAAAAQAAIAAAAOAAAAAAAQAAMAAAAOAAEAAAAUAP//AAAPAAAAAAAUAAAAAAAPAAEAAAAVAP//AAAQAAAAAAAVAAAAAAAQAAEAAAAEAAQAAAAPAAAAAAAEAAUAAAAPAAAAAAAFAAQAAAAQAAAAAAAFAAUAAAAQAAAAAAAEAAYAAAAPAAEAAAAGAAQAAAAOAAAAAAAGAAUAAAAOAAEAAAALAAoAAAAOAAAAAAALAAsAAAAOAAEAAAAZAA0AAAAOAAAAAAAZAA4AAAAOAAEAAAAhAAcAAAAOAAAAAAAhAAgAAAAOAAEAAAAlAAEAAAAOAAAAAAAlAAIAAAAOAAEAAAAFAAYAAAAQAAEAAAA=")
 tile_set = SubResource("TileSet_i7141")
-collision_visibility_mode = 1
 
 [node name="PropTilemapLayer2" type="TileMapLayer" parent="." unique_id=1503313387]
 texture_filter = 1
@@ -235,7 +234,7 @@ visible = false
 position = Vector2(928, 330)
 
 [node name="Enemy" parent="." unique_id=930025449 instance=ExtResource("3_q442r")]
-position = Vector2(215.00002, 385)
+position = Vector2(217, 290)
 stats = SubResource("Resource_h1r1l")
 
 [node name="Enemy2" parent="." unique_id=341070890 instance=ExtResource("3_q442r")]

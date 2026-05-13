@@ -3,6 +3,9 @@ extends Node2D
 ## A configurable vision cone for 2D entities. It can be used for example to simulate the vision of enemies in a stealth game.
 class_name VisionCone2D
 
+@onready var enemy = get_parent()
+@onready var player = $"../../Player"
+
 @export_group("Raycast parameters")
 ## How wide the vision cone is in degrees
 @export_range(0, 360) var angle_deg: int = 360
@@ -69,7 +72,7 @@ func recalculate_vision(override_static_flag = false):
 		var has_position_changed = _last_position == null or (global_position - _last_position).length() > static_threshold
 		if not has_position_changed:
 			return
-	
+
 	_last_position = global_position
 	_vision_points.clear()
 	_vision_points = calculate_vision_shape(override_static_flag)
@@ -84,7 +87,7 @@ func calculate_vision_shape(override_static_flag = false) -> Array[Vector2]:
 		new_vision_points.append(Vector2.ZERO)
 		last_point = Vector2.ZERO
 
-	for i in range(ray_count + 1): 
+	for i in range(ray_count + 1):
 		# TODO following transform should be customizable
 		var new_point = _ray_to(Vector2(0, max_distance).rotated(_angular_delta * i + global_rotation - _angle_half))
 		if min_distance_sqr > 0 and last_point:
@@ -101,7 +104,7 @@ func calculate_vision_shape(override_static_flag = false) -> Array[Vector2]:
 
 func _draw():
 	if len(_vision_points) == 0:
-		return 
+		return
 	var from = _vision_points[0]
 	var to: Vector2
 	for i in range(1, len(_vision_points)):
@@ -111,7 +114,7 @@ func _draw():
 		if debug_lines:
 			draw_line(Vector2.ZERO, to, Color(0, 0, 1, 0.5))
 		from = to
-	
+
 func _update_collision_polygon():
 	if write_collision_polygon == null:
 		return
@@ -130,11 +133,3 @@ func _ray_to(direction: Vector2) -> Vector2:
 
 	var ray_position = collision.get("position", destination)
 	return to_local(ray_position)
-
-
-func _on_vision_cone_area_body_entered(body: Node2D) -> void:
-	pass
-
-
-func _on_vision_cone_area_body_exited(body: Node2D) -> void:
-	pass # Replace with function body.

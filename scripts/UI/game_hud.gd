@@ -45,13 +45,15 @@ func _process(delta: float) -> void:
 		else: 
 			hide_score_mod()
 			b_adding_score = false
+	Globals.game_score = game_score
+	Globals.game_score_mod = game_score_mod
 
 func on_combat_ended() -> void:
 	player_health_bar.connect_player()
 	player_health_bar.update_hearts()
 	game_score_mod = Globals.combat_score
 	Globals.combat_score = 0.0
-	print(game_score_mod)
+	#print(game_score_mod)
 
 func update_score_label() -> void:
 	var score: int = round(game_score)

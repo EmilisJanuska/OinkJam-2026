@@ -19,28 +19,38 @@ func _ready() -> void:
 # scene loading
 
 var hud_scene_lib: Array = [
-	"res://scenes/main_menu.tscn",
+	"res://scenes/UI/main_menu.tscn",
+	"res://scenes/UI/pause_menu.tscn",
 	"res://scenes/UI/game_hud.tscn",
-	"res://scenes/UI/combat_hud.tscn"
+	"res://scenes/UI/combat_hud.tscn",
+	"res://scenes/UI/game_over_menu.tscn",
+	"res://scenes/UI/victory_menu.tscn",
 ]
 
 var level_scene_lib: Array = [
 	"res://scenes/UI/menu_background.tscn",
 	"res://scenes/dev_scene.tscn",
-	"res://scenes/combat/combat_scene.tscn"
+	"res://scenes/combat/combat_scene.tscn",
+	"res://scenes/levels/human_pens_01.tscn"
 ]
 
 enum HUDScenes {
 	main_menu,
+	pause_menu,
 	game_hud,
-	combat_hud
+	combat_hud,
+	game_over_menu,
+	victory_menu
 }
 
 enum LevelScenes {
 	menu_background,
 	dev_scene,
-	combat_scene
+	combat_scene,
+	human_pens_01
 }
+
+
 
 # other resources
 
@@ -52,6 +62,7 @@ var combat_enemy_sprites: Dictionary = {
 
 enum GameStates {
 	main_menu,
+	pause_menu,
 	in_world,
 	in_combat,
 	game_over,
@@ -63,6 +74,12 @@ enum EnemyTypes {
 	average,
 	strong,
 	miniboss,
+	boss
+}
+
+enum SpawnPointType {
+	player,
+	enemy,
 	boss
 }
 

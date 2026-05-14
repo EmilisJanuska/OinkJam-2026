@@ -1,0 +1,55 @@
+[gd_scene format=3 uid="uid://bpbabocvhqn6c"]
+
+[ext_resource type="Script" uid="uid://dw88w2ebrf2nt" path="res://scripts/UI/pause_menu.gd" id="1_voo7t"]
+[ext_resource type="Texture2D" uid="uid://rpik34r0vut2" path="res://assets/UI/main_menu_bg.jpg" id="2_a2ham"]
+[ext_resource type="FontFile" uid="uid://c57wrklqr8ham" path="res://assets/fonts/CarterOne-Regular.ttf" id="3_ak6qf"]
+[ext_resource type="FontFile" uid="uid://pfyak6wep6wh" path="res://assets/fonts/ProtestRevolution-Regular.ttf" id="3_yv7mv"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_7l7mv"]
+font = ExtResource("3_ak6qf")
+font_size = 48
+
+[node name="PauseMenu" type="Control" unique_id=420425486]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1024.0
+offset_bottom = 576.0
+mouse_filter = 2
+script = ExtResource("1_voo7t")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1985544975]
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+texture = ExtResource("2_a2ham")
+
+[node name="Label" type="Label" parent="." unique_id=1067081403]
+layout_mode = 0
+offset_left = 354.35
+offset_top = 122.25
+offset_right = 669.3506
+offset_bottom = 197.25003
+pivot_offset = Vector2(157, 0)
+text = "Game Over"
+label_settings = SubResource("LabelSettings_7l7mv")
+horizontal_alignment = 1
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=2026749231]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VFlowContainer" type="VBoxContainer" parent="CenterContainer" unique_id=2040763051]
+layout_mode = 2
+
+[node name="MainMenuBtn" type="Button" parent="CenterContainer/VFlowContainer" unique_id=2103341803]
+custom_minimum_size = Vector2(150, 50)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_yv7mv")
+theme_override_font_sizes/font_size = 26
+text = "Main Menu"
+
+[connection signal="pressed" from="CenterContainer/VFlowContainer/MainMenuBtn" to="." method="_on_main_menu_btn_pressed"]

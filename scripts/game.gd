@@ -12,10 +12,18 @@ var b_game_started: bool
 var b_game_paused: bool
 var b_combat_paused: bool
 
+var player_prefab: PackedScene = preload("res://scenes/player.tscn")
+var enemy_prefab: PackedScene = preload("res://scenes/Enemy1.tscn")
+
 @export var weapon_damage: float
 @export var player_health: float
 @export var player_max_health: float
 @export var quarter_heart_value: float
+
+var reset_weapon_damage: float
+var reset_player_health: float
+var reset_player_max_health: float
+var reset_quarter_heart_value: float
 
 signal game_paused
 signal game_unpaused
@@ -32,13 +40,16 @@ func _unhandled_input(event) -> void:
 		# toggle main menu
 		if event.pressed and event.keycode == KEY_ESCAPE:
 			if game_state == Globals.GameStates.in_world:
-				change_game_state(Globals.GameStates.main_menu, Globals.GameStates.in_world)
+				change_game_state(Globals.GameStates.pause_menu, Globals.GameStates.in_world)
 			elif game_state == Globals.GameStates.in_combat:
-				change_game_state(Globals.GameStates.main_menu, Globals.GameStates.in_combat)
-			elif game_state == Globals.GameStates.main_menu:
+				change_game_state(Globals.GameStates.pause_menu, Globals.GameStates.in_combat)
+			elif game_state == Globals.GameStates.pause_menu:
 				print(Globals.GameStates.find_key(last_game_state))
 				if b_game_started:
-					change_game_state(last_game_state, Globals.GameStates.main_menu)
+					change_game_state(last_game_state, Globals.GameStates.pause_menu)
+
+		if event.pressed and event.keycode == KEY_SPACE:
+			change_game_state(Globals.GameStates.game_win, Globals.GameStates.in_world)
 
 		# combat controls - only enabled when in combat
 		if game_state == Globals.GameStates.in_combat:
@@ -62,6 +73,11 @@ func _ready() -> void:
 	b_game_paused = false
 	b_combat_paused = false
 
+	reset_weapon_damage = weapon_damage
+	reset_player_health  = player_health
+	reset_player_max_health = player_max_health
+	reset_quarter_heart_value = quarter_heart_value
+
 	change_scene(Globals.LevelScenes.menu_background)
 	change_ui_scene(Globals.HUDScenes.main_menu)
 
@@ -73,43 +89,50 @@ func _ready() -> void:
 func change_game_state(to_state: Globals.GameStates, from_state: Globals.GameStates, start_combat: bool = false) -> void:
 	match to_state:
 		Globals.GameStates.main_menu:
+			pause_game()
+			game_state = Globals.GameStates.main_menu
+			last_game_state = from_state
+			change_ui_scene(Globals.HUDScenes.main_menu)
+			change_scene(Globals.LevelScenes.menu_background)
+
+		Globals.GameStates.pause_menu:
 			if from_state == Globals.GameStates.in_world:
 				pause_game()
-				game_state = Globals.GameStates.main_menu
+				game_state = Globals.GameStates.pause_menu
 				last_game_state = from_state
-				change_ui_scene(Globals.HUDScenes.main_menu, false, true)
-				change_scene(Globals.LevelScenes.menu_background, false, true)
+				change_ui_scene(Globals.HUDScenes.pause_menu, false, true)
 			elif from_state == Globals.GameStates.in_combat:
 				pause_combat()
-				game_state = Globals.GameStates.main_menu
+				game_state = Globals.GameStates.pause_menu
 				last_game_state = from_state
-				change_scene(Globals.LevelScenes.menu_background, false, true)
-				change_ui_scene(Globals.HUDScenes.main_menu, false, true)
+				change_ui_scene(Globals.HUDScenes.pause_menu, false, true)
 
 		Globals.GameStates.in_world:
 			if from_state == Globals.GameStates.main_menu:
 				if !b_game_started: b_game_started = true
 				game_state = Globals.GameStates.in_world
 				last_game_state = from_state
-				change_scene(Globals.LevelScenes.dev_scene, false, true)
-				change_ui_scene(Globals.HUDScenes.game_hud, false, true)
+				# TODO: set to 'current_level' or something similar instead of directly naming the scene
+				change_scene(Globals.LevelScenes.human_pens_01)
+				change_ui_scene(Globals.HUDScenes.game_hud)
+				unpause_game()
+			if from_state == Globals.GameStates.pause_menu:
+				if !b_game_started: b_game_started = true
+				game_state = Globals.GameStates.in_world
+				last_game_state = from_state
+				change_ui_scene(Globals.HUDScenes.game_hud)
 				unpause_game()
 			if from_state == Globals.GameStates.in_combat:
 				game_state = Globals.GameStates.in_world
 				last_game_state = from_state
-				change_scene(Globals.LevelScenes.dev_scene)
+				# TODO: set to 'current_level' or something similar instead of directly naming the scene
+				change_scene(Globals.LevelScenes.human_pens_01)
 				change_ui_scene(Globals.HUDScenes.game_hud)
 				use_game_camera.emit()
 				unpause_game()
 				combat_ended.emit()
 
 		Globals.GameStates.in_combat:
-			if from_state == Globals.GameStates.main_menu:
-				game_state = Globals.GameStates.in_combat
-				last_game_state = from_state
-				change_scene(Globals.LevelScenes.combat_scene, false, true)
-				change_ui_scene(Globals.HUDScenes.combat_hud, false, true)
-				unpause_combat()
 			if from_state == Globals.GameStates.in_world:
 				pause_game()
 				game_state = Globals.GameStates.in_combat
@@ -118,9 +141,25 @@ func change_game_state(to_state: Globals.GameStates, from_state: Globals.GameSta
 				change_ui_scene(Globals.HUDScenes.combat_hud, false, true, start_combat)
 
 		Globals.GameStates.game_over:
-			pass
+			if from_state == Globals.GameStates.in_combat:
+				pause_game()
+				game_state = Globals.GameStates.game_over
+				last_game_state = from_state
+				
+				for scene in loaded_scenes:
+					loaded_scenes[scene].queue_free()
+				
+				loaded_scenes.clear()
+
+				change_scene(Globals.LevelScenes.menu_background)
+				change_ui_scene(Globals.HUDScenes.game_over_menu)
+
 		Globals.GameStates.game_win:
-			pass
+			pause_game()
+			game_state = Globals.GameStates.game_win
+			last_game_state = from_state
+			change_scene(Globals.LevelScenes.menu_background)
+			change_ui_scene(Globals.HUDScenes.victory_menu, true, false, false, true)
 
 # scene change logic
 func change_scene(scene: Globals.LevelScenes, delete: bool = true, keep_running: bool = false, _begin_combat: bool = false) -> void:
@@ -152,7 +191,7 @@ func change_scene(scene: Globals.LevelScenes, delete: bool = true, keep_running:
 		current_scene = scene_name
 		loaded_scenes[scene_name].visible = true
 
-func change_ui_scene(ui_scene: Globals.HUDScenes, delete: bool = true, keep_running: bool = false, begin_combat: bool = false) -> void:
+func change_ui_scene(ui_scene: Globals.HUDScenes, delete: bool = true, keep_running: bool = false, begin_combat: bool = false, _victory: bool = false) -> void:
 	var scene_name = Globals.HUDScenes.find_key(ui_scene)
 	if !loaded_ui_scenes.has(scene_name) && scene_name != current_ui_scene:
 		if delete:
@@ -166,6 +205,10 @@ func change_ui_scene(ui_scene: Globals.HUDScenes, delete: bool = true, keep_runn
 		var new = load(Globals.hud_scene_lib[ui_scene]).instantiate()
 		loaded_ui_scenes[scene_name] = new
 		ui.add_child(new)
+
+		if _victory:
+			print("main: ", Globals.game_score)
+			new.set_score(Globals.game_score)
 		current_ui_scene = scene_name
 
 		if begin_combat:
@@ -216,16 +259,22 @@ func new_game() -> void:
 	game_state = Globals.GameStates.in_world
 	last_game_state = Globals.GameStates.main_menu
 
-	var dev_scene_key = Globals.LevelScenes.find_key(Globals.LevelScenes.dev_scene)
-	if loaded_scenes.has(dev_scene_key):
-		loaded_scenes.erase(dev_scene_key)
+	player_health = reset_player_health
+	player_max_health = reset_player_max_health
+	weapon_damage = reset_weapon_damage
+	quarter_heart_value = reset_quarter_heart_value
 
-	var dev_ui_scene_key = Globals.LevelScenes.find_key(Globals.HUDScenes.game_hud)
-	if loaded_scenes.has(dev_ui_scene_key):
-		loaded_scenes.erase(dev_ui_scene_key)
+	var scene_key = Globals.LevelScenes.find_key(Globals.LevelScenes.human_pens_01)
+	if loaded_scenes.has(scene_key):
+		loaded_scenes.erase(scene_key)
 
-	change_ui_scene(Globals.HUDScenes.game_hud, false, true)
-	change_scene(Globals.LevelScenes.dev_scene, false, true)
+	var ui_scene_key = Globals.LevelScenes.find_key(Globals.HUDScenes.game_hud)
+	if loaded_scenes.has(ui_scene_key):
+		loaded_scenes.erase(ui_scene_key)
+
+	change_ui_scene(Globals.HUDScenes.game_hud)
+	change_scene(Globals.LevelScenes.human_pens_01)
 	new_game_started.emit()
+	await get_tree().process_frame
 	use_game_camera.emit()
 	unpause_game()

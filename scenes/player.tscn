@@ -303,24 +303,24 @@ animations = [{
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qhqgy"]
 radius = 8.5
-height = 25.39
+height = 20.14
 
-[node name="Player" type="CharacterBody2D" unique_id=1640087231 groups=["player"]]
+[node name="Player" type="CharacterBody2D" unique_id=1640087231 node_paths=PackedStringArray("game_camera") groups=["player"]]
 texture_filter = 1
-position = Vector2(9, -3)
 collision_mask = 2
 script = ExtResource("1_g2els")
+game_camera = NodePath("Camera2D")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=325209838]
-position = Vector2(-1, 2)
 sprite_frames = SubResource("SpriteFrames_fjrip")
 animation = &"front_Walk"
+offset = Vector2(0, -16)
 
 [node name="InteractingComponent" parent="." unique_id=1575907070 instance=ExtResource("3_qhqgy")]
-position = Vector2(0, 12)
+position = Vector2(0, -7.545)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=843325438]
-position = Vector2(0.235, 21.075)
+position = Vector2(0, 5.8)
 shape = SubResource("CapsuleShape2D_qhqgy")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1839222290]

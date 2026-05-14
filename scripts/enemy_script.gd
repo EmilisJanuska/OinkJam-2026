@@ -6,54 +6,73 @@ extends CharacterBody2D
 @onready var player: CharacterBody2D = $"../Player"
 @onready var full_vision_cone: Node2D = $VisionCone2D
 @onready var enemy = $AnimatedSprite2D
-var speed = 200
+var speed = 100
 var startPoint: Vector2
 var is_chasing:= false
 var chase_timer := 0.0
 var current_direction = Vector2.ZERO
-var current_animation = ""
 var default_rotation = 0.0
 var in_vision = false
+var last_direction := Vector2.DOWN
 
 
 func _ready() -> void:
 	if stats: stats.duplicate() # necessary for unique stats for this enemy instance
 
 func _physics_process(_delta: float) -> void:
-		if not startPoint: startPoint = global_position
+		if startPoint: startPoint = global_position
 	
 		if is_chasing:
 			var direction = (player.position - position).normalized()
 			velocity = direction * speed
 			full_vision_cone.look_at(player.global_position)
 			full_vision_cone.rotation += deg_to_rad(-90) # DO NOT REMOVE OR WONT FACE PLAYER!!!!
+	
 			move_and_slide()
-			animation_play()
+		else:
+			velocity = Vector2.ZERO
 			
+		animation_play()
+				
 		if chase_timer > 0: 
 			chase_timer -= _delta #delta is real time
 			
 			if chase_timer <= 0: # stop chase after timer runs out
 				is_chasing = false
+
 				full_vision_cone.rotation = default_rotation
 				vision_cone.color = Color(0, 1, 0, 0.3)
 
 
 func animation_play():
-	if velocity.length() == 0:
-		enemy.play("back_Idle")
-		return
-	
-	if abs(velocity.x) > abs(velocity.y):
-		enemy.play("side_Walk")
-		enemy.flip_h = velocity.x < 0
+	#when moving
+	if velocity.length() > 1: # keep at 1 because enemy might sometimes have small float point velocity preventing this from executing
+		last_direction = velocity.normalized()
+		
+		if abs(velocity.x) > abs(velocity.y):
+			enemy.play("side_Walk")
+			enemy.flip_h = velocity.x < 0
 
+		else:
+			enemy.flip_h = false
+			if velocity.y < 0:
+				enemy.play("walk_up")
+			else:
+				enemy.play("walk_down")
+		return
+
+	#if idle play specfic idle animation based of last movement direction
+	if abs(last_direction.x) > abs(last_direction.y):
+		enemy.play("side_Idle")
+		enemy.flip_h = last_direction.x < 0
 	else:
 		enemy.flip_h = false
-		if velocity.y < 0:
-			enemy.play("walk_up")
+		
+		if last_direction.y < 0:
+			enemy.play("back_Idle")
 		else:
-			enemy.play("walk_down")
+			enemy.play("back_Idle")
+		
 	
 
 func _on_combat_box_body_entered(body: Node2D) -> void:

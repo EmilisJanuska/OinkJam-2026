@@ -244,7 +244,7 @@ visible = false
 position = Vector2(928, 330)
 
 [node name="Enemy" parent="." unique_id=930025449 instance=ExtResource("3_q442r")]
-position = Vector2(229, 338)
+position = Vector2(229, 343)
 stats = SubResource("Resource_ickkf")
 
 [node name="Enemy2" parent="." unique_id=341070890 instance=ExtResource("3_q442r")]

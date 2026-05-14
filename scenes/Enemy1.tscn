@@ -160,27 +160,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_2gc8a")
 }],
 "loop": true,
-"name": &"side_Idle_left",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_n15mh")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_bodv6")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_fvyyr")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_843fb")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_2gc8a")
-}],
-"loop": true,
-"name": &"side_Idle_right",
+"name": &"side_Idle",
 "speed": 5.0
 }, {
 "frames": [{
@@ -265,7 +245,8 @@ script = ExtResource("1_4fg0d")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1340891267]
 rotation = -0.0055271946
 sprite_frames = SubResource("SpriteFrames_qbm60")
-animation = &"walk_up"
+animation = &"side_Idle"
+frame_progress = 0.9661857
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=636006350]
 scale = Vector2(1, 0.99999994)
@@ -282,6 +263,9 @@ max_distance = 100.0
 
 [node name="VisionConeRenderer" parent="VisionCone2D" index="0" unique_id=477639745]
 color = Color(0.43137255, 0.92941177, 0.2784314, 0.28627452)
+
+[node name="DebugDraw" parent="VisionCone2D" index="2" unique_id=1463435281]
+position = Vector2(0, -24.01537)
 
 [connection signal="body_entered" from="combatBox" to="." method="_on_combat_box_body_entered"]
 [connection signal="body_entered" from="VisionCone2D/VisionConeArea" to="." method="_on_vision_cone_area_body_entered"]

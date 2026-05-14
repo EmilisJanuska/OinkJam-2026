@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://liqal251fato" path="res://assets/Pig v1/Pig walking forward animation-Sheet.png" id="4_vfen5"]
 [ext_resource type="Texture2D" uid="uid://jdixc31sx1mw" path="res://assets/Pig v1/Pig Side Idle-Sheet.png" id="5_uckuu"]
 [ext_resource type="Texture2D" uid="uid://c1nj3xdtdgygm" path="res://assets/Pig v1/Side pig walking animation-Sheet.png" id="6_f0pr3"]
+[ext_resource type="PackedScene" uid="uid://cxb65xdvfu4cd" path="res://scenes/light.tscn" id="9_cx467"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_14qmk"]
 atlas = ExtResource("2_n2stm")
@@ -266,6 +267,10 @@ color = Color(0.43137255, 0.92941177, 0.2784314, 0.28627452)
 
 [node name="DebugDraw" parent="VisionCone2D" index="2" unique_id=1463435281]
 position = Vector2(0, -24.01537)
+
+[node name="Light" parent="." unique_id=252344767 instance=ExtResource("9_cx467")]
+position = Vector2(-1, 23.53506)
+scale = Vector2(0.9380493, 0.5853746)
 
 [connection signal="body_entered" from="combatBox" to="." method="_on_combat_box_body_entered"]
 [connection signal="body_entered" from="VisionCone2D/VisionConeArea" to="." method="_on_vision_cone_area_body_entered"]

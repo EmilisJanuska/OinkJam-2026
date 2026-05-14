@@ -6,6 +6,8 @@ extends CharacterBody2D
 @onready var player: CharacterBody2D = $"../Player"
 @onready var full_vision_cone: Node2D = $VisionCone2D
 @onready var enemy = $AnimatedSprite2D
+@export var path: Path2D
+
 var speed = 100
 var startPoint: Vector2
 var is_chasing:= false
@@ -15,35 +17,34 @@ var default_rotation = 0
 var in_vision = false
 var last_direction := Vector2.DOWN
 
+@export var patrol_points:Array[Marker2D] = []
+var current_point_index = 0
 
 func _ready() -> void:
+	if patrol_points.size() == 0:
+		print("no patrol points assinged")
 	if stats: stats.duplicate() # necessary for unique stats for this enemy instance
 
-func _physics_process(_delta: float) -> void:
-		if startPoint: startPoint = global_position
-	
-		if is_chasing:
-			var direction = (player.position - position).normalized()
-			velocity = direction * speed
-			full_vision_cone.look_at(player.global_position)
-			full_vision_cone.rotation += deg_to_rad(-90) # DO NOT REMOVE OR WONT FACE PLAYER!!!!
-	
-			move_and_slide()
-		else:
+func _physics_process(delta: float) -> void:
+	if is_chasing:
+		var direction = (player.global_position - global_position).normalized()
+		velocity = direction * speed
+		full_vision_cone.rotation = direction.angle() + deg_to_rad(-90)
+	else:
+		patrol()
+		update_vision_direction()
+	move_and_slide()
+	animation_play()
+
+	if chase_timer > 0:
+		chase_timer -= delta
+		if chase_timer <= 0:
+			is_chasing = false
 			velocity = Vector2.ZERO
-			update_vision_direction()
-			
-		animation_play()
-				
-		if chase_timer > 0: 
-			chase_timer -= _delta #delta is real time
-			
-			if chase_timer <= 0: # stop chase after timer runs out
-				is_chasing = false
-
-				full_vision_cone.rotation = default_rotation
-				vision_cone.color = Color(0, 1, 0, 0.3)
-
+			full_vision_cone.rotation = default_rotation
+			vision_cone.color = Color(0, 1, 0, 0.3)
+			full_vision_cone.rotation = default_rotation
+			vision_cone.color = Color(0, 1, 0, 0.3)
 
 func update_vision_direction():
 	if last_direction == Vector2.ZERO:
@@ -81,8 +82,6 @@ func animation_play():
 		else:
 			enemy.play("back_Idle")
 		
-	
-
 func _on_combat_box_body_entered(body: Node2D) -> void:
 	if not body.is_in_group("player"):
 		return
@@ -96,8 +95,6 @@ func _on_combat_box_body_entered(body: Node2D) -> void:
 		
 		queue_free() # despawns enemy need to detect whether player won or not !!!!
 		
-
-
 func _on_vision_cone_area_body_entered(body: Node2D) -> void:
 	if body.is_in_group('player'):
 		in_vision = true
@@ -105,13 +102,19 @@ func _on_vision_cone_area_body_entered(body: Node2D) -> void:
 		vision_cone.color = Color(1, 0 ,0, 0.3)
 		chase_timer = 0.0
 		
-
-
 func _on_vision_cone_area_body_exited(body: Node2D) -> void:
 		in_vision = false
 		vision_cone.color = Color(1,1,0,0.3)
 		full_vision_cone.look_at(player.global_position)
 		chase_timer = 2.0 # on exit chase player for a bit more
 		# need to add return logic to original 'patrol route'
-
-	
+		
+func patrol()-> void:
+	if patrol_points.size() > 0:
+		var target = patrol_points[current_point_index].position
+		velocity = (target - position).normalized() * speed
+		
+		if position.distance_to(target) < 10.0:
+			current_point_index +=1
+			if current_point_index >= patrol_points.size():
+				current_point_index = 0

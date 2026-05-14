@@ -65,7 +65,7 @@ func calc_num_hearts() -> int:
 		@warning_ignore("narrowing_conversion")
 		return (Globals.game_controller.player_max_health / Globals.game_controller.quarter_heart_value) / 4
 	else:
-		print("max hp: ", Globals.cur_enemy_stats.max_health)
+		#print("max hp: ", Globals.cur_enemy_stats.max_health)
 		@warning_ignore("narrowing_conversion")
 		return (Globals.cur_enemy_stats.max_health / Globals.game_controller.quarter_heart_value) / 4
 

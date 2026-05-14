@@ -44,7 +44,7 @@ func _unhandled_input(event) -> void:
 			elif game_state == Globals.GameStates.in_combat:
 				change_game_state(Globals.GameStates.pause_menu, Globals.GameStates.in_combat)
 			elif game_state == Globals.GameStates.pause_menu:
-				print(Globals.GameStates.find_key(last_game_state))
+				#print(Globals.GameStates.find_key(last_game_state))
 				if b_game_started:
 					change_game_state(last_game_state, Globals.GameStates.pause_menu)
 
@@ -207,7 +207,7 @@ func change_ui_scene(ui_scene: Globals.HUDScenes, delete: bool = true, keep_runn
 		ui.add_child(new)
 
 		if _victory:
-			print("main: ", Globals.game_score)
+			#print("main: ", Globals.game_score)
 			new.set_score(Globals.game_score)
 		current_ui_scene = scene_name
 
@@ -277,4 +277,5 @@ func new_game() -> void:
 	new_game_started.emit()
 	await get_tree().process_frame
 	use_game_camera.emit()
+	AudioManager.play_sound("Play_MUSIC")
 	unpause_game()

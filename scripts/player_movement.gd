@@ -11,7 +11,7 @@ Variables:
 """
 extends CharacterBody2D
 @export var game_camera: Camera2D
-@export var speed = 300
+@export var speed = 150
 @onready var sprite = $AnimatedSprite2D
 var b_paused = false
 

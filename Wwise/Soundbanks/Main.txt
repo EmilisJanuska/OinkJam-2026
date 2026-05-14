@@ -12,4 +12,3 @@ In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	547956405	sfx_ENEMY_pig_snors_05	.cache\83\{83A6F3C1-8186-C226-A44E-204E1FD93D1B}.wem		\Containers\Default Work Unit\ENEMY\ENEMY\sfx_ENEMY_pig_snors_05		32188
 	662528356	sfx_ENEMY_pig_snors_08	.cache\DF\{DF59344A-7EA8-161E-F815-5B3B9E6FF82D}.wem		\Containers\Default Work Unit\ENEMY\ENEMY\sfx_ENEMY_pig_snors_08		47092
 	1068677485	sfx_ENEMY_pig_snors_06	.cache\35\{35D49AA0-3FEE-1D09-6BF6-F388DA821683}.wem		\Containers\Default Work Unit\ENEMY\ENEMY\sfx_ENEMY_pig_snors_06		75338
-

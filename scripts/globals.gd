@@ -29,7 +29,6 @@ var hud_scene_lib: Array = [
 
 var level_scene_lib: Array = [
 	"res://scenes/UI/menu_background.tscn",
-	"res://scenes/dev_scene.tscn",
 	"res://scenes/combat/combat_scene.tscn",
 	"res://scenes/levels/human_pens_01.tscn"
 ]
@@ -45,7 +44,6 @@ enum HUDScenes {
 
 enum LevelScenes {
 	menu_background,
-	dev_scene,
 	combat_scene,
 	human_pens_01
 }

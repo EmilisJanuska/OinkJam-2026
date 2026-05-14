@@ -6,6 +6,7 @@ class_name VisionCone2D
 @onready var enemy = get_parent()
 @onready var player = $"../../Player"
 
+
 @export_group("Raycast parameters")
 ## How wide the vision cone is in degrees
 @export_range(0, 360) var angle_deg: int = 360
@@ -62,9 +63,12 @@ func _process(_delta: float) -> void:
 		queue_redraw()
 
 func _physics_process(delta: float) -> void:
+	
 	if Time.get_ticks_msec() - _last_redraw_time > minimum_recalculate_time_msec:
 		_last_redraw_time = Time.get_ticks_msec()
 		recalculate_vision()
+		
+	
 
 func recalculate_vision(override_static_flag = false):
 	var should_recalculate = override_static_flag or recalculate_if_static

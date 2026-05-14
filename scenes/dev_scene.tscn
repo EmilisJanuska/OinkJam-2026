@@ -3,7 +3,6 @@
 [ext_resource type="PackedScene" uid="uid://jcdjovd6aab8" path="res://scenes/Enemy1.tscn" id="3_q442r"]
 [ext_resource type="PackedScene" uid="uid://c74d581jtpyl4" path="res://scenes/player.tscn" id="4_71j4m"]
 [ext_resource type="Script" uid="uid://b4p88otydyovf" path="res://scripts/resource_classes/enemy_stats.gd" id="4_ickkf"]
-[ext_resource type="Resource" uid="uid://7j0j4e2egfve" path="res://resources/enemy_average_1.tres" id="5_h1r1l"]
 [ext_resource type="PackedScene" uid="uid://dgc2c6qm7k0ao" path="res://scenes/temp_chest.tscn" id="5_i7141"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_71j4m"]
@@ -193,13 +192,23 @@ tile_size = Vector2i(32, 32)
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_qfnet")
 
+[sub_resource type="Resource" id="Resource_ickkf"]
+script = ExtResource("4_ickkf")
+name = "pig1"
+health = 3
+max_health = 3
+damage = 1
+patterns = [["left", "right", "left"], ["left", "right"]]
+metadata/_custom_type_script = "uid://b4p88otydyovf"
+
 [sub_resource type="Resource" id="Resource_h1r1l"]
 script = ExtResource("4_ickkf")
-name = "ThinBacon"
-health = 800
-max_health = 800
-damage = 200
-patterns = [["left", "right", "right"], ["right", "up", "down"], ["up", "up", "down"]]
+name = "pig2"
+type = 1
+health = 3
+max_health = 3
+damage = 1
+patterns = [null, null, null]
 metadata/_custom_type_script = "uid://b4p88otydyovf"
 
 [node name="DevScene" type="Node2D" unique_id=774591807]
@@ -235,9 +244,9 @@ visible = false
 position = Vector2(928, 330)
 
 [node name="Enemy" parent="." unique_id=930025449 instance=ExtResource("3_q442r")]
-position = Vector2(215.00002, 385)
-stats = SubResource("Resource_h1r1l")
+position = Vector2(229, 338)
+stats = SubResource("Resource_ickkf")
 
 [node name="Enemy2" parent="." unique_id=341070890 instance=ExtResource("3_q442r")]
-position = Vector2(259, 137.00002)
-stats = ExtResource("5_h1r1l")
+position = Vector2(329, 125)
+stats = SubResource("Resource_h1r1l")

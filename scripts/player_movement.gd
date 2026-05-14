@@ -51,7 +51,6 @@ func get_input():
 
 		else:
 			var current_animation = sprite.animation
-
 			if current_animation == "side_Walk":
 				sprite.play("side_Idle")
 			elif current_animation == "back_Walk":

@@ -276,11 +276,11 @@ position = Vector2(-20.410345, 0)
 scale = Vector2(0.15274327, -0.2733116)
 
 [node name="VisionCone2D" parent="." unique_id=985580835 instance=ExtResource("4_pkrqa")]
-rotation = -1.5659157
-max_distance = 50.0
+rotation = -1.5674199
+max_distance = 100.0
 
 [node name="VisionConeRenderer" parent="VisionCone2D" index="0" unique_id=477639745]
-color = Color(0.43137255, 0.92941177, 0.2784314, 0.28627452)
+color = Color(0.2830353, 0.5995296, 0.18966696, 0.28627452)
 
 [connection signal="body_entered" from="combatBox" to="." method="_on_combat_box_body_entered"]
 [connection signal="body_entered" from="VisionCone2D/VisionConeArea" to="." method="_on_vision_cone_area_body_entered"]

@@ -11,7 +11,7 @@ var startPoint: Vector2
 var is_chasing:= false
 var chase_timer := 0.0
 var current_direction = Vector2.ZERO
-var default_rotation = 0.0
+var default_rotation = 0
 var in_vision = false
 var last_direction := Vector2.DOWN
 
@@ -31,6 +31,7 @@ func _physics_process(_delta: float) -> void:
 			move_and_slide()
 		else:
 			velocity = Vector2.ZERO
+			update_vision_direction()
 			
 		animation_play()
 				
@@ -43,6 +44,12 @@ func _physics_process(_delta: float) -> void:
 				full_vision_cone.rotation = default_rotation
 				vision_cone.color = Color(0, 1, 0, 0.3)
 
+
+func update_vision_direction():
+	if last_direction == Vector2.ZERO:
+		return
+
+	full_vision_cone.rotation = last_direction.angle() + deg_to_rad(-90) # adjusts offset to make it face right direction
 
 func animation_play():
 	#when moving
@@ -57,6 +64,7 @@ func animation_play():
 			enemy.flip_h = false
 			if velocity.y < 0:
 				enemy.play("walk_up")
+				
 			else:
 				enemy.play("walk_down")
 		return

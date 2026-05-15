@@ -12,7 +12,7 @@ script = ExtResource("1_0jsnh")
 player_spawn = NodePath("PlayerSpawnPoint")
 
 [node name="PlayerSpawnPoint" parent="." unique_id=986081644 node_paths=PackedStringArray("layers") instance=ExtResource("1_a4lct")]
-position = Vector2(1259, 254)
+position = Vector2(-336, -387)
 layers = NodePath("../TilemapLayers")
 
 [node name="GroundLayer" type="TileMapLayer" parent="." unique_id=1639259726]

@@ -12,6 +12,7 @@ var last_game_state: Globals.GameStates
 var b_game_started: bool
 var b_game_paused: bool
 var b_combat_paused: bool
+var current_level
 
 var player_prefab: PackedScene = preload("res://scenes/player.tscn")
 var enemy_prefab: PackedScene = preload("res://scenes/Enemy1.tscn")
@@ -138,7 +139,8 @@ func change_game_state(to_state: Globals.GameStates, from_state: Globals.GameSta
 				game_state = Globals.GameStates.in_world
 				last_game_state = from_state
 				# TODO: set to 'current_level' or something similar instead of directly naming the scene
-				change_scene(Globals.LevelScenes.human_pens_01)
+				print("loaded_scenes: ", current_level)
+				change_scene(Globals.LevelScenes[current_level])
 				change_ui_scene(Globals.HUDScenes.game_hud)
 				use_game_camera.emit()
 				unpause_game()
@@ -186,11 +188,13 @@ func change_scene(scene: Globals.LevelScenes, delete: bool = true, keep_running:
 		elif keep_running:
 			if loaded_scenes.has(current_scene):
 				loaded_scenes[current_scene].visible = false # scene will run in background
+				current_level = current_scene
 
 		# load and display new scene
 		var new = load(Globals.level_scene_lib[scene]).instantiate()
 		loaded_scenes[scene_name] = new
 		#world.call_deferred("add_child", new)
+		#current_level = loaded_scenes[scene_name]
 		world.add_child(new)
 		current_scene = scene_name
 		current_spawn_point = loaded_scenes[current_scene].get_node_or_null("PlayerSpawnPoint")
@@ -208,9 +212,11 @@ func change_scene(scene: Globals.LevelScenes, delete: bool = true, keep_running:
 		elif keep_running:
 			if loaded_scenes.has(current_scene):
 				loaded_scenes[current_scene].visible = false # scene will run in background
+				current_level = current_scene
 		
 		# load and display new scene
 		current_scene = scene_name
+		#current_level = loaded_scenes[scene_name]
 		current_spawn_point = loaded_scenes[current_scene].get_node_or_null("PlayerSpawnPoint")
 
 		await get_tree().process_frame

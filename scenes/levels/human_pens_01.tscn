@@ -11,7 +11,7 @@
 script = ExtResource("1_wqoxe")
 
 [node name="PlayerSpawnPoint" parent="." unique_id=986081644 node_paths=PackedStringArray("layers") instance=ExtResource("2_bp8v6")]
-position = Vector2(589, 290)
+position = Vector2(596, 267)
 layers = NodePath("../TilemapLayers")
 
 [node name="GroundLayer" type="TileMapLayer" parent="." unique_id=117868575]

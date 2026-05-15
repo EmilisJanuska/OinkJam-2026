@@ -1,13 +1,9 @@
 [gd_scene format=3 uid="uid://chxkb6vugd40p"]
 
 [ext_resource type="Script" uid="uid://1gyit43gplkj" path="res://scripts/game.gd" id="1_0wfyh"]
-[ext_resource type="Script" uid="uid://bs8cv86t7j417" path="res://scripts/Audio/audio_player.gd" id="2_jyhfs"]
-[ext_resource type="WwiseBank" uid="uid://ci1a7f0epwg0i" path="res://Wwise/resources/SoundBank/{426DB5F1-E237-4D6E-BB15-22CC67446715}.tres" id="2_sugp2"]
-[ext_resource type="WwiseEvent" uid="uid://jyh4mosrgbb3" path="res://Wwise/resources/Event/{8C10BA04-B135-44F0-A058-B659D82A5B5D}.tres" id="4_jyhfs"]
 
-[node name="GameController" type="Node" unique_id=1966796427 node_paths=PackedStringArray("audio_player")]
+[node name="GameController" type="Node" unique_id=1966796427]
 script = ExtResource("1_0wfyh")
-audio_player = NodePath("AudioPlayer")
 weapon_damage = 400.0
 player_health = 1200.0
 player_max_health = 1200.0
@@ -18,13 +14,3 @@ quarter_heart_value = 100.0
 [node name="UI" type="CanvasLayer" parent="." unique_id=429257003]
 
 [node name="AudioPlayer" type="Node2D" parent="." unique_id=136938635]
-script = ExtResource("2_jyhfs")
-
-[node name="AkBank" type="AkBank" parent="AudioPlayer" unique_id=2091256948]
-bank = ExtResource("2_sugp2")
-load_on = 1
-
-[node name="AkEvent2D" type="AkEvent2D" parent="AudioPlayer/AkBank" unique_id=1677182441]
-event = ExtResource("4_jyhfs")
-
-[node name="AkListener2D" type="AkListener2D" parent="AudioPlayer/AkBank" unique_id=488784935]

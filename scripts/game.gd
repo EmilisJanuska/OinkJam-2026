@@ -19,7 +19,6 @@ var enemy_prefab: PackedScene = preload("res://scenes/Enemy1.tscn")
 var current_spawn_point
 var player_instance
 
-@export var audio_player: AudioPlayer
 @export var weapon_damage: float
 @export var player_health: float
 @export var player_max_health: float
@@ -73,7 +72,6 @@ func _ready() -> void:
 	Globals.game_controller = self
 	world = $World
 	ui = $UI
-	audio_player = $AudioPlayer
 	game_state = Globals.GameStates.main_menu
 	last_game_state = Globals.GameStates.in_world
 	b_game_started = false
@@ -178,7 +176,6 @@ func change_game_state(to_state: Globals.GameStates, from_state: Globals.GameSta
 # scene change logic
 func change_scene(scene: Globals.LevelScenes, delete: bool = true, keep_running: bool = false, _begin_combat: bool = false) -> void:
 	var scene_name = Globals.LevelScenes.find_key(scene)
-	audio_player.stop_sounds()
 	if !loaded_scenes.has(scene_name) && scene_name != current_scene:
 		# remove or hide current scene
 		if delete:
@@ -199,8 +196,7 @@ func change_scene(scene: Globals.LevelScenes, delete: bool = true, keep_running:
 		current_spawn_point = loaded_scenes[current_scene].get_node_or_null("PlayerSpawnPoint")
 
 		await get_tree().process_frame
-		if current_spawn_point != null:
-			audio_player.update_spawn_point(current_spawn_point)
+
 		loaded_scenes[current_scene].visible = true
 	elif loaded_scenes.has(scene_name) && scene_name != current_scene:
 		# remove or hide current scene
@@ -218,13 +214,10 @@ func change_scene(scene: Globals.LevelScenes, delete: bool = true, keep_running:
 		current_spawn_point = loaded_scenes[current_scene].get_node_or_null("PlayerSpawnPoint")
 
 		await get_tree().process_frame
-		if current_spawn_point != null:
-			audio_player.update_spawn_point(current_spawn_point)
 		loaded_scenes[scene_name].visible = true
 
 func change_ui_scene(ui_scene: Globals.HUDScenes, delete: bool = true, keep_running: bool = false, begin_combat: bool = false, _victory: bool = false) -> void:
 	var scene_name = Globals.HUDScenes.find_key(ui_scene)
-	audio_player.stop_sounds()
 	if !loaded_ui_scenes.has(scene_name) && scene_name != current_ui_scene:
 		# remove or hide old ui scene
 		if delete:

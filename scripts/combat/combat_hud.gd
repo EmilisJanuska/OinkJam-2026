@@ -1,7 +1,7 @@
 extends Node2D
 
 var ref_world : Node2D
-var ref_audio_player: AudioPlayer
+
 var pattern_spawner: Node2D
 var pattern_count: int
 var b_input_paused: bool
@@ -46,7 +46,6 @@ var b_enemy_damaged: bool
 @onready var enemy_anim = $combat_pig
 
 func _ready() -> void:
-	ref_audio_player = Globals.game_controller.audio_player
 	enemy_sprite = load(Globals.combat_enemy_sprites["test"])
 	#enemy_instance = enemy_prefab.instantiate()
 	#enemy_container.add_child(enemy_instance)
@@ -203,8 +202,6 @@ func damage_enemy() -> void:
 	# shake.tween_property(enemy_instance, "position", shake_dist * 2, shake_step).as_relative()
 	# shake.tween_property(enemy_instance, "position", -shake_dist, shake_step).as_relative()
 
-	#print("damaged enemy with epic attack move")
-	ref_audio_player.play_sound(ref_audio_player.event.EnemyCombatDamage)
 
 	@warning_ignore("narrowing_conversion")
 	Globals.cur_enemy_stats.health -= Globals.game_controller.weapon_damage
@@ -270,13 +267,11 @@ func handle_attack_success() -> void:
 # failed the pattern - no damage taken, but resets multiplier
 func handle_pattern_fail() -> void:
 	scoring_multiplier = 1.0
-	ref_audio_player.play_sound(ref_audio_player.event.CombatWrongButton)
 	update_multiplier()
 
 # timer ran out - take damage, unless we already damaged the enemy
 func handle_time_fail() -> void:
 	if !b_enemy_damaged:
-		ref_audio_player.play_sound(ref_audio_player.event.CombatTimerExpire)
 		enemy_attack()
 
 func create_pattern_spawner(enemy_stats_ref:EnemyStats):

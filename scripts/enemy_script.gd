@@ -8,7 +8,6 @@ extends CharacterBody2D
 @onready var enemy = $AnimatedSprite2D
 @export var path: Path2D
 
-var ref_audio_player: AudioPlayer
 var snore_audio_delay: float = 5.0
 @export var snore_audio_delay_min: float = 5.0
 @export var snore_audio_delay_max: float = 10.0
@@ -27,7 +26,6 @@ var last_direction := Vector2.DOWN
 var current_point_index = 0
 
 func _ready() -> void:
-	ref_audio_player = Globals.game_controller.audio_player
 	if patrol_points.size() == 0:
 		print("no patrol points assinged")
 	if stats: stats.duplicate() # necessary for unique stats for this enemy instance
@@ -36,7 +34,6 @@ func _process(delta: float) -> void:
 	if snore_time < snore_audio_delay:
 		snore_time += delta
 	else:
-		ref_audio_player.play_sound(ref_audio_player.event.EnemyRandomSnores)
 		snore_time = 0.0
 		snore_audio_delay = randf_range(snore_audio_delay_min, snore_audio_delay_max)
 
@@ -116,7 +113,6 @@ func _on_vision_cone_area_body_entered(body: Node2D) -> void:
 		is_chasing = true
 		vision_cone.color = Color(1, 0 ,0, 0.3)
 		chase_timer = 0.0
-		ref_audio_player.play_sound(ref_audio_player.event.EnemyAggroCloseAttack)
 		
 func _on_vision_cone_area_body_exited(body: Node2D) -> void:
 		in_vision = false

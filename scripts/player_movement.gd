@@ -15,7 +15,6 @@ extends CharacterBody2D
 @export var speed = 150
 @onready var sprite = $AnimatedSprite2D
 
-var ref_audio_player: AudioPlayer
 @export var footstep_audio_delay = 0.21
 @export var breath_audio_delay = 5.0
 var step_time = 0.0
@@ -27,7 +26,6 @@ var b_paused = false
 signal player_spawned
 
 func _ready() -> void:
-	ref_audio_player = Globals.game_controller.audio_player
 	reset_physics_interpolation()
 	set_collision_layer_value(1, false)
 	set_collision_mask_value(1, false)
@@ -77,20 +75,6 @@ func get_input():
 	
 	elif b_paused:
 		reset_velocity()
-
-func _process(delta) -> void:
-	if b_walking:
-		if step_time < footstep_audio_delay:
-			step_time += delta
-		else:
-			ref_audio_player.play_sound(ref_audio_player.event.PlayerFootsteps)
-			step_time = 0.0
-
-	if breath_time < breath_audio_delay:
-		breath_time += delta
-	else:
-		#ref_audio_player.play_sound(ref_audio_player.event.PlayerBreaths)
-		breath_time = 0.0
 
 func _physics_process(_delta):
 	if !b_paused:

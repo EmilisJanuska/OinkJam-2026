@@ -1,9 +1,7 @@
 [gd_scene format=3 uid="uid://cf10tbscu2un1"]
 
 [ext_resource type="Script" uid="uid://b2bpsu5x0iay1" path="res://scripts/combat_scene_script.gd" id="1_3cl4e"]
-[ext_resource type="Texture2D" uid="uid://c0ndp0ikn810p" path="res://assets/UI/combat/combat_bg_01.jpg" id="1_jecyb"]
-[ext_resource type="PackedScene" uid="uid://cjnp72ycxifye" path="res://scenes/combat_pig.tscn" id="2_7cuye"]
-[ext_resource type="PackedScene" uid="uid://ffpiy8a0pm5k" path="res://scenes/combat_player.tscn" id="3_fyyo7"]
+[ext_resource type="Texture2D" uid="uid://dshyl2sh65w0f" path="res://assets/UI/combat/combat_bg_01.jpg" id="1_jecyb"]
 
 [node name="CombatScene" type="Node2D" unique_id=80936472]
 script = ExtResource("1_3cl4e")
@@ -13,12 +11,3 @@ modulate = Color(0.22670749, 0.22670749, 0.22670746, 1)
 offset_right = 40.0
 offset_bottom = 40.0
 texture = ExtResource("1_jecyb")
-
-[node name="combat_pig" parent="." unique_id=1942592105 instance=ExtResource("2_7cuye")]
-position = Vector2(843, 435)
-animation = &"ATTACK"
-
-[node name="combat_player" parent="." unique_id=1817633168 instance=ExtResource("3_fyyo7")]
-position = Vector2(276, 419)
-
-[connection signal="animation_finished" from="combat_player" to="." method="_on_combat_player_animation_finished"]

@@ -101,20 +101,22 @@ func choose_next_pattern() -> int:
 
 # checks if input matches current symbol in the current pattern
 func check_input(input: String) -> bool:
-	if input == ap_instance.pattern[pattern_idx]:
-		if pattern_idx == ap_instance.pattern.size() - 1:
-			ap_instance.success(pattern_idx)
-			pattern_input_success.emit()
-			return true
-		elif pattern_idx < ap_instance.pattern.size() - 1:
-			ap_instance.success(pattern_idx)
-			pattern_idx = pattern_idx + 1
-			return true
-	else:
-		pattern_idx = 0
-		b_success = false
-		ap_instance.fail()
-		pattern_input_failure.emit()
+	if ap_instance != null:
+		if input == ap_instance.pattern[pattern_idx]:
+			if pattern_idx == ap_instance.pattern.size() - 1:
+				ap_instance.success(pattern_idx)
+				pattern_input_success.emit()
+				return true
+			elif pattern_idx < ap_instance.pattern.size() - 1:
+				ap_instance.success(pattern_idx)
+				pattern_idx = pattern_idx + 1
+				return true
+		else:
+			pattern_idx = 0
+			b_success = false
+			ap_instance.fail()
+			pattern_input_failure.emit()
+			return false
 		return false
 	return false
 

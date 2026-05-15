@@ -94,5 +94,7 @@ animations = [{
 }]
 
 [node name="combat_pig" type="AnimatedSprite2D" unique_id=1942592105]
+texture_filter = 1
+scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_y6gyk")
 animation = &"IDLE"

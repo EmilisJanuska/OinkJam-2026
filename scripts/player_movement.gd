@@ -112,4 +112,3 @@ func reset_velocity() -> void:
 
 func on_use_game_camera() -> void:
 	game_camera.make_current()
-	

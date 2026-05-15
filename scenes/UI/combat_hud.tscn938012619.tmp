@@ -13,9 +13,8 @@
 [ext_resource type="Texture2D" uid="uid://c3jhic7qimmnv" path="res://assets/sprite_animations/combat/attack_slash_07.png" id="11_27uen"]
 [ext_resource type="PackedScene" uid="uid://beo7cifxhgfak" path="res://scenes/UI/health_bar.tscn" id="12_p0xtj"]
 [ext_resource type="PackedScene" uid="uid://cjnp72ycxifye" path="res://scenes/combat_pig.tscn" id="13_wpbbp"]
-[ext_resource type="Script" uid="uid://t7iilkioot63" path="res://scripts/combat/combat_enemy.gd" id="14_1rych"]
 [ext_resource type="PackedScene" uid="uid://ffpiy8a0pm5k" path="res://scenes/combat_player.tscn" id="14_sq3j6"]
-[ext_resource type="Script" uid="uid://bcn2arf6g0ou1" path="res://scripts/combat/comabat_player.gd" id="16_1rych"]
+[ext_resource type="Script" uid="uid://bcn2arf6g0ou1" path="res://scripts/combat/comabat_player.gd" id="15_sq3j6"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_h2dbt"]
 font = ExtResource("2_pn8vs")
@@ -150,15 +149,10 @@ position = Vector2(512, 288)
 
 [node name="combat_pig" parent="." unique_id=1942592105 instance=ExtResource("13_wpbbp")]
 position = Vector2(843, 435)
-scale = Vector2(1, 1)
 animation = &"ATTACK"
-script = ExtResource("14_1rych")
 
 [node name="combat_player" parent="." unique_id=1817633168 instance=ExtResource("14_sq3j6")]
 position = Vector2(276, 419)
-scale = Vector2(2, 2)
-animation = &"IDLE"
-script = ExtResource("16_1rych")
+script = ExtResource("15_sq3j6")
 
-[connection signal="animation_finished" from="combat_pig" to="combat_pig" method="_on_animation_finished"]
 [connection signal="animation_finished" from="combat_player" to="combat_player" method="_on_combat_player_animation_finished"]

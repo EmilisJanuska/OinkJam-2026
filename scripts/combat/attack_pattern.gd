@@ -11,6 +11,9 @@ var max_fall_dist: float
 var pattern: Array
 var symbol_input_time: float
 
+@onready var player_anim = $combat_player
+@onready var enemy_anim = $combat_pig
+
 signal symbol_input_success_time
 signal symbol_input_fail
 
@@ -77,6 +80,8 @@ func success(idx: int) -> void:
 	arrows[idx].play_success_animation()
 	symbol_input_success_time.emit(symbol_input_time)
 	symbol_input_time = 0.0
+
+	
 
 func fail() -> void:
 	symbol_input_fail.emit()

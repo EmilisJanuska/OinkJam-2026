@@ -59,8 +59,8 @@ tile_set = ExtResource("1_bp8v6")
 [node name="Enemy" parent="TilemapLayers" unique_id=1798533872 node_paths=PackedStringArray("patrol_points") instance=ExtResource("3_6uead")]
 light_mask = 3
 visibility_layer = 3
-position = Vector2(466.00003, 439)
-scale = Vector2(0.644428, 0.6082415)
+position = Vector2(215.00002, 466.00003)
+scale = Vector2(0.34745857, 0.3812709)
 stats = ExtResource("4_4ma7i")
 patrol_points = [NodePath("../../Marker2D"), NodePath("../../Marker2D2")]
 
@@ -70,6 +70,7 @@ tile_map_data = PackedByteArray("AAALAAsAAAAdAAoAAAAOAAoAAAAdAAoAAAAPAAsAAAAeAAo
 tile_set = ExtResource("1_bp8v6")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=1943569467]
+visible = false
 color = Color(0, 0.012920001, 0.012920001, 0.82000005)
 
 [node name="Marker2D" type="Marker2D" parent="." unique_id=1179601700]
@@ -79,7 +80,7 @@ scale = Vector2(0.21, 0.195)
 [node name="Marker2D2" type="Marker2D" parent="." unique_id=2021531940]
 light_mask = 3
 visibility_layer = 3
-position = Vector2(263.00003, 480)
+position = Vector2(266, 474.99997)
 scale = Vector2(0.21, 0.195)
 
 [node name="Marker2D3" type="Marker2D" parent="." unique_id=564972859]

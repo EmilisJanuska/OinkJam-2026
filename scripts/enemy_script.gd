@@ -123,7 +123,6 @@ func _on_vision_cone_area_body_exited(body: Node2D) -> void:
 		vision_cone.color = Color(1,1,0,0.3)
 		full_vision_cone.look_at(player.global_position)
 		chase_timer = 2.0 # on exit chase player for a bit more
-		# need to add return logic to original 'patrol route'
 		
 func patrol()-> void:
 	if patrol_points.size() > 0:

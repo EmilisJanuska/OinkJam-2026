@@ -2,13 +2,59 @@
 
 [ext_resource type="Script" uid="uid://bebmhp7tvomk7" path="res://scripts/enemy_script.gd" id="1_4fg0d"]
 [ext_resource type="Texture2D" uid="uid://dworlfbac8isp" path="res://assets/Pig v1/idle backwards pig-Sheet.png" id="2_n2stm"]
+[ext_resource type="Texture2D" uid="uid://lcljxf4n856f" path="res://assets/Pig v1/Pig_fighting_bite-Sheet.png" id="2_uckuu"]
 [ext_resource type="Texture2D" uid="uid://c3qqmufdghho0" path="res://assets/Pig v1/Backwards walking animation pig-Sheet.png" id="3_cx467"]
+[ext_resource type="Texture2D" uid="uid://cmffpjlpr0rwn" path="res://assets/Pig v1/Pig fighting animations/Pig fighting idle V1-Sheet.png" id="3_f0pr3"]
 [ext_resource type="PackedScene" uid="uid://2txlp5y2admn" path="res://scenes/combat_box.tscn" id="4_ihqwx"]
 [ext_resource type="PackedScene" uid="uid://kf8tqdlm8c5t" path="res://addons/vision_cone_2d/vision_cone_2d_template.tscn" id="4_pkrqa"]
 [ext_resource type="Texture2D" uid="uid://liqal251fato" path="res://assets/Pig v1/Pig walking forward animation-Sheet.png" id="4_vfen5"]
 [ext_resource type="Texture2D" uid="uid://jdixc31sx1mw" path="res://assets/Pig v1/Pig Side Idle-Sheet.png" id="5_uckuu"]
 [ext_resource type="Texture2D" uid="uid://c1nj3xdtdgygm" path="res://assets/Pig v1/Side pig walking animation-Sheet.png" id="6_f0pr3"]
 [ext_resource type="PackedScene" uid="uid://cxb65xdvfu4cd" path="res://scenes/light.tscn" id="9_cx467"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qbm60"]
+atlas = ExtResource("2_uckuu")
+region = Rect2(0, 0, 120, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xkjyj"]
+atlas = ExtResource("2_uckuu")
+region = Rect2(120, 0, 120, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_08lvw"]
+atlas = ExtResource("2_uckuu")
+region = Rect2(240, 0, 120, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_86it0"]
+atlas = ExtResource("2_uckuu")
+region = Rect2(360, 0, 120, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b6nfs"]
+atlas = ExtResource("2_uckuu")
+region = Rect2(480, 0, 120, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o6qsi"]
+atlas = ExtResource("2_uckuu")
+region = Rect2(600, 0, 120, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ojmf7"]
+atlas = ExtResource("2_uckuu")
+region = Rect2(720, 0, 120, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n28gs"]
+atlas = ExtResource("3_f0pr3")
+region = Rect2(0, 0, 240, 240)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_idnqt"]
+atlas = ExtResource("3_f0pr3")
+region = Rect2(240, 0, 240, 240)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_68hhq"]
+atlas = ExtResource("3_f0pr3")
+region = Rect2(480, 0, 240, 240)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rp80b"]
+atlas = ExtResource("3_f0pr3")
+region = Rect2(720, 0, 240, 240)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_14qmk"]
 atlas = ExtResource("2_n2stm")
@@ -124,6 +170,49 @@ region = Rect2(320, 0, 64, 64)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_qbm60"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qbm60")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xkjyj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_08lvw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_86it0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b6nfs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o6qsi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ojmf7")
+}],
+"loop": true,
+"name": &"ATTACK",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n28gs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_idnqt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_68hhq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rp80b")
+}],
+"loop": true,
+"name": &"FIGHT_IDLE",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_14qmk")
@@ -246,8 +335,7 @@ script = ExtResource("1_4fg0d")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1340891267]
 rotation = -0.0055271946
 sprite_frames = SubResource("SpriteFrames_qbm60")
-animation = &"side_Idle"
-frame_progress = 0.9661857
+animation = &"FIGHT_IDLE"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=636006350]
 scale = Vector2(1, 0.99999994)

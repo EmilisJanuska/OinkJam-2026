@@ -146,6 +146,7 @@ func on_combat_ended() -> void:
 func damage_player() -> void:
 	Globals.game_controller.player_health -= Globals.cur_enemy_stats.damage
 	player_health_bar.update_hearts()
+	
 	if Globals.game_controller.player_health <= 0:
 		player_die()
 

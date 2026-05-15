@@ -93,6 +93,3 @@ var combat_input_precision: Dictionary = {
 	"sure": 0.5,
 	"nope": 1.0
 }
-
-
-var is_chasing = false

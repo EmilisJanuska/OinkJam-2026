@@ -1,0 +1,98 @@
+[gd_scene format=3 uid="uid://cjnp72ycxifye"]
+
+[ext_resource type="Texture2D" uid="uid://lcljxf4n856f" path="res://assets/Pig v1/Pig_fighting_bite-Sheet.png" id="1_nmx7e"]
+[ext_resource type="Texture2D" uid="uid://cmffpjlpr0rwn" path="res://assets/Pig v1/Pig fighting animations/Pig fighting idle V1-Sheet.png" id="2_u1q01"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eqm2l"]
+atlas = ExtResource("1_nmx7e")
+region = Rect2(0, 0, 120, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fo581"]
+atlas = ExtResource("1_nmx7e")
+region = Rect2(120, 0, 120, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uhjvj"]
+atlas = ExtResource("1_nmx7e")
+region = Rect2(240, 0, 120, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vm101"]
+atlas = ExtResource("1_nmx7e")
+region = Rect2(360, 0, 120, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f48nu"]
+atlas = ExtResource("1_nmx7e")
+region = Rect2(480, 0, 120, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1rucl"]
+atlas = ExtResource("1_nmx7e")
+region = Rect2(600, 0, 120, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6itpg"]
+atlas = ExtResource("1_nmx7e")
+region = Rect2(720, 0, 120, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d260n"]
+atlas = ExtResource("2_u1q01")
+region = Rect2(0, 0, 240, 240)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vy6km"]
+atlas = ExtResource("2_u1q01")
+region = Rect2(240, 0, 240, 240)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rvbxy"]
+atlas = ExtResource("2_u1q01")
+region = Rect2(480, 0, 240, 240)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vli2d"]
+atlas = ExtResource("2_u1q01")
+region = Rect2(720, 0, 240, 240)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_y6gyk"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eqm2l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fo581")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uhjvj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vm101")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f48nu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1rucl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6itpg")
+}],
+"loop": true,
+"name": &"ATTACK",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d260n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vy6km")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rvbxy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vli2d")
+}],
+"loop": true,
+"name": &"IDLE",
+"speed": 5.0
+}]
+
+[node name="combat_pig" type="AnimatedSprite2D" unique_id=1942592105]
+sprite_frames = SubResource("SpriteFrames_y6gyk")
+animation = &"IDLE"

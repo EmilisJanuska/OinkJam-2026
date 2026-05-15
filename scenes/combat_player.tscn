@@ -1,0 +1,93 @@
+[gd_scene format=3 uid="uid://ffpiy8a0pm5k"]
+
+[ext_resource type="Texture2D" uid="uid://cshnvlnsknbhw" path="res://assets/player_animations/Idle_Fighting_pose-Shee3t.png" id="1_a7b5j"]
+[ext_resource type="Texture2D" uid="uid://cwheni0lk22rj" path="res://assets/player_animations/Idle_Fighting_JAB3-Sheet.png" id="2_2y0xf"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6bpum"]
+atlas = ExtResource("1_a7b5j")
+region = Rect2(0, 0, 120, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4xf3l"]
+atlas = ExtResource("1_a7b5j")
+region = Rect2(120, 0, 120, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f2ew3"]
+atlas = ExtResource("1_a7b5j")
+region = Rect2(240, 0, 120, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pneil"]
+atlas = ExtResource("1_a7b5j")
+region = Rect2(360, 0, 120, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v6vdr"]
+atlas = ExtResource("2_2y0xf")
+region = Rect2(0, 0, 120, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lemnr"]
+atlas = ExtResource("2_2y0xf")
+region = Rect2(120, 0, 120, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ifkpx"]
+atlas = ExtResource("2_2y0xf")
+region = Rect2(240, 0, 120, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a2vwc"]
+atlas = ExtResource("2_2y0xf")
+region = Rect2(360, 0, 120, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_amxj6"]
+atlas = ExtResource("2_2y0xf")
+region = Rect2(480, 0, 120, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1kjdt"]
+atlas = ExtResource("2_2y0xf")
+region = Rect2(600, 0, 120, 120)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1kjdt"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6bpum")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4xf3l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f2ew3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pneil")
+}],
+"loop": true,
+"name": &"IDLE",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 0.35,
+"texture": SubResource("AtlasTexture_v6vdr")
+}, {
+"duration": 0.35,
+"texture": SubResource("AtlasTexture_lemnr")
+}, {
+"duration": 0.35,
+"texture": SubResource("AtlasTexture_ifkpx")
+}, {
+"duration": 0.35,
+"texture": SubResource("AtlasTexture_a2vwc")
+}, {
+"duration": 0.35,
+"texture": SubResource("AtlasTexture_amxj6")
+}, {
+"duration": 0.35,
+"texture": SubResource("AtlasTexture_1kjdt")
+}],
+"loop": false,
+"name": &"JAB",
+"speed": 5.0
+}]
+
+[node name="combat_player" type="AnimatedSprite2D" unique_id=1817633168]
+sprite_frames = SubResource("SpriteFrames_1kjdt")
+animation = &"JAB"
+frame = 5
+frame_progress = 1.0

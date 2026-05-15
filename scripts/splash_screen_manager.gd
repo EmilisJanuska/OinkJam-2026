@@ -6,7 +6,7 @@ extends Control
 @export var pause_time: float
 @export var fade_out_time: float
 @export var out_time: float
-@export var splash_screen: Label
+@export var splash_screen: Sprite2D
 
 func _unhandled_input(event: InputEvent) -> void:
 	if(event is InputEventKey):

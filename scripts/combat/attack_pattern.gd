@@ -11,9 +11,6 @@ var max_fall_dist: float
 var pattern: Array
 var symbol_input_time: float
 
-@onready var player_anim = $combat_player
-@onready var enemy_anim = $combat_pig
-
 signal symbol_input_success_time
 signal symbol_input_fail
 

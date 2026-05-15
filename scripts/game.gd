@@ -12,6 +12,7 @@ var last_game_state: Globals.GameStates
 var b_game_started: bool
 var b_game_paused: bool
 var b_combat_paused: bool
+var current_level
 
 var player_prefab: PackedScene = preload("res://scenes/player.tscn")
 var enemy_prefab: PackedScene = preload("res://scenes/Enemy1.tscn")
@@ -59,14 +60,22 @@ func _unhandled_input(event) -> void:
 
 		# combat controls - only enabled when in combat
 		if game_state == Globals.GameStates.in_combat:
-			if event.pressed and event.keycode == KEY_LEFT:
+			if Input.is_action_just_pressed("Combat_Left"):
 				combat_input_pressed.emit("left")
-			elif event.pressed and event.keycode == KEY_RIGHT:
+			elif Input.is_action_just_pressed("Combat_Right"):
 				combat_input_pressed.emit("right")
-			elif event.pressed and event.keycode == KEY_UP:
+			elif Input.is_action_just_pressed("Combat_Up"):
 				combat_input_pressed.emit("up")
-			elif event.pressed and event.keycode == KEY_DOWN:
+			elif Input.is_action_just_pressed("Combat_Down"):
 				combat_input_pressed.emit("down")
+			# if event.pressed and event.keycode == KEY_LEFT:
+			# 	combat_input_pressed.emit("left")
+			# elif event.pressed and event.keycode == KEY_RIGHT:
+			# 	combat_input_pressed.emit("right")
+			# elif event.pressed and event.keycode == KEY_UP:
+			# 	combat_input_pressed.emit("up")
+			# elif event.pressed and event.keycode == KEY_DOWN:
+			# 	combat_input_pressed.emit("down")
 
 # init the game
 func _ready() -> void:
@@ -140,7 +149,7 @@ func change_game_state(to_state: Globals.GameStates, from_state: Globals.GameSta
 				game_state = Globals.GameStates.in_world
 				last_game_state = from_state
 				# TODO: set to 'current_level' or something similar instead of directly naming the scene
-				change_scene(Globals.LevelScenes.human_pens_01)
+				change_scene(Globals.LevelScenes[current_level])
 				change_ui_scene(Globals.HUDScenes.game_hud)
 				use_game_camera.emit()
 				unpause_game()
@@ -153,6 +162,11 @@ func change_game_state(to_state: Globals.GameStates, from_state: Globals.GameSta
 				last_game_state = from_state
 				change_scene(Globals.LevelScenes.combat_scene, false, true, start_combat)
 				change_ui_scene(Globals.HUDScenes.combat_hud, false, true, start_combat)
+			if from_state == Globals.GameStates.pause_menu:
+				game_state = Globals.GameStates.in_combat
+				last_game_state = from_state
+				change_ui_scene(Globals.HUDScenes.combat_hud)
+				unpause_combat()
 
 		Globals.GameStates.game_over:
 			if from_state == Globals.GameStates.in_combat:
@@ -189,12 +203,13 @@ func change_scene(scene: Globals.LevelScenes, delete: bool = true, keep_running:
 		elif keep_running:
 			if loaded_scenes.has(current_scene):
 				loaded_scenes[current_scene].visible = false # scene will run in background
+				current_level = current_scene
 
 		# load and display new scene
 		var new = load(Globals.level_scene_lib[scene]).instantiate()
 		loaded_scenes[scene_name] = new
-		#world.call_deferred("add_child", new)
-		world.add_child(new)
+		world.call_deferred("add_child", new)
+		#world.add_child(new)
 		current_scene = scene_name
 		current_spawn_point = loaded_scenes[current_scene].get_node_or_null("PlayerSpawnPoint")
 
@@ -212,6 +227,7 @@ func change_scene(scene: Globals.LevelScenes, delete: bool = true, keep_running:
 		elif keep_running:
 			if loaded_scenes.has(current_scene):
 				loaded_scenes[current_scene].visible = false # scene will run in background
+				current_level = current_scene
 		
 		# load and display new scene
 		current_scene = scene_name

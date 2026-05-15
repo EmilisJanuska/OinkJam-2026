@@ -130,7 +130,7 @@ func on_combat_started() -> void:
 	create_pattern_spawner(Globals.cur_enemy_stats)
 	pattern_spawner.spawned_pattern.connect(on_pattern_spawned)
 	
-	#enemy_intro()
+	enemy_intro()
 
 func on_combat_paused() -> void:
 	b_combat_paused = true
@@ -176,13 +176,12 @@ func enemy_intro() -> void:
 	# tween.tween_property(enemy_instance, "position", enemy_end_pos, enemy_intro_time)
 	# await tween.finished
 
-	# initiative_label.show()
-	# var fade = initiative_label.create_tween()
-	# fade.tween_property(initiative_label, "scale", Vector2(1.25, 1.25), 1)
-	# fade.tween_property(initiative_label, "modulate:a", 0.0, 1)
-	# await tween.finished
-	# initiative_label.hide()
-	pass
+	initiative_label.show()
+	var fade = initiative_label.create_tween()
+	fade.tween_property(initiative_label, "scale", Vector2(1.25, 1.25), 1)
+	fade.tween_property(initiative_label, "modulate:a", 0.0, 1)
+	await fade.finished
+	initiative_label.hide()
 
 func damage_enemy() -> void:
 	pattern_spawner.pause_spawning()
@@ -193,15 +192,15 @@ func damage_enemy() -> void:
 	# await attack_slash_anim.animation_finished
 	# attack_slash_anim.hide()
 
-	# var shake = enemy_instance.create_tween()
-	# var shake_dist = Vector2(8.0, 0.0)
-	# var shake_step = 0.02
-	# shake.tween_property(enemy_instance, "position", shake_dist, shake_step).as_relative()
-	# shake.tween_property(enemy_instance, "position", -shake_dist * 2, shake_step).as_relative()
-	# shake.tween_property(enemy_instance, "position", shake_dist * 2, shake_step).as_relative()
-	# shake.tween_property(enemy_instance, "position", -shake_dist * 2, shake_step).as_relative()
-	# shake.tween_property(enemy_instance, "position", shake_dist * 2, shake_step).as_relative()
-	# shake.tween_property(enemy_instance, "position", -shake_dist, shake_step).as_relative()
+	var shake = enemy_anim.create_tween()
+	var shake_dist = Vector2(8.0, 0.0)
+	var shake_step = 0.02
+	shake.tween_property(enemy_anim, "position", shake_dist, shake_step).as_relative()
+	shake.tween_property(enemy_anim, "position", -shake_dist * 2, shake_step).as_relative()
+	shake.tween_property(enemy_anim, "position", shake_dist * 2, shake_step).as_relative()
+	shake.tween_property(enemy_anim, "position", -shake_dist * 2, shake_step).as_relative()
+	shake.tween_property(enemy_anim, "position", shake_dist * 2, shake_step).as_relative()
+	shake.tween_property(enemy_anim, "position", -shake_dist, shake_step).as_relative()
 
 	#print("damaged enemy with epic attack move")
 	ref_audio_player.play_sound(ref_audio_player.event.EnemyCombatDamage)
@@ -240,19 +239,19 @@ func enemy_die() -> void:
 	pattern_spawner.pause_spawning()
 	b_input_paused = true
 
-	# var flip = create_tween()
-	# var rot_angle: float = 180.0
-	# var rot_time: float = 0.5
+	var flip = create_tween()
+	var rot_angle: float = 90.0
+	var rot_time: float = 0.1
 
-	# flip.tween_property(enemy_instance, "rotation_degrees", rot_angle, rot_time)
-	# await flip.finished
+	flip.tween_property(enemy_anim, "rotation_degrees", rot_angle, rot_time)
+	await flip.finished
 
-	# var die = create_tween()
-	# var sink_dist: float = 20.0
-	# var sink_time: float = 1.0
+	var die = create_tween()
+	var sink_dist: float = 20.0
+	var sink_time: float = 1.0
 
-	# die.tween_property(enemy_instance, "position:y", enemy_instance.position.y + sink_dist, sink_time)
-	# await die.finished
+	die.tween_property(enemy_anim, "position:y", enemy_anim.position.y + sink_dist, sink_time)
+	await die.finished
 
 	Globals.cur_enemy_stats.health = Globals.cur_enemy_stats.max_health
 	Globals.game_controller.change_game_state(Globals.GameStates.in_world, Globals.GameStates.in_combat)

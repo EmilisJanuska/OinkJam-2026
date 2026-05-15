@@ -13,7 +13,8 @@ func _on_main_menu_btn_pressed() -> void:
 func _on_continue_button_pressed() -> void:
 	if ref_audio_player != null:
 		ref_audio_player.play_sound(ref_audio_player.event.UIMenuButtonPressed)
-	Globals.game_controller.change_game_state(Globals.GameStates.in_world, Globals.GameStates.pause_menu)
+	var last = Globals.GameStates.find_key(Globals.game_controller.last_game_state)
+	Globals.game_controller.change_game_state(Globals.GameStates[last], Globals.GameStates.pause_menu)
 
 func _on_main_menu_btn_mouse_entered() -> void:
 	if ref_audio_player != null:

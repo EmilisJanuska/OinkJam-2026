@@ -29,10 +29,6 @@ font_size = 28
 font = ExtResource("4_cxy85")
 font_size = 72
 
-[sub_resource type="LabelSettings" id="LabelSettings_0r7i2"]
-font = ExtResource("2_pn8vs")
-font_size = 60
-
 [sub_resource type="SpriteFrames" id="SpriteFrames_22xsm"]
 animations = [{
 "frames": [{
@@ -62,11 +58,15 @@ animations = [{
 "speed": 30.0
 }]
 
+[sub_resource type="LabelSettings" id="LabelSettings_0r7i2"]
+font = ExtResource("2_pn8vs")
+font_size = 60
+
 [node name="CombatHud" type="Node2D" unique_id=967472215 node_paths=PackedStringArray("player_health_bar", "enemy_health_bar", "enemy_container", "combat_score_label", "combat_score_mod_label", "multiplier_label", "initiative_label", "attack_slash_anim")]
 script = ExtResource("1_swk68")
 player_health_bar = NodePath("PlayerHealthBar")
 enemy_health_bar = NodePath("EnemyHealthBar")
-enemy_container = NodePath("EnemyContainer")
+enemy_container = NodePath("")
 combat_score_label = NodePath("CombatScore")
 combat_score_mod_label = NodePath("CombatScoreMod")
 multiplier_label = NodePath("Multiplier")
@@ -80,8 +80,6 @@ reaction_text_color = Color(0.58907443, 0.30049345, 0.79654706, 1)
 reaction_text_fade_to = 0.5
 reaction_text_anim_time = 0.1
 attack_slash_anim = NodePath("AttackSlashAnimation")
-
-[node name="EnemyContainer" type="Node2D" parent="." unique_id=1498258183]
 
 [node name="CombatScore" type="Label" parent="." unique_id=1821638661]
 offset_left = 45.0
@@ -117,15 +115,6 @@ pivot_offset = Vector2(80, 56)
 text = "150x"
 label_settings = SubResource("LabelSettings_mq2li")
 
-[node name="Initiative" parent="." unique_id=1993837123 instance=ExtResource("3_omoar")]
-offset_left = 400.0
-offset_top = 194.0
-offset_right = 622.0
-offset_bottom = 267.0
-pivot_offset = Vector2(111, 37)
-text = "Spotted!"
-label_settings = SubResource("LabelSettings_0r7i2")
-
 [node name="AttackSlashAnimation" type="AnimatedSprite2D" parent="." unique_id=661368071]
 visible = false
 position = Vector2(500, 287)
@@ -149,16 +138,25 @@ offset_bottom = 60.0
 position = Vector2(512, 288)
 
 [node name="combat_pig" parent="." unique_id=1942592105 instance=ExtResource("13_wpbbp")]
-position = Vector2(843, 435)
+position = Vector2(631, 360)
 scale = Vector2(1, 1)
 animation = &"ATTACK"
 script = ExtResource("14_1rych")
 
 [node name="combat_player" parent="." unique_id=1817633168 instance=ExtResource("14_sq3j6")]
-position = Vector2(276, 419)
+position = Vector2(411, 328)
 scale = Vector2(2, 2)
 animation = &"IDLE"
 script = ExtResource("16_1rych")
+
+[node name="Initiative" parent="." unique_id=1993837123 instance=ExtResource("3_omoar")]
+offset_left = 400.0
+offset_top = 194.0
+offset_right = 622.0
+offset_bottom = 267.0
+pivot_offset = Vector2(111, 37)
+text = "Spotted!"
+label_settings = SubResource("LabelSettings_0r7i2")
 
 [connection signal="animation_finished" from="combat_pig" to="combat_pig" method="_on_animation_finished"]
 [connection signal="animation_finished" from="combat_player" to="combat_player" method="_on_combat_player_animation_finished"]

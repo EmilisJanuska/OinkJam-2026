@@ -1,13 +1,9 @@
 [gd_scene format=3 uid="uid://cjjb6xbqjeo23"]
 
 [ext_resource type="Script" uid="uid://cemdwl6pfkppi" path="res://scripts/splash_screen_manager.gd" id="1_kkrr7"]
-[ext_resource type="FontFile" uid="uid://pfyak6wep6wh" path="res://assets/fonts/ProtestRevolution-Regular.ttf" id="1_rx4go"]
 [ext_resource type="PackedScene" uid="uid://chxkb6vugd40p" path="res://scenes/main.tscn" id="2_4krii"]
 [ext_resource type="Texture2D" uid="uid://rpik34r0vut2" path="res://assets/UI/main_menu_bg.jpg" id="3_dpkmb"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_f3omg"]
-font = ExtResource("1_rx4go")
-font_size = 72
+[ext_resource type="Texture2D" uid="uid://dgswkots5o5yd" path="res://assets/UI/splash_title.png" id="4_dpkmb"]
 
 [node name="SplashScreenManager" type="Control" unique_id=761618487 node_paths=PackedStringArray("splash_screen")]
 layout_mode = 3
@@ -20,7 +16,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("1_kkrr7")
 load_scene = ExtResource("2_4krii")
-splash_screen = NodePath("CenterContainer/Label")
+splash_screen = NodePath("SplashTitle")
 
 [node name="Background" type="TextureRect" parent="." unique_id=24460557]
 layout_mode = 1
@@ -46,8 +42,7 @@ offset_bottom = 44.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Label" type="Label" parent="CenterContainer" unique_id=1025665655]
-layout_mode = 2
-text = "Swine Hide"
-label_settings = SubResource("LabelSettings_f3omg")
-horizontal_alignment = 1
+[node name="SplashTitle" type="Sprite2D" parent="." unique_id=394703806]
+texture_filter = 1
+position = Vector2(505, 290)
+texture = ExtResource("4_dpkmb")

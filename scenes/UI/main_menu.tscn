@@ -3,10 +3,7 @@
 [ext_resource type="Script" uid="uid://bq0ix7v2ut1yp" path="res://scripts/UI/main_menu.gd" id="1_l6cm7"]
 [ext_resource type="Texture2D" uid="uid://rpik34r0vut2" path="res://assets/UI/main_menu_bg.jpg" id="2_5jstl"]
 [ext_resource type="FontFile" uid="uid://pfyak6wep6wh" path="res://assets/fonts/ProtestRevolution-Regular.ttf" id="2_ekxnf"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_5jstl"]
-font = ExtResource("2_ekxnf")
-font_size = 72
+[ext_resource type="Texture2D" uid="uid://dgswkots5o5yd" path="res://assets/UI/splash_title.png" id="3_tfcbk"]
 
 [node name="MainMenu" type="Control" unique_id=420425486]
 layout_mode = 3
@@ -22,31 +19,21 @@ offset_right = 1152.0
 offset_bottom = 648.0
 texture = ExtResource("2_5jstl")
 
-[node name="Label" type="Label" parent="." unique_id=1469932992]
-layout_mode = 0
-offset_left = 354.35
-offset_top = 96.55
-offset_right = 689.35
-offset_bottom = 184.55002
-pivot_offset = Vector2(157, 0)
-text = "Swine Hide"
-label_settings = SubResource("LabelSettings_5jstl")
-horizontal_alignment = 1
+[node name="SplashTitle" type="Sprite2D" parent="." unique_id=1734818333]
+position = Vector2(523, 188.45)
+scale = Vector2(0.82, 0.82)
+texture = ExtResource("3_tfcbk")
 
-[node name="CenterContainer" type="CenterContainer" parent="." unique_id=2026749231]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Button" type="Button" parent="CenterContainer" unique_id=248320997]
+[node name="Button" type="Button" parent="." unique_id=248320997]
 custom_minimum_size = Vector2(150, 50)
-layout_mode = 2
+layout_mode = 0
+offset_left = 437.0
+offset_top = 333.605
+offset_right = 587.00006
+offset_bottom = 383.605
 theme_override_fonts/font = ExtResource("2_ekxnf")
 theme_override_font_sizes/font_size = 26
 text = "New Game"
 
-[connection signal="mouse_entered" from="CenterContainer/Button" to="." method="_on_button_mouse_entered"]
-[connection signal="pressed" from="CenterContainer/Button" to="." method="_on_button_pressed"]
+[connection signal="mouse_entered" from="Button" to="." method="_on_button_mouse_entered"]
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

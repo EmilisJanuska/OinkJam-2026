@@ -63,4 +63,3 @@ In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	970758755	swinehide_breath_02	.cache\C3\{C3FEDED3-59C6-F493-EF26-0B439CBC1BBB}.wem		\Containers\Default Work Unit\PLAYER\PLAYER_Human_Breaths\swinehide_breath_02		116258
 	991890985	pig_deamage_04	.cache\AE\{AEAAC809-DA60-EAF3-ED0E-6074A56BB8B2}.wem		\Containers\Default Work Unit\ENEMY\ENEMY_CBT_damage\pig_deamage_04		101512
 	1068677485	sfx_ENEMY_pig_snors_06	.cache\35\{35D49AA0-3FEE-1D09-6BF6-F388DA821683}.wem		\Containers\Default Work Unit\ENEMY\ENEMY_Random_Snores_No_Limitation\sfx_ENEMY_pig_snors_06		75338
-

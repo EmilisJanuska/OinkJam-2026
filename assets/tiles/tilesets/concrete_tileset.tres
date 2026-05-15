@@ -1,6 +1,6 @@
 [gd_resource type="TileSet" format=3 uid="uid://bw7qm8iordjlb"]
 
-[ext_resource type="Texture2D" uid="uid://hjy7vtg884wi" path="res://assets/tiles/concrete_tileset.png" id="1_5s4eo"]
+[ext_resource type="Texture2D" uid="uid://wnhvu58qqdno" path="res://assets/tiles/concrete_tileset.png" id="1_5s4eo"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_abote"]
 texture = ExtResource("1_5s4eo")
@@ -324,28 +324,25 @@ texture_region_size = Vector2i(32, 32)
 25:1/0/texture_origin = Vector2i(0, 16)
 20:7/size_in_atlas = Vector2i(1, 4)
 20:7/0 = 0
-20:7/0/texture_origin = Vector2i(0, 48)
+20:7/0/texture_origin = Vector2i(0, 32)
 20:7/0/physics_layer_0/polygon_0/points = PackedVector2Array(-3, -7, 16, -7, 16, 3, -3, 3)
 22:7/size_in_atlas = Vector2i(1, 4)
 22:7/0 = 0
-22:7/0/texture_origin = Vector2i(0, 48)
+22:7/0/texture_origin = Vector2i(0, 32)
 22:7/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -7, 16, -7, 16, 3, -16, 3)
 23:7/size_in_atlas = Vector2i(1, 4)
 23:7/0 = 0
-23:7/0/texture_origin = Vector2i(0, 48)
+23:7/0/texture_origin = Vector2i(0, 32)
 23:7/0/physics_layer_0/polygon_0/points = PackedVector2Array(3, -7, -16, -7, -16, 3, 3, 3)
 19:8/size_in_atlas = Vector2i(1, 3)
 19:8/next_alternative_id = 5
 19:8/0 = 0
-19:8/0/texture_origin = Vector2i(0, 16)
 19:8/0/y_sort_origin = -64
 19:8/0/physics_layer_0/polygon_0/points = PackedVector2Array(-2, -64, 2, -64, 2, 48, -2, 48)
 19:8/1 = 1
-19:8/1/texture_origin = Vector2i(0, 16)
 19:8/1/y_sort_origin = 32
 19:8/1/physics_layer_0/polygon_0/points = PackedVector2Array(-2, -64, 2, -64, 2, 48, -2, 48)
 19:8/3 = 3
-19:8/3/texture_origin = Vector2i(0, 16)
 19:8/3/y_sort_origin = 32
 19:11/0 = 0
 19:11/0/y_sort_origin = -16
@@ -356,11 +353,11 @@ texture_region_size = Vector2i(32, 32)
 21:7/size_in_atlas = Vector2i(1, 4)
 21:7/next_alternative_id = 3
 21:7/0 = 0
-21:7/0/texture_origin = Vector2i(0, 48)
+21:7/0/texture_origin = Vector2i(0, 32)
 21:7/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -7, 16, -7, 16, 3, -16, 3)
 18:7/size_in_atlas = Vector2i(1, 4)
 18:7/0 = 0
-18:7/0/texture_origin = Vector2i(0, 48)
+18:7/0/texture_origin = Vector2i(0, 32)
 30:14/size_in_atlas = Vector2i(2, 2)
 30:14/0 = 0
 30:12/size_in_atlas = Vector2i(2, 2)
@@ -368,6 +365,23 @@ texture_region_size = Vector2i(32, 32)
 0:7/size_in_atlas = Vector2i(1, 3)
 0:7/0 = 0
 0:7/0/y_sort_origin = 48
+7:7/size_in_atlas = Vector2i(2, 2)
+7:7/0 = 0
+7:7/0/y_sort_origin = -16
+7:11/size_in_atlas = Vector2i(2, 2)
+7:11/0 = 0
+7:11/0/y_sort_origin = -16
+9:7/size_in_atlas = Vector2i(1, 2)
+9:7/0 = 0
+9:9/size_in_atlas = Vector2i(1, 2)
+9:9/0 = 0
+7:6/size_in_atlas = Vector2i(2, 1)
+7:6/0 = 0
+7:6/0/y_sort_origin = 9
+7:9/size_in_atlas = Vector2i(1, 2)
+7:9/0 = 0
+8:9/size_in_atlas = Vector2i(1, 2)
+8:9/0 = 0
 
 [resource]
 tile_size = Vector2i(32, 32)

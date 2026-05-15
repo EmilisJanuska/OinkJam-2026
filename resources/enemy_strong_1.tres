@@ -6,8 +6,8 @@
 script = ExtResource("1_7ntk0")
 name = "ToughBacon"
 type = 2
-health = 1600
-max_health = 1600
+health = 2400
+max_health = 2400
 damage = 400
 patterns = [["left", "right", "right", "up"], ["up", "down", "right", "right"], ["left", "up", "right", "up"]]
 metadata/_custom_type_script = "uid://b4p88otydyovf"

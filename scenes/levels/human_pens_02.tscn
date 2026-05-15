@@ -5,7 +5,8 @@
 [ext_resource type="TileSet" uid="uid://bw7qm8iordjlb" path="res://assets/tiles/tilesets/concrete_tileset.tres" id="2_b7kv6"]
 [ext_resource type="PackedScene" uid="uid://jcdjovd6aab8" path="res://scenes/Enemy1.tscn" id="3_0jsnh"]
 [ext_resource type="Resource" uid="uid://7j0j4e2egfve" path="res://resources/enemy_average_1.tres" id="4_a4lct"]
-[ext_resource type="PackedScene" uid="uid://c651fv5hvvblq" path="res://scenes/win_area.tscn" id="6_8srbj"]
+[ext_resource type="PackedScene" path="res://scenes/win_area.tscn" id="6_8srbj"]
+[ext_resource type="Resource" uid="uid://cvs6hi51ehwip" path="res://resources/enemy_strong_1.tres" id="6_t6on4"]
 
 [node name="HumanPens02" type="Node2D" unique_id=292854858 node_paths=PackedStringArray("player_spawn")]
 script = ExtResource("1_0jsnh")
@@ -67,14 +68,15 @@ position = Vector2(856, -107)
 stats = ExtResource("4_a4lct")
 patrol_points = [NodePath("../../Marker2D3"), NodePath("../../Marker2D4"), NodePath("../../Marker2D5")]
 
+[node name="Boss" parent="TilemapLayers" unique_id=92491301 node_paths=PackedStringArray("patrol_points") instance=ExtResource("3_0jsnh")]
+position = Vector2(1071, 520)
+stats = ExtResource("6_t6on4")
+patrol_points = [NodePath("../../Marker2D3"), NodePath("../../Marker2D4"), NodePath("../../Marker2D5")]
+
 [node name="GroundOverlay2" type="TileMapLayer" parent="." unique_id=862045586]
 texture_filter = 1
 tile_map_data = PackedByteArray("AAAqAP//AAAIAAAAAAAqAAAAAAAFAAMAAAAqAAEAAAAFAAMAAAAqAAIAAAAFAAMAAAAYAAEAAAAGAAMAAAAYAAIAAAAGAAMAAAAYAAAAAAAGAAMAAAAYAP//AAAJAAAAAAAXAP//AAAIAAAAAAAKAPf/AAAFAAMAAAAKAPj/AAAFAAMAAAAKAPn/AAAFAAMAAAAKAPb/AAAIAAAAAAAGAPf/AAAGAAIAAAAGAPj/AAAGAAIAAAAGAPn/AAAGAAIAAAAeAAgAAAAFAAIAAAAeAAkAAAAFAAMAAAAeAAoAAAAFAAMAAAAeAAsAAAAFAAMAAAAYAAkAAAAGAAMAAAAYAAoAAAAGAAMAAAAYAAsAAAAGAAMAAAAYAAgAAAAGAAIAAAAkAAgAAAAFAAIAAAAqAAgAAAAFAAIAAAAkAAkAAAAFAAMAAAAkAAoAAAAFAAMAAAAkAAsAAAAFAAMAAAAqAAkAAAAFAAMAAAAqAAoAAAAFAAMAAAAqAAsAAAAFAAMAAAD///H/AAAeAAoAAAAAAPD/AAAcAAoAAAAWAPn/AAAcAAoAAAAXAPn/AAAdAAwAAAA=")
 tile_set = ExtResource("2_b7kv6")
-
-[node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=1860806311]
-visible = false
-color = Color(0, 0.012920001, 0.012920001, 0.82000005)
 
 [node name="Marker2D" type="Marker2D" parent="." unique_id=941207573]
 position = Vector2(271.00003, -398)
@@ -96,8 +98,16 @@ scale = Vector2(0.21, 0.195)
 position = Vector2(1072, 109)
 scale = Vector2(0.21, 0.195)
 
+[node name="Marker2D6" type="Marker2D" parent="." unique_id=1625707063]
+position = Vector2(1072.0001, 510)
+scale = Vector2(0.21, 0.195)
+
+[node name="Marker2D7" type="Marker2D" parent="." unique_id=647967564]
+position = Vector2(1087.0001, 510)
+scale = Vector2(0.21, 0.195)
+
 [node name="CanvasModulate2" type="CanvasModulate" parent="." unique_id=2040331625]
 color = Color(0, 0.012920001, 0.012920001, 0.82000005)
 
 [node name="winArea" parent="." unique_id=1835458918 instance=ExtResource("6_8srbj")]
-position = Vector2(-275, -401)
+position = Vector2(1072, 570)

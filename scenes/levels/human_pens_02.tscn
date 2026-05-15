@@ -1,12 +1,16 @@
 [gd_scene format=4 uid="uid://db311eway23um"]
 
+[ext_resource type="Script" uid="uid://dausfbk1utuv1" path="res://scripts/human_pens_02_script.gd" id="1_0jsnh"]
 [ext_resource type="PackedScene" uid="uid://dkfci5qbuxwxu" path="res://scenes/spawn_point.tscn" id="1_a4lct"]
 [ext_resource type="TileSet" uid="uid://bw7qm8iordjlb" path="res://assets/tiles/tilesets/concrete_tileset.tres" id="2_b7kv6"]
 
-[node name="HumanPens02" type="Node2D" unique_id=292854858]
+[node name="HumanPens02" type="Node2D" unique_id=292854858 node_paths=PackedStringArray("player_spawn")]
+script = ExtResource("1_0jsnh")
+player_spawn = NodePath("PlayerSpawnPoint")
 
-[node name="SpawnPoint" parent="." unique_id=986081644 instance=ExtResource("1_a4lct")]
-position = Vector2(876, 46)
+[node name="PlayerSpawnPoint" parent="." unique_id=986081644 node_paths=PackedStringArray("layers") instance=ExtResource("1_a4lct")]
+position = Vector2(1065, -97)
+layers = NodePath("../TilemapLayers")
 
 [node name="GroundLayer" type="TileMapLayer" parent="." unique_id=1639259726]
 z_index = -1

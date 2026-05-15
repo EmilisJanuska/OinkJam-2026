@@ -12,5 +12,3 @@ quarter_heart_value = 100.0
 [node name="World" type="Node2D" parent="." unique_id=1304922401]
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=429257003]
-
-[node name="AudioPlayer" type="Node2D" parent="." unique_id=136938635]

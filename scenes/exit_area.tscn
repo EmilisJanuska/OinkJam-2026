@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://bdty358gxxhxl"]
+
+[ext_resource type="Script" uid="uid://criqhoqh4axki" path="res://scripts/exit_area_script.gd" id="1_32eed"]
+[ext_resource type="PackedScene" uid="uid://cxb65xdvfu4cd" path="res://scenes/light.tscn" id="1_h3otn"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_sbhq0"]
+
+[node name="Exit" type="Area2D" unique_id=695463316]
+script = ExtResource("1_32eed")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1189511758]
+scale = Vector2(1.6806098, 1.5659314)
+shape = SubResource("CircleShape2D_sbhq0")
+
+[node name="Light" parent="." unique_id=252344767 instance=ExtResource("1_h3otn")]
+scale = Vector2(0.9976078, 1.0231117)
+color = Color(0.72997886, 0.13631058, 0.19407865, 1)
+energy = 4.09
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

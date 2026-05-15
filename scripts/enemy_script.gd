@@ -33,6 +33,7 @@ func _physics_process(delta: float) -> void:
 	else:
 		patrol()
 		update_vision_direction()
+		
 	move_and_slide()
 	animation_play()
 
@@ -88,8 +89,7 @@ func _on_combat_box_body_entered(body: Node2D) -> void:
 
 	if body.is_in_group("player") and in_vision:
 		set_physics_process(false)
-
-		# enter combat
+	# enter combat
 		Globals.cur_enemy_stats = stats
 		Globals.game_controller.change_game_state(Globals.GameStates.in_combat, Globals.GameStates.in_world, true)
 		

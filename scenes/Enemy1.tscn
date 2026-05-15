@@ -256,6 +256,8 @@ shape = SubResource("RectangleShape2D_4fg0d")
 [node name="combatBox" parent="." unique_id=44847553 instance=ExtResource("4_ihqwx")]
 position = Vector2(-20.410345, 0)
 scale = Vector2(0.15274327, -0.2733116)
+collision_layer = 3
+collision_mask = 3
 
 [node name="VisionCone2D" parent="." unique_id=985580835 instance=ExtResource("4_pkrqa")]
 light_mask = 3

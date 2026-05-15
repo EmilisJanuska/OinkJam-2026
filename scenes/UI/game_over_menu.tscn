@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bpbabocvhqn6c"]
 
-[ext_resource type="Script" uid="uid://dw88w2ebrf2nt" path="res://scripts/UI/pause_menu.gd" id="1_voo7t"]
+[ext_resource type="Script" uid="uid://3i8a2w7v2ibl" path="res://scripts/UI/game_over_menu.gd" id="1_voo7t"]
 [ext_resource type="Texture2D" uid="uid://rpik34r0vut2" path="res://assets/UI/main_menu_bg.jpg" id="2_a2ham"]
 [ext_resource type="FontFile" uid="uid://c57wrklqr8ham" path="res://assets/fonts/CarterOne-Regular.ttf" id="3_ak6qf"]
 [ext_resource type="FontFile" uid="uid://pfyak6wep6wh" path="res://assets/fonts/ProtestRevolution-Regular.ttf" id="3_yv7mv"]
@@ -9,7 +9,7 @@
 font = ExtResource("3_ak6qf")
 font_size = 48
 
-[node name="PauseMenu" type="Control" unique_id=420425486]
+[node name="GameOverMenu" type="Control" unique_id=420425486]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 1024.0
@@ -52,4 +52,5 @@ theme_override_fonts/font = ExtResource("3_yv7mv")
 theme_override_font_sizes/font_size = 26
 text = "Main Menu"
 
+[connection signal="mouse_entered" from="CenterContainer/VFlowContainer/MainMenuBtn" to="." method="_on_main_menu_btn_mouse_entered"]
 [connection signal="pressed" from="CenterContainer/VFlowContainer/MainMenuBtn" to="." method="_on_main_menu_btn_pressed"]

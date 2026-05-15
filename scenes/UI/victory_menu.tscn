@@ -64,4 +64,5 @@ theme_override_fonts/font = ExtResource("4_eliea")
 theme_override_font_sizes/font_size = 26
 text = "Main Menu"
 
+[connection signal="mouse_entered" from="CenterContainer/VFlowContainer/MainMenuBtn" to="." method="_on_main_menu_btn_mouse_entered"]
 [connection signal="pressed" from="CenterContainer/VFlowContainer/MainMenuBtn" to="." method="_on_main_menu_btn_pressed"]

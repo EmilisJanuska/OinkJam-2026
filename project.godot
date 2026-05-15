@@ -24,7 +24,6 @@ config/icon="res://assets/icon.svg"
 [autoload]
 
 WwiseRuntimeManager="*uid://cxwi881py10pu"
-AudioManager="*uid://ctjlu8u15y13t"
 Globals="*uid://cijr1toqctl4m"
 
 [display]

@@ -7,8 +7,8 @@
 [ext_resource type="Texture2D" uid="uid://6sjxc4ljmnd7" path="res://assets/player_animations/character-sprite-Sheet-idle.png" id="5_d2wvv"]
 [ext_resource type="Texture2D" uid="uid://cbdy4gnu0pwqj" path="res://assets/player_animations/Side ways walking animation-Sheet.png" id="6_3v2ag"]
 [ext_resource type="Texture2D" uid="uid://bgp2uohk7ceyi" path="res://assets/player_animations/Idle_sideways-Sheet.png" id="7_jej6c"]
-[ext_resource type="Script" uid="uid://bw5a3nvqewwv6" path="res://scripts/camera_2d.gd" id="9_ur7pv"]
-[ext_resource type="PackedScene" uid="uid://cxb65xdvfu4cd" path="res://scenes/light.tscn" id="10_y4r1p"]
+[ext_resource type="Script" path="res://scripts/camera_2d.gd" id="9_ur7pv"]
+[ext_resource type="PackedScene" path="res://scenes/light.tscn" id="10_y4r1p"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wnwbv"]
 atlas = ExtResource("5_d2wvv")
@@ -204,7 +204,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"back_Walk",
-"speed": 5.0
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -247,7 +247,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"front_Walk",
-"speed": 5.0
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -299,7 +299,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"side_Walk",
-"speed": 5.0
+"speed": 10.0
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qhqgy"]
@@ -314,7 +314,7 @@ game_camera = NodePath("Camera2D")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=325209838]
 sprite_frames = SubResource("SpriteFrames_fjrip")
-animation = &"front_Walk"
+animation = &"back_Walk"
 offset = Vector2(0, -16)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=843325438]

@@ -1,6 +1,6 @@
 [gd_resource type="TileSet" format=3 uid="uid://bw7qm8iordjlb"]
 
-[ext_resource type="Texture2D" uid="uid://hjy7vtg884wi" path="res://assets/tiles/concrete_tileset.png" id="1_5s4eo"]
+[ext_resource type="Texture2D" uid="uid://wnhvu58qqdno" path="res://assets/tiles/concrete_tileset.png" id="1_5s4eo"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_abote"]
 texture = ExtResource("1_5s4eo")
@@ -368,9 +368,6 @@ texture_region_size = Vector2i(32, 32)
 7:7/size_in_atlas = Vector2i(2, 2)
 7:7/0 = 0
 7:7/0/y_sort_origin = -16
-7:9/size_in_atlas = Vector2i(2, 2)
-7:9/0 = 0
-7:9/0/y_sort_origin = -16
 7:11/size_in_atlas = Vector2i(2, 2)
 7:11/0 = 0
 7:11/0/y_sort_origin = -16
@@ -381,6 +378,10 @@ texture_region_size = Vector2i(32, 32)
 7:6/size_in_atlas = Vector2i(2, 1)
 7:6/0 = 0
 7:6/0/y_sort_origin = 9
+7:9/size_in_atlas = Vector2i(1, 2)
+7:9/0 = 0
+8:9/size_in_atlas = Vector2i(1, 2)
+8:9/0 = 0
 
 [resource]
 tile_size = Vector2i(32, 32)

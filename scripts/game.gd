@@ -1,4 +1,5 @@
-class_name GameController extends Node
+class_name GameController
+extends Node
 
 var world: Node2D
 var ui: CanvasLayer
@@ -15,6 +16,10 @@ var b_combat_paused: bool
 var player_prefab: PackedScene = preload("res://scenes/player.tscn")
 var enemy_prefab: PackedScene = preload("res://scenes/Enemy1.tscn")
 
+var current_spawn_point
+var player_instance
+
+@export var audio_player: AudioPlayer
 @export var weapon_damage: float
 @export var player_health: float
 @export var player_max_health: float
@@ -49,7 +54,8 @@ func _unhandled_input(event) -> void:
 					change_game_state(last_game_state, Globals.GameStates.pause_menu)
 
 		if event.pressed and event.keycode == KEY_SPACE:
-			change_game_state(Globals.GameStates.game_win, Globals.GameStates.in_world)
+			#change_game_state(Globals.GameStates.game_win, Globals.GameStates.in_world)
+			audio_player.play_sound(audio_player.event.EnemyRandomSnores)
 
 		# combat controls - only enabled when in combat
 		if game_state == Globals.GameStates.in_combat:
@@ -67,6 +73,7 @@ func _ready() -> void:
 	Globals.game_controller = self
 	world = $World
 	ui = $UI
+	audio_player = $AudioPlayer
 	game_state = Globals.GameStates.main_menu
 	last_game_state = Globals.GameStates.in_world
 	b_game_started = false
@@ -80,6 +87,13 @@ func _ready() -> void:
 
 	change_scene(Globals.LevelScenes.menu_background)
 	change_ui_scene(Globals.HUDScenes.main_menu)
+
+'''
+	GAME LOOP
+'''
+func _process(_delta: float) -> void:
+	pass
+
 
 '''
 	GAME STATE / SCENE MANAGEMENT
@@ -165,6 +179,7 @@ func change_game_state(to_state: Globals.GameStates, from_state: Globals.GameSta
 func change_scene(scene: Globals.LevelScenes, delete: bool = true, keep_running: bool = false, _begin_combat: bool = false) -> void:
 	var scene_name = Globals.LevelScenes.find_key(scene)
 	if !loaded_scenes.has(scene_name) && scene_name != current_scene:
+		# remove or hide current scene
 		if delete:
 			if loaded_scenes.has(current_scene):
 				var del = loaded_scenes[current_scene]
@@ -173,13 +188,21 @@ func change_scene(scene: Globals.LevelScenes, delete: bool = true, keep_running:
 		elif keep_running:
 			if loaded_scenes.has(current_scene):
 				loaded_scenes[current_scene].visible = false # scene will run in background
+
+		# load and display new scene
 		var new = load(Globals.level_scene_lib[scene]).instantiate()
 		loaded_scenes[scene_name] = new
 		#world.call_deferred("add_child", new)
 		world.add_child(new)
 		current_scene = scene_name
+		current_spawn_point = loaded_scenes[current_scene].get_node_or_null("PlayerSpawnPoint")
+
+		await get_tree().process_frame
+		if current_spawn_point != null:
+			audio_player.update_spawn_point(current_spawn_point)
 		loaded_scenes[current_scene].visible = true
 	elif loaded_scenes.has(scene_name) && scene_name != current_scene:
+		# remove or hide current scene
 		if delete:
 			if loaded_scenes.has(current_scene):
 				var del = loaded_scenes[current_scene]
@@ -188,12 +211,20 @@ func change_scene(scene: Globals.LevelScenes, delete: bool = true, keep_running:
 		elif keep_running:
 			if loaded_scenes.has(current_scene):
 				loaded_scenes[current_scene].visible = false # scene will run in background
+		
+		# load and display new scene
 		current_scene = scene_name
+		current_spawn_point = loaded_scenes[current_scene].get_node_or_null("PlayerSpawnPoint")
+
+		await get_tree().process_frame
+		if current_spawn_point != null:
+			audio_player.update_spawn_point(current_spawn_point)
 		loaded_scenes[scene_name].visible = true
 
 func change_ui_scene(ui_scene: Globals.HUDScenes, delete: bool = true, keep_running: bool = false, begin_combat: bool = false, _victory: bool = false) -> void:
 	var scene_name = Globals.HUDScenes.find_key(ui_scene)
 	if !loaded_ui_scenes.has(scene_name) && scene_name != current_ui_scene:
+		# remove or hide old ui scene
 		if delete:
 			if loaded_ui_scenes.has(current_ui_scene):
 				var del = loaded_ui_scenes[current_ui_scene]
@@ -202,6 +233,8 @@ func change_ui_scene(ui_scene: Globals.HUDScenes, delete: bool = true, keep_runn
 		elif keep_running:
 			if loaded_ui_scenes.has(current_ui_scene):
 				loaded_ui_scenes[current_ui_scene].visible = false # scene will run in background
+
+		# load and display new ui scene
 		var new = load(Globals.hud_scene_lib[ui_scene]).instantiate()
 		loaded_ui_scenes[scene_name] = new
 		ui.add_child(new)
@@ -216,6 +249,7 @@ func change_ui_scene(ui_scene: Globals.HUDScenes, delete: bool = true, keep_runn
 
 		loaded_ui_scenes[current_ui_scene].visible = true
 	elif loaded_ui_scenes.has(scene_name) && scene_name != current_ui_scene:
+		# remove or hide old ui scene
 		if delete:
 			if loaded_ui_scenes.has(current_ui_scene):
 				var del = loaded_ui_scenes[current_ui_scene]
@@ -224,6 +258,8 @@ func change_ui_scene(ui_scene: Globals.HUDScenes, delete: bool = true, keep_runn
 		elif keep_running:
 			if loaded_ui_scenes.has(current_ui_scene):
 				loaded_ui_scenes[current_ui_scene].visible = false # scene will run in background
+
+		# load and display new ui scene
 		current_ui_scene = scene_name
 
 		if begin_combat:
@@ -277,5 +313,5 @@ func new_game() -> void:
 	new_game_started.emit()
 	await get_tree().process_frame
 	use_game_camera.emit()
-	AudioManager.play_sound("Play_MUSIC")
+	#AudioManager.play_sound("Play_MUSIC")
 	unpause_game()

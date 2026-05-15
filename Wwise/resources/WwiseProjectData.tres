@@ -1,4 +1,4 @@
-[gd_resource type="WwiseProjectData" format=3 uid="uid://bqnsvi70a81xi"]
+[gd_resource type="WwiseProjectData" load_steps=45 format=3 uid="uid://ck8xm0a0el31w"]
 
 [sub_resource type="WwiseTreeObject" id="WwiseTreeObject_dn5s6"]
 path = "\\Virtual Acoustics\\Factory Acoustic Textures\\Textures\\Acoustic_Banner"
@@ -133,29 +133,176 @@ name = "Default Work Unit"
 id = 125608783
 
 [sub_resource type="WwiseTreeObjectEvent" id="WwiseTreeObjectEvent_5n8hf"]
-max_attenuation = 30.0
-max_duration = 2003.7441
-min_duration = 3.5339916
-path = "\\Events\\Default Work Unit\\sfx_ENEMY_pig_npc_snore"
+max_duration = 0.543788
+min_duration = 0.347184
+path = "\\Events\\Default Work Unit\\ENEMY\\Play_ENEMY_Aggro_Close_Attack"
 type = 3
-name = "sfx_ENEMY_pig_npc_snore"
-guid = "{AD0EFDB9-7179-47B8-9656-DE2B2F78FC8B}"
-id = 996272122
+name = "Play_ENEMY_Aggro_Close_Attack"
+guid = "{9D0FB972-A7C5-49E2-9D95-F2A5744D268D}"
+id = 872933623
 
-[sub_resource type="WwiseTreeObject" id="WwiseTreeObject_tnib1"]
-children = [SubResource("WwiseTreeObjectEvent_5n8hf")]
+[sub_resource type="WwiseTreeObjectEvent" id="WwiseTreeObjectEvent_tnib1"]
+max_duration = 1.35584
+min_duration = 0.971872
+path = "\\Events\\Default Work Unit\\ENEMY\\Play_ENEMY_CBT_damage"
+type = 3
+name = "Play_ENEMY_CBT_damage"
+guid = "{8C10BA04-B135-44F0-A058-B659D82A5B5D}"
+id = 2734126450
+
+[sub_resource type="WwiseTreeObjectEvent" id="WwiseTreeObjectEvent_o7sea"]
+max_attenuation = 30.0
+max_duration = 0.877521
+min_duration = 0.311988
+path = "\\Events\\Default Work Unit\\ENEMY\\Play_ENEMY_Random_Snores_No_Limitation"
+type = 3
+name = "Play_ENEMY_Random_Snores_No_Limitation"
+guid = "{35F9543A-426C-40D5-A5C9-7D5B6D7A7597}"
+id = 1508763586
+
+[sub_resource type="WwiseTreeObject" id="WwiseTreeObject_lrto0"]
+children = [SubResource("WwiseTreeObjectEvent_5n8hf"), SubResource("WwiseTreeObjectEvent_tnib1"), SubResource("WwiseTreeObjectEvent_o7sea")]
+name = "ENEMY"
+id = 2299321487
+
+[sub_resource type="WwiseTreeObjectEvent" id="WwiseTreeObjectEvent_i5cxa"]
+max_duration = 3.11982
+min_duration = 3.11982
+path = "\\Events\\Default Work Unit\\ENVIRO\\Play_ENVIRO_Combat_Timer_End_Pattern_Switch"
+type = 3
+name = "Play_ENVIRO_Combat_Timer_End_Pattern_Switch"
+guid = "{026E3BA7-6F76-4877-8244-D6235AC57DC0}"
+id = 2877007734
+
+[sub_resource type="WwiseTreeObject" id="WwiseTreeObject_ptp8y"]
+children = [SubResource("WwiseTreeObjectEvent_i5cxa")]
+name = "ENVIRO"
+id = 1995189622
+
+[sub_resource type="WwiseTreeObjectEvent" id="WwiseTreeObjectEvent_26l8v"]
+max_duration = 0.0
+min_duration = 0.0
+path = "\\Events\\Default Work Unit\\MUSIC\\Play_MUSIC"
+type = 3
+name = "Play_MUSIC"
+guid = "{515C9FC7-E820-48EF-84A6-EFF402D7C47B}"
+id = 2932040671
+
+[sub_resource type="WwiseTreeObject" id="WwiseTreeObject_hir8t"]
+children = [SubResource("WwiseTreeObjectEvent_26l8v")]
+name = "MUSIC"
+id = 3991942870
+
+[sub_resource type="WwiseTreeObjectEvent" id="WwiseTreeObjectEvent_viedb"]
+max_duration = 0.688889
+min_duration = 0.669277
+path = "\\Events\\Default Work Unit\\PLAYER\\Play_PLAYER_CBT_wrong_btn"
+type = 3
+name = "Play_PLAYER_CBT_wrong_btn"
+guid = "{A7146251-07C6-4996-85A4-5E60B782733E}"
+id = 2640841182
+
+[sub_resource type="WwiseTreeObjectEvent" id="WwiseTreeObjectEvent_bq6kk"]
+max_duration = 0.776971
+min_duration = 0.22728
+path = "\\Events\\Default Work Unit\\PLAYER\\Play_PLAYER_Footsteps"
+type = 3
+name = "Play_PLAYER_Footsteps"
+guid = "{923A9C10-98E3-441E-B788-BC4329F9DE4B}"
+id = 98439365
+
+[sub_resource type="WwiseTreeObjectEvent" id="WwiseTreeObjectEvent_hssb3"]
+max_duration = 1.31703
+min_duration = 0.81502
+path = "\\Events\\Default Work Unit\\PLAYER\\Play_PLAYER_Human_Breaths"
+type = 3
+name = "Play_PLAYER_Human_Breaths"
+guid = "{2BAAEBAA-F057-46EA-AEA0-1A02990BCAD8}"
+id = 1042134263
+
+[sub_resource type="WwiseTreeObject" id="WwiseTreeObject_0g3k4"]
+children = [SubResource("WwiseTreeObjectEvent_viedb"), SubResource("WwiseTreeObjectEvent_bq6kk"), SubResource("WwiseTreeObjectEvent_hssb3")]
+name = "PLAYER"
+id = 1069431850
+
+[sub_resource type="WwiseTreeObjectEvent" id="WwiseTreeObjectEvent_5ppdk"]
+max_duration = 0.0823651
+min_duration = 0.0455637
+path = "\\Events\\Default Work Unit\\UI\\Play_UI_Menu_button_hover"
+type = 3
+name = "Play_UI_Menu_button_hover"
+guid = "{D170B9CF-76FF-47C7-A832-D898AE89F934}"
+id = 1883557774
+
+[sub_resource type="WwiseTreeObjectEvent" id="WwiseTreeObjectEvent_l65hi"]
+max_duration = 0.235671
+min_duration = 0.116147
+path = "\\Events\\Default Work Unit\\UI\\Play_UI_Menu_button_pressed"
+type = 3
+name = "Play_UI_Menu_button_pressed"
+guid = "{004EA55D-9771-45F3-991F-B3BD5C1EDACD}"
+id = 740518234
+
+[sub_resource type="WwiseTreeObject" id="WwiseTreeObject_63ewg"]
+children = [SubResource("WwiseTreeObjectEvent_5ppdk"), SubResource("WwiseTreeObjectEvent_l65hi")]
+name = "UI"
+id = 1551306167
+
+[sub_resource type="WwiseTreeObject" id="WwiseTreeObject_myib7"]
+children = [SubResource("WwiseTreeObject_lrto0"), SubResource("WwiseTreeObject_ptp8y"), SubResource("WwiseTreeObject_hir8t"), SubResource("WwiseTreeObject_0g3k4"), SubResource("WwiseTreeObject_63ewg")]
 name = "Default Work Unit"
 id = 125608783
 
-[sub_resource type="WwiseTreeObject" id="WwiseTreeObject_o7sea"]
+[sub_resource type="WwiseTreeObject" id="WwiseTreeObject_gv40o"]
 path = "\\Game Parameters\\Default Work Unit\\Pig_Count"
 type = 13
 name = "Pig_Count"
 guid = "{F5B27FAA-CD17-401D-A955-B6BF4E63BABC}"
 id = 1826053195
 
-[sub_resource type="WwiseTreeObject" id="WwiseTreeObject_lrto0"]
-children = [SubResource("WwiseTreeObject_o7sea")]
+[sub_resource type="WwiseTreeObject" id="WwiseTreeObject_0hqp2"]
+children = [SubResource("WwiseTreeObject_gv40o")]
+name = "Default Work Unit"
+id = 125608783
+
+[sub_resource type="WwiseTreeObject" id="WwiseTreeObject_h61g6"]
+path = "\\States\\Default Work Unit\\New_State_Group\\Combat"
+type = 8
+name = "Combat"
+guid = "{2A16BA16-70C0-43FC-9A66-68542BFCCAD8}"
+id = 2764240573
+
+[sub_resource type="WwiseTreeObject" id="WwiseTreeObject_q407k"]
+path = "\\States\\Default Work Unit\\New_State_Group\\Exploration"
+type = 8
+name = "Exploration"
+guid = "{662A4411-B820-48DA-B20D-05D035654E86}"
+id = 2582085496
+
+[sub_resource type="WwiseTreeObject" id="WwiseTreeObject_o561g"]
+path = "\\States\\Default Work Unit\\New_State_Group\\Menu"
+type = 8
+name = "Menu"
+guid = "{79F75187-A63A-48DB-A552-FF3F27105506}"
+id = 2607556080
+
+[sub_resource type="WwiseTreeObject" id="WwiseTreeObject_dipfp"]
+path = "\\States\\Default Work Unit\\New_State_Group\\None"
+type = 8
+name = "None"
+guid = "{AA6FB8EA-0555-4D69-812E-3E380697C917}"
+id = 748895195
+
+[sub_resource type="WwiseTreeObject" id="WwiseTreeObject_orwwv"]
+path = "\\States\\Default Work Unit\\New_State_Group"
+children = [SubResource("WwiseTreeObject_h61g6"), SubResource("WwiseTreeObject_q407k"), SubResource("WwiseTreeObject_o561g"), SubResource("WwiseTreeObject_dipfp")]
+type = 9
+name = "New_State_Group"
+guid = "{55B29DE2-2BCE-4C4D-8C64-429BDD5BAA7A}"
+id = 2012657067
+
+[sub_resource type="WwiseTreeObject" id="WwiseTreeObject_4owox"]
+children = [SubResource("WwiseTreeObject_orwwv")]
 name = "Default Work Unit"
 id = 125608783
 
@@ -163,5 +310,6 @@ id = 125608783
 acoustic_texture_root = [SubResource("WwiseTreeObject_4djpx")]
 bus_root = [SubResource("WwiseTreeObject_geu6g")]
 bank_root = [SubResource("WwiseTreeObject_v560u")]
-event_root = [SubResource("WwiseTreeObject_tnib1")]
-game_parameter_root = [SubResource("WwiseTreeObject_lrto0")]
+event_root = [SubResource("WwiseTreeObject_myib7")]
+game_parameter_root = [SubResource("WwiseTreeObject_0hqp2")]
+state_root = [SubResource("WwiseTreeObject_4owox")]

@@ -1,32 +1,43 @@
 class_name AK
 
 class EVENTS:
-	pass
+
+	const PLAY_ENEMY_AGGRO_CLOSE_ATTACK : int = 872933623
+	const PLAY_ENEMY_CBT_DAMAGE : int = 2734126450
+	const PLAY_ENEMY_RANDOM_SNORES_NO_LIMITATION : int = 1508763586
+	const PLAY_ENVIRO_COMBAT_TIMER_END_PATTERN_SWITCH : int = 2877007734
+	const PLAY_MUSIC : int = 2932040671
+	const PLAY_PLAYER_CBT_WRONG_BTN : int = 2640841182
+	const PLAY_PLAYER_FOOTSTEPS : int = 98439365
+	const PLAY_PLAYER_HUMAN_BREATHS : int = 1042134263
+	const PLAY_UI_MENU_BUTTON_HOVER : int = 1883557774
+	const PLAY_UI_MENU_BUTTON_PRESSED : int = 740518234
 
 class STATES:
-	pass
+
+	class NEW_STATE_GROUP:
+		const GROUP : int = 2012657067
+	
+		class STATE:
+			const COMBAT : int = 2764240573
+			const EXPLORATION : int = 2582085496
+			const MENU : int = 2607556080
+			const NONE : int = 748895195
+
 
 class SWITCHES:
 	pass
 
 class GAME_PARAMETERS:
 
-	const SS_AIR_FEAR : int = 1351367891
-	const SS_AIR_FREEFALL : int = 3002758120
-	const SS_AIR_FURY : int = 1029930033
-	const SS_AIR_MONTH : int = 2648548617
-	const SS_AIR_PRESENCE : int = 3847924954
-	const SS_AIR_RPM : int = 822163944
-	const SS_AIR_SIZE : int = 3074696722
-	const SS_AIR_STORM : int = 3715662592
-	const SS_AIR_TIMEOFDAY : int = 3203397129
-	const SS_AIR_TURBULENCE : int = 4160247818
+	const PIG_COUNT : int = 1826053195
 
 class TRIGGERS:
 	pass
 
 class BANKS:
-	pass
+
+	const MAIN : int = 3161908922
 
 class AUX_BUSSES:
 	pass

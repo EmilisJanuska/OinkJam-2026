@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WwiseDocument Type="WorkUnit" ID="{E7E5AFD1-93DE-4662-A56A-7D1CB46FA92B}" SchemaVersion="133">
+	<States>
+		<WorkUnit Name="Default Work Unit" ID="{E7E5AFD1-93DE-4662-A56A-7D1CB46FA92B}" PersistMode="Standalone">
+			<ChildrenList>
+				<StateGroup Name="New_State_Group" ID="{55B29DE2-2BCE-4C4D-8C64-429BDD5BAA7A}">
+					<ChildrenList>
+						<State Name="None" ID="{AA6FB8EA-0555-4D69-812E-3E380697C917}"/>
+						<State Name="Combat" ID="{2A16BA16-70C0-43FC-9A66-68542BFCCAD8}"/>
+						<State Name="Exploration" ID="{662A4411-B820-48DA-B20D-05D035654E86}"/>
+						<State Name="Menu" ID="{79F75187-A63A-48DB-A552-FF3F27105506}"/>
+					</ChildrenList>
+				</StateGroup>
+			</ChildrenList>
+		</WorkUnit>
+	</States>
+</WwiseDocument>

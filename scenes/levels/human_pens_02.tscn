@@ -103,7 +103,6 @@ position = Vector2(1087.0001, 510)
 scale = Vector2(0.21, 0.195)
 
 [node name="CanvasModulate2" type="CanvasModulate" parent="." unique_id=2040331625]
-visible = false
 color = Color(0, 0.012920001, 0.012920001, 0.82000005)
 
 [node name="Exit" parent="." unique_id=110133230 instance=ExtResource("6_8srbj")]

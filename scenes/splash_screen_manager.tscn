@@ -4,8 +4,6 @@
 [ext_resource type="FontFile" uid="uid://pfyak6wep6wh" path="res://assets/fonts/ProtestRevolution-Regular.ttf" id="1_rx4go"]
 [ext_resource type="PackedScene" uid="uid://chxkb6vugd40p" path="res://scenes/main.tscn" id="2_4krii"]
 [ext_resource type="Texture2D" uid="uid://rpik34r0vut2" path="res://assets/UI/main_menu_bg.jpg" id="3_dpkmb"]
-[ext_resource type="WwiseBank" uid="uid://ci1a7f0epwg0i" path="res://Wwise/resources/SoundBank/{426DB5F1-E237-4D6E-BB15-22CC67446715}.tres" id="5_7px8g"]
-[ext_resource type="WwiseEvent" uid="uid://dl52vd2ft48vg" path="res://Wwise/resources/Event/{026E3BA7-6F76-4877-8244-D6235AC57DC0}.tres" id="5_f3wds"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_f3omg"]
 font = ExtResource("1_rx4go")
@@ -53,13 +51,3 @@ layout_mode = 2
 text = "Swine Hide"
 label_settings = SubResource("LabelSettings_f3omg")
 horizontal_alignment = 1
-
-[node name="AkBank" type="AkBank" parent="." unique_id=1551697202]
-bank = ExtResource("5_7px8g")
-load_on = 1
-
-[node name="AkEvent2D" type="AkEvent2D" parent="AkBank" unique_id=1526759210]
-event = ExtResource("5_f3wds")
-trigger_on = 1
-
-[node name="AkListener2D" type="AkListener2D" parent="AkBank" unique_id=1871866258]

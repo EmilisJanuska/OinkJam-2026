@@ -44,3 +44,5 @@ func update_spawn_point(spawn_point) -> void:
 func play_sound(sound: int) -> void:
 	Wwise.post_event(event_names[sound], self)
 		
+func stop_sounds() -> void:
+	Wwise.stop_all(self)

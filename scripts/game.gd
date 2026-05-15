@@ -53,9 +53,9 @@ func _unhandled_input(event) -> void:
 				if b_game_started:
 					change_game_state(last_game_state, Globals.GameStates.pause_menu)
 
-		if event.pressed and event.keycode == KEY_SPACE:
+		#if event.pressed and event.keycode == KEY_SPACE:
 			#change_game_state(Globals.GameStates.game_win, Globals.GameStates.in_world)
-			audio_player.play_sound(audio_player.event.EnemyRandomSnores)
+			#audio_player.play_sound(audio_player.event.EnemyRandomSnores)
 
 		# combat controls - only enabled when in combat
 		if game_state == Globals.GameStates.in_combat:
@@ -178,6 +178,7 @@ func change_game_state(to_state: Globals.GameStates, from_state: Globals.GameSta
 # scene change logic
 func change_scene(scene: Globals.LevelScenes, delete: bool = true, keep_running: bool = false, _begin_combat: bool = false) -> void:
 	var scene_name = Globals.LevelScenes.find_key(scene)
+	audio_player.stop_sounds()
 	if !loaded_scenes.has(scene_name) && scene_name != current_scene:
 		# remove or hide current scene
 		if delete:
@@ -223,6 +224,7 @@ func change_scene(scene: Globals.LevelScenes, delete: bool = true, keep_running:
 
 func change_ui_scene(ui_scene: Globals.HUDScenes, delete: bool = true, keep_running: bool = false, begin_combat: bool = false, _victory: bool = false) -> void:
 	var scene_name = Globals.HUDScenes.find_key(ui_scene)
+	audio_player.stop_sounds()
 	if !loaded_ui_scenes.has(scene_name) && scene_name != current_ui_scene:
 		# remove or hide old ui scene
 		if delete:

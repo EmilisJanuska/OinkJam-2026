@@ -1,14 +1,33 @@
 Event	ID	Name			Wwise Object Path	Notes
 	98439365	Play_PLAYER_Footsteps			\Default Work Unit\PLAYER\Play_PLAYER_Footsteps	
+	361969070	Play_ENVIRO_WORLD_END			\Default Work Unit\ENVIRO\Play_ENVIRO_WORLD_END	
+	416518550	Play_PLAYER_Power_Down_Wear_Off			\Default Work Unit\PLAYER\Play_PLAYER_Power_Down_Wear_Off	
+	469901184	Play_ENVIRO_Close_Container			\Default Work Unit\ENVIRO\Play_ENVIRO_Close_Container	
+	482445392	Play_Combat_Theme			\Default Work Unit\Play_Combat_Theme	
 	740518234	Play_UI_Menu_button_pressed			\Default Work Unit\UI\Play_UI_Menu_button_pressed	
+	846353081	Play_PLAYER_CBT_player_right_btn			\Default Work Unit\PLAYER\Play_PLAYER_CBT_player_right_btn	
 	872933623	Play_ENEMY_Aggro_Close_Attack			\Default Work Unit\ENEMY\Play_ENEMY_Aggro_Close_Attack	
+	996272122	sfx_ENEMY_pig_npc_snore			\Default Work Unit\ENEMY\sfx_ENEMY_pig_npc_snore	
+	1019217311	Play_Exploration_Theme			\Default Work Unit\Play_Exploration_Theme	
 	1042134263	Play_PLAYER_Human_Breaths			\Default Work Unit\PLAYER\Play_PLAYER_Human_Breaths	
+	1501722603	Play_PLAYER_Power_Up_Buff			\Default Work Unit\PLAYER\Play_PLAYER_Power_Up_Buff	
 	1508763586	Play_ENEMY_Random_Snores_No_Limitation			\Default Work Unit\ENEMY\Play_ENEMY_Random_Snores_No_Limitation	
+	1653993732	Play_PLAYER_CBT_attack			\Default Work Unit\PLAYER\Play_PLAYER_CBT_attack	
 	1883557774	Play_UI_Menu_button_hover			\Default Work Unit\UI\Play_UI_Menu_button_hover	
+	1959519515	Play_UI_Score_Increase_Loopable			\Default Work Unit\UI\Play_UI_Score_Increase_Loopable	
+	1981894631	Play_PLAYER_END			\Default Work Unit\PLAYER\Play_PLAYER_END	
+	2181630209	Play_Menu_Theme			\Default Work Unit\Play_Menu_Theme	
+	2531999604	Play_ENEMY_END			\Default Work Unit\ENEMY\Play_ENEMY_END	
+	2611103136	Play_UI_Menu_flipping_sound			\Default Work Unit\UI\Play_UI_Menu_flipping_sound	
 	2640841182	Play_PLAYER_CBT_wrong_btn			\Default Work Unit\PLAYER\Play_PLAYER_CBT_wrong_btn	
 	2734126450	Play_ENEMY_CBT_damage			\Default Work Unit\ENEMY\Play_ENEMY_CBT_damage	
 	2877007734	Play_ENVIRO_Combat_Timer_End_Pattern_Switch			\Default Work Unit\ENVIRO\Play_ENVIRO_Combat_Timer_End_Pattern_Switch	
 	2932040671	Play_MUSIC			\Default Work Unit\MUSIC\Play_MUSIC	
+	3229301663	Play_ENEMY_CBT_Sees_Player_Investigate_Oink			\Default Work Unit\ENEMY\Play_ENEMY_CBT_Sees_Player_Investigate_Oink	
+	3237028244	Play_UI_Splash_Title_Fade_In			\Default Work Unit\UI\Play_UI_Splash_Title_Fade_In	
+	3322081940	Play_ENVIRO_Open_Container			\Default Work Unit\ENVIRO\Play_ENVIRO_Open_Container	
+	3803466734	Play_ENEMY_CBT_appear			\Default Work Unit\ENEMY\Play_ENEMY_CBT_appear	
+	4035153595	Play_PLAYER_CBT_damage			\Default Work Unit\PLAYER\Play_PLAYER_CBT_damage	
 
 State Group	ID	Name			Wwise Object Path	Notes
 	2012657067	New_State_Group			\Default Work Unit\New_State_Group	
@@ -19,20 +38,25 @@ State	ID	Name	State Group			Notes
 	2607556080	Menu	New_State_Group			
 	2764240573	Combat	New_State_Group			
 
+Game Parameter	ID	Name			Wwise Object Path	Notes
+	1826053195	Pig_Count			\Default Work Unit\Pig_Count	
+
 In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	23657185	sfx_ENEMY_pig_snors_03	.cache\91\{9188DD9E-D54D-BCB3-836D-6869A7493917}.wem		\Containers\Default Work Unit\ENEMY\ENEMY_Aggro_Close_Attack\sfx_ENEMY_pig_snors_03		44078
 	67548941	swinehide_breath_05	.cache\1C\{1C4105C7-A4A1-4B8A-85EC-593247BEEA01}.wem		\Containers\Default Work Unit\PLAYER\PLAYER_Human_Breaths\swinehide_breath_05		81316
 	71647149	swinehide_footstep_05	.cache\7F\{7F331FCE-8D71-D718-3DB0-DB83352803CE}.wem		\Containers\Default Work Unit\PLAYER\PLAYER_Footsteps\swinehide_footstep_05		44150
+	78468391	Menu_Theme	.cache\F5\{F577993F-8165-85DE-5E49-03447DA1B11F}.wem		\Containers\Default Work Unit\MUSIC_CONTAINER\Menu_Theme		16896744
 	93020165	swinehide_breath_08	.cache\2C\{2C4AC2B0-B192-C3A7-F72B-D429A6299E3A}.wem		\Containers\Default Work Unit\PLAYER\PLAYER_Human_Breaths\swinehide_breath_08		114902
 	95524846	swinehide_footstep_08	.cache\ED\{EDB0F124-FDB0-52BB-15AE-0EEC89D7C0E0}.wem		\Containers\Default Work Unit\PLAYER\PLAYER_Footsteps\swinehide_footstep_08		24038
 	98277470	swinehide_footstep_02	.cache\BC\{BC205B72-A801-253B-9843-46F68F4ACAF3}.wem		\Containers\Default Work Unit\PLAYER\PLAYER_Footsteps\swinehide_footstep_02		20594
 	160527622	UI_Menu_button_hover_03	.cache\22\{220E8B24-E19B-E255-1CB7-30B868E56A81}.wem		\Containers\Default Work Unit\UI_HUD\UI_Menu_button_hover\UI_Menu_button_hover_03		13454
 	162729289	pig_deamage_01	.cache\E4\{E49AA042-2D4B-A114-278C-2AB4A4DDD89B}.wem		\Containers\Default Work Unit\ENEMY\ENEMY_CBT_damage\pig_deamage_01		77420
 	201403007	swinehide_breath_03	.cache\0A\{0A2BA966-EC2B-F6D1-E9F7-F9CFF0FEA500}.wem		\Containers\Default Work Unit\PLAYER\PLAYER_Human_Breaths\swinehide_breath_03		100204
+	209068202	END_WORLD	.cache\FE\{FEC0ACE1-5F57-8C0C-D3FB-BDDC02345C84}.wem		\Containers\Default Work Unit\GLOBAL_ENVIRO\ENVIRO_WORLD_END\END_WORLD		595448
 	253275350	Fight	.cache\92\{922F2BAF-075C-D139-A8A7-69055F43D191}.wem		\Containers\Default Work Unit\MUSIC\MUSIC_Combat\MSC_Combat\Fight		3880896
 	254877641	UI_Menu_button_pressed_04	.cache\B8\{B86465A2-1727-457B-DEC5-1F05AA80A5D2}.wem		\Containers\Default Work Unit\UI_HUD\UI_Menu_button_pressed\UI_Menu_button_pressed_04		15124
 	272770045	pig_deamage_02	.cache\7E\{7E74E7D0-B510-CA94-1F81-B8E3FAE088A7}.wem		\Containers\Default Work Unit\ENEMY\ENEMY_CBT_damage\pig_deamage_02		75152
-	299721440	sfx_ENEMY_pig_snors_07	.cache\30\{3032B3AD-DB2B-4B87-D36D-888A03685196}.wem		\Containers\Default Work Unit\ENEMY\ENEMY_Random_Snores_No_Limitation\sfx_ENEMY_pig_snors_07		53358
+	299721440	sfx_ENEMY_pig_snors_07	.cache\30\{3032B3AD-DB2B-4B87-D36D-888A03685196}.wem		\Containers\Default Work Unit\ENEMY\ENEMY_Random_Snores\sfx_ENEMY_pig_snors_07		53358
 	301282847	swinehide_footstep_12	.cache\96\{96913355-277C-7D29-ECA4-4334ECCBDFD3}.wem		\Containers\Default Work Unit\PLAYER\PLAYER_Footsteps\swinehide_footstep_12		27266
 	310891478	player_wrong_button	.cache\6A\{6A9CF8EC-42CA-9FB2-7ED4-7E0CE702052F}.wem		\Containers\Default Work Unit\PLAYER\PLAYER_CBT_wrong_btn\player_wrong_button		54070
 	311265268	UI_Menu_button_hover_06	.cache\E4\{E4649C3E-AD55-258B-8A50-6DB0A5548167}.wem		\Containers\Default Work Unit\UI_HUD\UI_Menu_button_hover\UI_Menu_button_hover_06		19716
@@ -46,6 +70,7 @@ In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	548364396	swinehide_footstep_07	.cache\4C\{4C8220FF-DC42-7775-7727-F74BDD4478FA}.wem		\Containers\Default Work Unit\PLAYER\PLAYER_Footsteps\swinehide_footstep_07		18478
 	569582531	swinehide_breath_06	.cache\57\{57B1A951-2D77-1BD0-799F-FA858D849E4B}.wem		\Containers\Default Work Unit\PLAYER\PLAYER_Human_Breaths\swinehide_breath_06		72816
 	588552891	UI_Menu_button_pressed_01	.cache\14\{145C5D5E-B397-45EC-4CBB-5E8F38E6007D}.wem		\Containers\Default Work Unit\UI_HUD\UI_Menu_button_pressed\UI_Menu_button_pressed_01		14706
+	616726245	Exploration_Theme	.cache\0F\{0F163DD5-7112-563A-5F8A-DD32E2B05E4A}.wem		\Containers\Default Work Unit\MUSIC_CONTAINER\Exploration_Theme		4057296
 	621185723	swinehide_footstep_06	.cache\E1\{E171B10B-5A60-D319-6BCA-6A08A0F3A3C5}.wem		\Containers\Default Work Unit\PLAYER\PLAYER_Footsteps\swinehide_footstep_06		56082
 	635466652	swinehide_breath_07	.cache\01\{0162CD88-572E-AE5B-582B-01E34749E771}.wem		\Containers\Default Work Unit\PLAYER\PLAYER_Human_Breaths\swinehide_breath_07		84148
 	658999416	swinehide_breath_09	.cache\D2\{D2AEB20C-C838-AEF8-FC46-4EE56EF54653}.wem		\Containers\Default Work Unit\PLAYER\PLAYER_Human_Breaths\swinehide_breath_09		108468
@@ -54,13 +79,14 @@ In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	757334483	swinehide_breath_01	.cache\D5\{D552B1D0-FF29-7D4D-5EFB-3B8053C551EA}.wem		\Containers\Default Work Unit\PLAYER\PLAYER_Human_Breaths\swinehide_breath_01		110592
 	759604041	swinehide_footstep_09	.cache\09\{090FE1FD-FBD7-EA5B-8084-F8479AE43703}.wem		\Containers\Default Work Unit\PLAYER\PLAYER_Footsteps\swinehide_footstep_09		21194
 	778752428	pig_deamage_05	.cache\D4\{D4217757-E9A0-4BE7-01E2-22687F542466}.wem		\Containers\Default Work Unit\ENEMY\ENEMY_CBT_damage\pig_deamage_05		104804
-	849610129	sfx_ENEMY_pig_snors_01	.cache\AD\{AD39D6E8-0EF2-B077-C04A-F044C343C1C2}.wem		\Containers\Default Work Unit\ENEMY\ENEMY_Random_Snores_No_Limitation\sfx_ENEMY_pig_snors_01		26372
+	849610129	sfx_ENEMY_pig_snors_01	.cache\AD\{AD39D6E8-0EF2-B077-C04A-F044C343C1C2}.wem		\Containers\Default Work Unit\ENEMY\ENEMY_Random_Snores\sfx_ENEMY_pig_snors_01		26372
 	864842093	swinehide_footstep_01	.cache\F5\{F5654997-8AE6-4B1F-4138-702180A8F2A0}.wem		\Containers\Default Work Unit\PLAYER\PLAYER_Footsteps\swinehide_footstep_01		21198
 	868473270	swinehide_footstep_11	.cache\F0\{F0D100D7-4EDD-64E9-0EB0-92B1D2085DD6}.wem		\Containers\Default Work Unit\PLAYER\PLAYER_Footsteps\swinehide_footstep_11		30236
 	869159143	pig_deamage	.cache\21\{21C6994B-20D0-D3FF-F584-08C5A00F798B}.wem		\Containers\Default Work Unit\ENEMY\ENEMY_CBT_damage\pig_deamage		101792
+	902201698	Combat_Theme	.cache\BF\{BF002CFB-3CD3-D255-1770-DFF6447017CA}.wem		\Containers\Default Work Unit\MUSIC_CONTAINER\Combat_Theme		2842440
 	925026697	concept_menu_loop	.cache\F5\{F577993F-8165-85DE-5E49-03447DA1B11F}.wem		\Containers\Default Work Unit\MUSIC\MUSIC_Menu\MSC_Menu\concept_menu_loop		16896744
 	927047882	swinehide_footstep_03	.cache\0B\{0BD884DB-DFBC-5D21-163C-0C2865CAD746}.wem		\Containers\Default Work Unit\PLAYER\PLAYER_Footsteps\swinehide_footstep_03		28220
 	970758755	swinehide_breath_02	.cache\C3\{C3FEDED3-59C6-F493-EF26-0B439CBC1BBB}.wem		\Containers\Default Work Unit\PLAYER\PLAYER_Human_Breaths\swinehide_breath_02		116258
 	991890985	pig_deamage_04	.cache\AE\{AEAAC809-DA60-EAF3-ED0E-6074A56BB8B2}.wem		\Containers\Default Work Unit\ENEMY\ENEMY_CBT_damage\pig_deamage_04		101512
-	1068677485	sfx_ENEMY_pig_snors_06	.cache\35\{35D49AA0-3FEE-1D09-6BF6-F388DA821683}.wem		\Containers\Default Work Unit\ENEMY\ENEMY_Random_Snores_No_Limitation\sfx_ENEMY_pig_snors_06		75338
+	1068677485	sfx_ENEMY_pig_snors_06	.cache\35\{35D49AA0-3FEE-1D09-6BF6-F388DA821683}.wem		\Containers\Default Work Unit\ENEMY\ENEMY_Random_Snores\sfx_ENEMY_pig_snors_06		75338
 

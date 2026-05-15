@@ -429,6 +429,39 @@
 						</Event>
 					</ChildrenList>
 				</Folder>
+				<Event Name="Play_Combat_Theme" ID="{85A37926-0CF6-4922-A73A-A7BC163E7B01}">
+					<ChildrenList>
+						<Action Name="" ID="{01075CF0-7AA3-4913-9275-48AC403D1082}" ShortID="624625547">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Combat_Theme" ID="{1FE02927-1758-499F-9C2D-CBA5DC5CAC04}" WorkUnitID="{9BE85346-1BD8-4342-87D8-8916CD902A6F}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_Exploration_Theme" ID="{A5ED27A4-3145-40CF-AC1A-8B450A653D50}">
+					<ChildrenList>
+						<Action Name="" ID="{230D08E8-17E1-40C1-A62D-AD1E310C3E6D}" ShortID="645748124">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Exploration_Theme" ID="{6DFBE454-5045-44F2-B29F-27A2929D3553}" WorkUnitID="{9BE85346-1BD8-4342-87D8-8916CD902A6F}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_Menu_Theme" ID="{311ACEC9-46DE-497A-8B18-22054E934273}">
+					<ChildrenList>
+						<Action Name="" ID="{0E80EE64-201A-4661-8DEF-7A4CBAB6E0E9}" ShortID="517059827">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Menu_Theme" ID="{283212CF-4F35-4F40-8D13-AFAF4C0C0346}" WorkUnitID="{9BE85346-1BD8-4342-87D8-8916CD902A6F}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
 			</ChildrenList>
 		</WorkUnit>
 	</Events>

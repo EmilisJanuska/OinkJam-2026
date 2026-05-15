@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://c651fv5hvvblq"]
+
+[ext_resource type="Script" uid="uid://c8nfo3vii2ben" path="res://scenes/win_area.gd" id="1_ito5k"]
+[ext_resource type="PackedScene" uid="uid://cxb65xdvfu4cd" path="res://scenes/light.tscn" id="2_e0fpl"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3alhw"]
+radius = 36.013885
+
+[node name="winArea" type="Area2D" unique_id=1835458918]
+script = ExtResource("1_ito5k")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1149694889]
+shape = SubResource("CircleShape2D_3alhw")
+
+[node name="Light" parent="." unique_id=252344767 instance=ExtResource("2_e0fpl")]
+scale = Vector2(0.9976078, 1.0231117)
+color = Color(0.20767346, 0.39831346, 0.24007899, 1)
+energy = 4.09
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

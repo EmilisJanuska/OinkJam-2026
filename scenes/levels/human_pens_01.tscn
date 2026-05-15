@@ -7,9 +7,8 @@
 [ext_resource type="Resource" uid="uid://b1e1bcwxy4boq" path="res://resources/enemy_weak_1.tres" id="4_4ma7i"]
 [ext_resource type="PackedScene" uid="uid://bdty358gxxhxl" path="res://scenes/exit_area.tscn" id="6_f2yjq"]
 
-[node name="HumanPens01" type="Node2D" unique_id=1302433940 node_paths=PackedStringArray("player_spawn")]
+[node name="HumanPens01" type="Node2D" unique_id=1302433940]
 script = ExtResource("1_wqoxe")
-player_spawn = NodePath("PlayerSpawnPoint")
 
 [node name="PlayerSpawnPoint" parent="." unique_id=986081644 node_paths=PackedStringArray("layers") instance=ExtResource("2_bp8v6")]
 position = Vector2(589, 290)
